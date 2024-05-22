@@ -5,7 +5,7 @@ import Ring from "./ring";
 
 export default function Card(props) {
   return (
-    <TouchableOpacity onPress={{}}>
+    <TouchableOpacity onPress={{/*Add onPress Here*/ }}>
       <View style={styles.Card}>
         <View style={styles.cardContent}>{props.children}</View>
         
