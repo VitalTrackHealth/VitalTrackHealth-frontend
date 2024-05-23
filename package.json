@@ -13,7 +13,7 @@
     "@expo/vector-icons": "^14.0.1",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
-    "expo": "^51.0.5",
+    "expo": "^51.0.8",
     "expo-checkbox": "^2.7.0",
     "expo-linear-gradient": "~12.7.2",
     "expo-status-bar": "~1.11.1",
@@ -31,7 +31,7 @@
     "@babel/core": "^7.20.0",
     "@eslint/compat": "^1.0.1",
     "@eslint/js": "^9.3.0",
-    "eslint": "^9.3.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.3.0"
   },

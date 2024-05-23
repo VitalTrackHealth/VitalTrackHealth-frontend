@@ -3,12 +3,12 @@ import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import COLORS from "../../constants/colors";
 import Ring from "./ring";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { StatusBar } from "react-native";
 
 export default function Patientcard(props) {
   return (
     <View
       style={{
-       
         borderRadius: 10,
         elevation: 3,
         backgroundColor: "rgba(255, 255, 255, 0.2)", // semi-transparent white
@@ -21,7 +21,7 @@ export default function Patientcard(props) {
         shadowRadius: 2,
         marginHorizontal: 4,
         marginVertical: 6,
-        marginTop: 50,
+        marginTop: 100,
         padding: 20,
       }}
     >
