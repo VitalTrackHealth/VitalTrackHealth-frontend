@@ -20,12 +20,17 @@ export default function Patientcard(props) {
         shadowOpacity: 0.3,
         shadowRadius: 2,
         marginHorizontal: 4,
-        marginVertical: 6,
+        marginVertical: 4,
+        justifyContent: "space-between",
         marginTop: 100,
         padding: 20,
       }}
     >
-      <View style={{ backgroundColor: "red", margin: 10 }}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <View
+        style={{ margin: 10, alignItems: "center", justifyContent: "center" }}
+      >
+        <Text>Fat</Text>
         <AnimatedCircularProgress
           size={100}
           width={12}
@@ -34,10 +39,14 @@ export default function Patientcard(props) {
           onAnimationComplete={() => console.log("onAnimationComplete")}
           backgroundColor="#C1C7C9"
         ></AnimatedCircularProgress>
-        <Text> Hello world</Text>
+        <Text style={{ position: "absolute" }}>80%</Text>
+        <Text>150g</Text>
       </View>
 
-      <View style={{ backgroundColor: "blue", margin: 10 }}>
+      <View
+        style={{ margin: 10, alignItems: "center", justifyContent: "center" }}
+      >
+        <Text>Protein</Text>
         <AnimatedCircularProgress
           size={100}
           width={12}
@@ -46,10 +55,14 @@ export default function Patientcard(props) {
           onAnimationComplete={() => console.log("onAnimationComplete")}
           backgroundColor="#C1C7C9"
         ></AnimatedCircularProgress>
-        <Text> Hello world</Text>
+        <Text style={{ position: "absolute" }}>80%</Text>
+        <Text>150g</Text>
       </View>
 
-      <View style={{ backgroundColor: "green", margin: 10 }}>
+      <View
+        style={{ margin: 10, alignItems: "center", justifyContent: "center" }}
+      >
+        <Text>Carbohydrates</Text>
         <AnimatedCircularProgress
           size={100}
           width={12}
@@ -58,9 +71,9 @@ export default function Patientcard(props) {
           onAnimationComplete={() => console.log("onAnimationComplete")}
           backgroundColor="#C1C7C9"
         ></AnimatedCircularProgress>
-        <Text> Hello world</Text>
+        <Text style={{ position: "absolute" }}>80%</Text>
+        <Text> 200g</Text>
       </View>
-      <Text> Hello world</Text>
     </View>
   );
 }

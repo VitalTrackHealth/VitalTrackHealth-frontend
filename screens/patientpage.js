@@ -5,7 +5,9 @@ import { ProgressBar } from "react-native";
 import Patientcard from "../ios/components/patientcard";
 import { LinearGradient } from "expo-linear-gradient";
 import Button from "../ios/components/Buttom";
+import FoodDiary from "../ios/components/FoodDiary";
 import { TouchableOpacity } from "react-native";
+import AddButtom from "../ios/components/AddButtom";
 
 const Patientpage = () => {
   return (
@@ -76,6 +78,7 @@ const Patientpage = () => {
       </View>
 
       <Patientcard> </Patientcard>
+      <FoodDiary> </FoodDiary>
 
       <Button // Button should send user to the Food Diary page
         onPress={() => {
@@ -87,18 +90,15 @@ const Patientpage = () => {
           marginBottom: 4,
         }}
       />
-
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
+          right: 20,
+          bottom: 20,
           position: "absolute",
-          bottom: 0,
-          width: "100%",
-          backgroundColor: "white",
-          padding: 30,
         }}
-      ></View>
+      >
+        <AddButtom> </AddButtom>
+      </View>
     </LinearGradient>
   );
 };
