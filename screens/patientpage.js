@@ -80,16 +80,6 @@ const Patientpage = () => {
       <Patientcard> </Patientcard>
       <FoodDiary> </FoodDiary>
 
-      <Button // Button should send user to the Food Diary page
-        onPress={() => {
-          console.log("Food Diary button pressed");
-        }}
-        title="Food Diary"
-        style={{
-          marginTop: 18,
-          marginBottom: 4,
-        }}
-      />
       <View
         style={{
           right: 20,
