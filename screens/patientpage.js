@@ -8,8 +8,12 @@ import Button from "../ios/components/Buttom";
 import FoodDiary from "../ios/components/FoodDiary";
 import { TouchableOpacity } from "react-native";
 import AddButtom from "../ios/components/AddButtom";
-
+import { AntDesign } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import React, { useState } from "react";
 const Patientpage = () => {
+  const [selectedIcon, setSelectedIcon] = useState(null);
   return (
     <LinearGradient
       colors={["#FFFFFF", "#007260"]}
@@ -37,42 +41,36 @@ const Patientpage = () => {
           marginBottom: 20,
         }}
       >
-        <TouchableOpacity>
-          <Image
-            source={require("../assets/patient.png")}
-            style={{
-              height: 40,
-              width: 40,
-              marginRight: 6,
-              marginTop: 10,
-            }}
-            resizeMode="contain"
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() => setSelectedIcon("setting")}
+        >
+          <AntDesign
+            name="setting"
+            size={35}
+            color={selectedIcon === "setting" ? "green" : "black"}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity>
-          <Image
-            source={require("../assets/patient.png")}
-            style={{
-              height: 40,
-              width: 40,
-              marginRight: 6,
-              marginTop: 10,
-            }}
-            resizeMode="contain"
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() => setSelectedIcon("home")}
+        >
+          <AntDesign
+            name="home"
+            size={35}
+            color={selectedIcon === "home" ? "green" : "black"}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity>
-          <Image
-            source={require("../assets/supervisor.png")}
-            style={{
-              height: 40,
-              width: 40,
-              marginRight: 6,
-              marginTop: 10,
-            }}
-            resizeMode="contain"
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() => setSelectedIcon("restaurant-outline")}
+        >
+          <Ionicons
+            name="restaurant-outline"
+            size={35}
+            color={selectedIcon === "restaurant-outline" ? "green" : "black"}
           />
         </TouchableOpacity>
       </View>
@@ -91,6 +89,13 @@ const Patientpage = () => {
       </View>
     </LinearGradient>
   );
+
+  const styles = StyleSheet.create({
+    selectedIcon: {
+      backgroundColor: "gray", // Change this to the desired background color
+    },
+    // ...
+  });
 };
 
 export default Patientpage;

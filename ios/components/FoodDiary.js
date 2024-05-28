@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { AntDesign } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   cardContent: {
-    overflow: "normal",
+    overflow: "visible",
   },
   cardText: {
     fontSize: 16,
