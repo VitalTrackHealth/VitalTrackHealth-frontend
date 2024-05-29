@@ -48,10 +48,6 @@ const Register = ({ navigation }) => {
           </Text>
         </View>
 
-
-
-
-
         <View style={{ marginBottom: 12 }}>
           <Text
             style={{
@@ -62,7 +58,7 @@ const Register = ({ navigation }) => {
           >
             Name
           </Text>
-<View
+          <View
             style={{
               width: "100%",
               height: 48,
@@ -82,16 +78,10 @@ const Register = ({ navigation }) => {
                 width: "100%",
               }}
             />
-            
           </View>
+        </View>
 
-            
-          </View>
-          
-       
-
-
-          <View style={{ marginBottom: 12 }}>
+        <View style={{ marginBottom: 12 }}>
           <Text
             style={{
               fontSize: 16,
@@ -101,7 +91,7 @@ const Register = ({ navigation }) => {
           >
             Email address
           </Text>
-<View
+          <View
             style={{
               width: "100%",
               height: 48,
@@ -121,13 +111,8 @@ const Register = ({ navigation }) => {
                 width: "100%",
               }}
             />
-            
           </View>
-
-            
-          </View>
-
-        
+        </View>
 
         <View style={{ marginBottom: 12 }}>
           <Text
@@ -184,7 +169,6 @@ const Register = ({ navigation }) => {
               marginVertical: 8,
             }}
           >
-            
             Password
           </Text>
 
@@ -256,9 +240,7 @@ const Register = ({ navigation }) => {
               marginHorizontal: 10,
             }}
           />
-          <Text style={{ fontSize: 14 }}>
-            What fits your role?
-          </Text>
+          <Text style={{ fontSize: 14 }}>What fits your role?</Text>
           <View
             style={{
               flex: 1,
@@ -345,7 +327,7 @@ const Register = ({ navigation }) => {
           onPress={() => {
             console.log(isSupervisorPressed);
             if (isSupervisorPressed == true) navigation.navigate("mainpage");
-            if (isPatientPressed == true) navigation.navigate("patientpage");
+            if (isPatientPressed == true) navigation.navigate("questionspage");
           }}
           title="Sign Up"
           filled
