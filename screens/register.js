@@ -12,7 +12,8 @@ import COLORS from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import Button from "../ios/components/Buttom";
-
+import { password_complexity } from "../scripts/register_complexity";
+import { email_complexity } from "../scripts/register_complexity";
 import { useNavigation } from "@react-navigation/native";
 
 const Register = ({ navigation }) => {
@@ -20,6 +21,7 @@ const Register = ({ navigation }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isSupervisorPressed, setSupervisorPressed] = useState(false);
   const [isPatientPressed, setPatientPressed] = useState(false);
+  const [Email, setEmail] = useState("");
   let isSupervisor = false;
   let isPatient = false;
 
@@ -110,6 +112,14 @@ const Register = ({ navigation }) => {
               style={{
                 width: "100%",
               }}
+              onChangeText={(text) => {
+                setEmail(text);
+                console.log(text);
+                if (email_complexity(text) == true) {
+                  console.log("Email is valid");
+                }
+              }}
+              value={Email}
             />
           </View>
         </View>
