@@ -19,11 +19,10 @@ import { useNavigation } from "@react-navigation/native";
 const Register = ({ navigation }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [isSupervisorPressed, setSupervisorPressed] = useState(false);
-  const [isPatientPressed, setPatientPressed] = useState(false);
   const [Email, setEmail] = useState("");
-  let isSupervisor = false;
-  let isPatient = false;
+  const [password, setPassword] = useState("");
+  const [emailWarning, setEmailWarning] = useState("");
+  const [passwordWarning, setPasswordWarning] = useState("");
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -114,14 +113,15 @@ const Register = ({ navigation }) => {
               }}
               onChangeText={(text) => {
                 setEmail(text);
-                console.log(text);
-                if (email_complexity(text) == true) {
-                  console.log("Email is valid");
-                }
+                setEmailWarning("");
               }}
               value={Email}
             />
           </View>
+
+          {emailWarning ? (
+            <Text style={{ color: "red" }}>{emailWarning}</Text>
+          ) : null}
         </View>
 
         <View style={{ marginBottom: 12 }}>
@@ -201,6 +201,11 @@ const Register = ({ navigation }) => {
               style={{
                 width: "100%",
               }}
+              onChangeText={(text) => {
+                setPassword(text);
+                setPasswordWarning("");
+              }}
+              value={password}
             />
 
             <TouchableOpacity
@@ -217,6 +222,9 @@ const Register = ({ navigation }) => {
               )}
             </TouchableOpacity>
           </View>
+          {passwordWarning ? (
+            <Text style={{ color: "red" }}>{passwordWarning}</Text>
+          ) : null}
         </View>
 
         <View
@@ -238,106 +246,18 @@ const Register = ({ navigation }) => {
         <View
           style={{
             flexDirection: "row",
-            alignItems: "center",
-            marginVertical: 20,
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: COLORS.grey,
-              marginHorizontal: 10,
-            }}
-          />
-          <Text style={{ fontSize: 14 }}>What fits your role?</Text>
-          <View
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: COLORS.grey,
-              marginHorizontal: 10,
-            }}
-          />
-        </View>
-
-        <View
-          style={{
-            flexDirection: "row",
             justifyContent: "center",
           }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              setPatientPressed((prevState) => !prevState);
-              isPatient = !isPatient;
-              console.log(isPatient);
-              setSupervisorPressed(false);
-            }}
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              height: 52,
-              borderWidth: 1,
-              borderColor: COLORS.grey,
-              marginRight: 4,
-              borderRadius: 10,
-              backgroundColor: isPatientPressed ? "#b3ecec" : COLORS.white,
-            }}
-          >
-            <Image
-              source={require("../assets/patient.png")}
-              style={{
-                height: 40,
-                width: 40,
-                marginRight: 6,
-              }}
-              resizeMode="contain"
-            />
-
-            <Text>Patient</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              setSupervisorPressed((prevState) => !prevState);
-              isSupervisor = !isSupervisor;
-              console.log(isSupervisor);
-              setPatientPressed(false);
-            }}
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              height: 52,
-              borderWidth: 1,
-              borderColor: COLORS.grey,
-              marginRight: 4,
-              borderRadius: 10,
-              backgroundColor: isSupervisorPressed ? "#b3ecec" : COLORS.white,
-            }}
-          >
-            <Image
-              source={require("../assets/supervisor.png")}
-              style={{
-                height: 40,
-                width: 40,
-                marginRight: 4,
-              }}
-              resizeMode="contain"
-            />
-
-            <Text>Supervisor</Text>
-          </TouchableOpacity>
-        </View>
+        ></View>
         <Button
           onPress={() => {
-            console.log(isSupervisorPressed);
-            if (isSupervisorPressed == true) navigation.navigate("mainpage");
-            if (isPatientPressed == true) navigation.navigate("questionspage");
+            if (!email_complexity(Email))
+              setEmailWarning("* Please enter a valid email address");
+            else if (!password_complexity(password))
+              setPasswordWarning(
+                "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
+              );
+            else navigation.navigate("questionspage");
           }}
           title="Sign Up"
           filled
@@ -346,6 +266,7 @@ const Register = ({ navigation }) => {
             marginBottom: 4,
           }}
         />
+
         <View
           style={{
             flexDirection: "row",
