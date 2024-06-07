@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import Button from "../ios/components/Buttom";
 import { useNavigation } from "@react-navigation/native";
+import { handleLogin, handleRegister } from "../scripts/handle_register";
 
 const Login = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -42,7 +43,6 @@ const Login = () => {
             Hello again you have been missed!
           </Text>
         </View>
-
         <View style={{ marginBottom: 12 }}>
           <Text
             style={{
@@ -76,7 +76,6 @@ const Login = () => {
             />
           </View>
         </View>
-
         <View style={{ marginBottom: 12 }}>
           <Text
             style={{
@@ -124,7 +123,6 @@ const Login = () => {
             </TouchableOpacity>
           </View>
         </View>
-
         <View
           style={{
             flexDirection: "row",
@@ -140,10 +138,10 @@ const Login = () => {
 
           <Text>Remember Me</Text>
         </View>
-
         <Button
           title="Login"
           filled
+          onPress={() => handleLogin("Fernandes", "123456789")}
           style={{
             marginTop: 18,
             marginBottom: 4,
@@ -175,7 +173,6 @@ const Login = () => {
             }}
           />
         </View>
-
         <View
           style={{
             flexDirection: "row",
@@ -183,7 +180,7 @@ const Login = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("mainpage")}
+            onPress={() => navigation.navigate("questionspage")}
             style={{
               flex: 1,
               alignItems: "center",
@@ -236,7 +233,6 @@ const Login = () => {
             <Text>Google</Text>
           </TouchableOpacity>
         </View>
-
         <View
           style={{
             flexDirection: "row",

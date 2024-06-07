@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import Button from "../ios/components/Buttom";
 import { password_complexity } from "../scripts/register_complexity";
+import { handleRegister } from "../scripts/handle_register";
 import { email_complexity } from "../scripts/register_complexity";
 import { useNavigation } from "@react-navigation/native";
 
@@ -249,15 +250,22 @@ const Register = ({ navigation }) => {
             justifyContent: "center",
           }}
         ></View>
+
         <Button
           onPress={() => {
+            console.log("Email", Email);
+            console.log("password", password);
+
             if (!email_complexity(Email))
               setEmailWarning("* Please enter a valid email address");
             else if (!password_complexity(password))
               setPasswordWarning(
                 "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
               );
-            else navigation.navigate("questionspage");
+            else {
+              handleRegister(Email, password);
+              navigation.navigate("questionspage");
+            }
           }}
           title="Sign Up"
           filled
