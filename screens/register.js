@@ -22,6 +22,9 @@ const Register = ({ navigation }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [Email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const [emailWarning, setEmailWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState("");
 
@@ -75,9 +78,12 @@ const Register = ({ navigation }) => {
             <TextInput
               placeholder="Enter your full name"
               placeholderTextColor={"#000000"}
-              keyboardType="email-address"
+              keyboardType="default"
               style={{
                 width: "100%",
+              }}
+              onChangeText={(text) => {
+                setName(text);
               }}
             />
           </View>
@@ -150,7 +156,7 @@ const Register = ({ navigation }) => {
             }}
           >
             <TextInput
-              placeholder="+91"
+              placeholder="+1"
               placeholderTextColor={"#000000"}
               keyboardType="numeric"
               style={{
@@ -167,6 +173,9 @@ const Register = ({ navigation }) => {
               keyboardType="numeric"
               style={{
                 width: "80%",
+              }}
+              onChangeText={(text) => {
+                setPhoneNumber(text);
               }}
             />
           </View>
@@ -241,7 +250,7 @@ const Register = ({ navigation }) => {
             color={isChecked ? COLORS.primary : undefined}
           />
 
-          <Text>I aggree to the terms and conditions</Text>
+          <Text>I agree to the terms and conditions</Text>
         </View>
 
         <View
@@ -263,7 +272,7 @@ const Register = ({ navigation }) => {
                 "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
               );
             else {
-              handleRegister(Email, password);
+              handleRegister(name, password, phoneNumber, Email);
               navigation.navigate("questionspage");
             }
           }}

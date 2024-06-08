@@ -18,6 +18,8 @@ import { handleLogin, handleRegister } from "../scripts/handle_register";
 const Login = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [EMAIL, setEmail] = useState("");
+  const [PASSWORD, setPassword] = useState("");
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -73,6 +75,9 @@ const Login = () => {
               style={{
                 width: "100%",
               }}
+              onChangeText={(text) => {
+                setEmail(text);
+              }}
             />
           </View>
         </View>
@@ -105,6 +110,9 @@ const Login = () => {
               secureTextEntry={isPasswordShown}
               style={{
                 width: "100%",
+              }}
+              onChangeText={(text) => {
+                setPassword(text);
               }}
             />
 
@@ -141,7 +149,7 @@ const Login = () => {
         <Button
           title="Login"
           filled
-          onPress={() => handleLogin("Fernandes", "123456789")}
+          onPress={() => handleLogin(EMAIL, PASSWORD)}
           style={{
             marginTop: 18,
             marginBottom: 4,

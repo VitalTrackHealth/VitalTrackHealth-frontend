@@ -1,12 +1,14 @@
-export function handleRegister(email, password) {
+export function handleRegister(name, password, phoneNumber, email) {
   fetch("http://192.168.1.220:5000/api/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userName: email,
+      userName: name,
       password: password,
+      phoneNumber: phoneNumber,
+      email: email,
     }),
   })
     .then((response) => response.json())
@@ -28,6 +30,8 @@ export function handleLogin(email, password) {
     body: JSON.stringify({
       userName: email,
       password: password,
+      phoneNumber: "1234567890",
+      email: email,
     }),
   })
     .then((response) => response.text()) // Use text() instead of json()
