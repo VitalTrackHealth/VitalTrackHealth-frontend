@@ -11,6 +11,7 @@ import register from "./screens/register";
 import mainpage from "./screens/providerpage";
 import patientpage from "./screens/patientpage";
 import questions from "./screens/questionspage";
+import SearchFoodPage from "./screens/search_food_page";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -49,6 +50,12 @@ export default function App() {
         <Stack.Screen
           name="patientpage"
           component={patientpage}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="search_food_page"
+          component={SearchFoodPage}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

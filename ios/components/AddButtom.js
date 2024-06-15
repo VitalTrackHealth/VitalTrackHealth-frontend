@@ -1,9 +1,14 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
-const AddButtom = ({ onAddPress }) => {
+const AddButtom = ({}) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.cont} onPress={onAddPress}>
+    <TouchableOpacity
+      style={styles.cont}
+      onPress={() => navigation.navigate("search_food_page")}
+    >
       <Image
         source={{
           uri: "https://github.com/herodev-ch/ReactNativeDream/blob/ui/create-add-button/src/assets/icons/plus.png?raw=true",

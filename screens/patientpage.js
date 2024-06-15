@@ -12,6 +12,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useState } from "react";
+import { handleFood_search } from "../scripts/handle_register";
+
 const Patientpage = () => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   return (
@@ -54,7 +56,10 @@ const Patientpage = () => {
 
         <TouchableOpacity
           style={{ marginTop: 20 }}
-          onPress={() => setSelectedIcon("home")}
+          onPress={() => {
+            setSelectedIcon("home");
+            handleFood_search("potato", "lays");
+          }}
         >
           <AntDesign
             name="home"
