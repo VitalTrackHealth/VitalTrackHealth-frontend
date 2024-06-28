@@ -1,6 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { handleFood_search } from "../scripts/handle_register";
+import FoodCard from "../ios/components/food";
+import SearchBar from "../ios/components/SearchBar";
+import Card from "../ios/components/card";
 let images = [];
 async function getFoodData(ingr, brand) {
   const foodData = await handleFood_search(ingr, brand);
@@ -15,27 +18,25 @@ async function getFoodData(ingr, brand) {
 }
 
 const SearchFoodPage = () => {
-  const data = getFoodData("rice", "royal");
+  const data = getFoodData("pasta", "");
 
   console.log("\n" + data);
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: images[1],
-        }}
-        style={{ width: 100, height: 100 }}
-      />
-      <Text>Data</Text>
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <SearchBar></SearchBar>
+        <FoodCard items={images} />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    marginTop: 50,
+    // justifyContent: "center",
 
     alignItems: "center",
   },
