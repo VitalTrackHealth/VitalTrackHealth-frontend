@@ -5,6 +5,8 @@ import FoodCard from "../ios/components/food";
 import SearchBar from "../ios/components/SearchBar";
 import Card from "../ios/components/card";
 let images = [];
+let names = [];
+
 async function getFoodData(ingr, brand) {
   const foodData = await handleFood_search(ingr, brand);
 
@@ -12,6 +14,7 @@ async function getFoodData(ingr, brand) {
     console.log(foodData[i].food.image);
     console.log("\n" + foodData[i].food.knownAs);
     images[i] = foodData[i].food.image;
+    names[i] = foodData[i].food.knownAs;
   }
   console.log("\n" + images[1]);
   return foodData;
@@ -26,7 +29,7 @@ const SearchFoodPage = () => {
     <ScrollView>
       <View style={styles.container}>
         <SearchBar></SearchBar>
-        <FoodCard items={images} />
+        <FoodCard images={images} names={names} />
       </View>
     </ScrollView>
   );

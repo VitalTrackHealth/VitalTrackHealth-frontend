@@ -3,15 +3,15 @@ import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import COLORS from "../../constants/colors";
 import Ring from "./ring";
 
-export default function FoodCard({ items }) {
-  console.log(items);
-  // Step 1: Accept items as a prop
+export default function FoodCard({ images, names }) {
+  console.log(images);
+  // Step 1: Accept images as a prop
   return (
     <View>
-      {items.map(
+      {images.map(
         (
-          item,
-          index // Step 2: Map over the items array
+          images,
+          index // Step 2: Map over the images array
         ) => (
           <TouchableOpacity
             key={index}
@@ -20,9 +20,9 @@ export default function FoodCard({ items }) {
             }}
           >
             <View style={styles.Card}>
-              <Image source={{ uri: items[9] }} style={styles.image} />
+              <Image source={{ uri: images }} style={styles.image} />
               <View>
-                <Text>rice</Text>
+                <Text>{names[index]}</Text>
                 <Text>500 kc</Text>
               </View>
             </View>
