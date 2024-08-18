@@ -24,35 +24,27 @@ Questions = ({ navigation }) => {
       colors={["#FFFFFF", "#007260"]}
       style={{
         flex: 1,
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "center",
         paddingTop: 25,
       }}
     >
-      <View style={{ marginTop: 50 }}>
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          {" "}
-          Welcome to Vital Track!{" "}
-        </Text>
-      </View>
-      <Image
-        source={require("../assets/logo-train.png")}
-        style={{
-          height: 300,
-          width: 300,
-          marginTop: 30,
-        }}
-        resizeMode="contain"
-      />
-
-      <View style={{ marginTop: 35 }}>
+      <View style={{ marginTop: 10, alignItems: "center" }}>
         <Text style={{ textAlign: "center" }}>
           Before starting, please answer some questions
         </Text>
         <Text>What kind of account would you like?</Text>
       </View>
-
-      <View style={{ flexDirection: "row" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          //alignItems: "center",
+          backgroundColor: "#007260",
+          margin: 10,
+          borderRadius: 10,
+          padding: 70,
+        }}
+      >
         <TouchableOpacity
           onPress={() => {
             setSupervisorPressed((prevState) => !prevState);
@@ -82,11 +74,11 @@ Questions = ({ navigation }) => {
               height: 40,
               width: 40,
               marginRight: 4,
+              resizeMode: "contain",
             }}
-            resizeMode="contain"
           />
 
-          <Text>Supervisor</Text>
+          <Text>Provider</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -142,7 +134,7 @@ Questions = ({ navigation }) => {
         (isSupervisorPressed ? (
           <View style={{ margin: 30 }}>
             <Text style={{ textAlign: "justify" }}>
-              With a Supervisor Account, you will be able to help your patients
+              With a Provider Account, you will be able to help your patients
               with their diet, track their nutrition, and learn about nutrition!
             </Text>
           </View>
@@ -150,7 +142,7 @@ Questions = ({ navigation }) => {
 
       {showTextDefault && (
         <View style={{ margin: 30 }}>
-          <Text style={{ textAlign: "justify" }}>Default text</Text>
+          <Text style={{ textAlign: "justify" }}>Choose an option!</Text>
         </View>
       )}
 
@@ -158,7 +150,8 @@ Questions = ({ navigation }) => {
         onPress={() => {
           console.log(isSupervisorPressed);
           if (isSupervisorPressed == true) navigation.navigate("mainpage");
-          if (isPatientPressed == true) navigation.navigate("patientpage");
+          if (isPatientPressed == true)
+            navigation.navigate("questions-condition");
         }}
         title="Continue"
         style={{
