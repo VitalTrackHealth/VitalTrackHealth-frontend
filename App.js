@@ -11,13 +11,14 @@ import register from "./screens/register";
 import mainpage from "./screens/providerpage";
 import patientpage from "./screens/patientpage";
 import questions from "./screens/questionspage";
+import questions_condition from "./screens/questions-condition";
 import SearchFoodPage from "./screens/search_food_page";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="search_food_page">
+      <Stack.Navigator initialRouteName="questionspage">
         <Stack.Screen
           name="welcome"
           component={welcome}
@@ -32,6 +33,12 @@ export default function App() {
         <Stack.Screen
           name="register"
           component={register}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="questions-condition"
+          component={questions_condition}
           options={{ headerShown: false }}
         />
 
