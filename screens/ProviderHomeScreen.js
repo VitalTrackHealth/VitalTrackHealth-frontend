@@ -9,7 +9,7 @@ import Ring from "../ios/components/ring";
 import AddButtom from "../ios/components/AddButtom";
 import SearchBar from "../ios/components/SearchBar";
 
-const Mainpage = ({ navigation }) => {
+const ProviderHomeScreen = ({ navigation }) => {
   return (
     <LinearGradient
       colors={["#FFFFFF", "#007260"]}
@@ -71,4 +71,4 @@ const Mainpage = ({ navigation }) => {
   );
 };
 
-export default Mainpage;
+export default ProviderHomeScreen;

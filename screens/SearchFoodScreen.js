@@ -20,7 +20,7 @@ async function getFoodData(ingr, brand) {
   return foodData;
 }
 
-const SearchFoodPage = () => {
+const SearchFoodScreen = () => {
   const data = getFoodData("pasta", "");
 
   console.log("\n" + data);
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchFoodPage;
+export default SearchFoodScreen;

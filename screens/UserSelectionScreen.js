@@ -7,9 +7,8 @@ import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import COLORS from "../constants/colors";
 import { Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
-Questions = ({ navigation }) => {
+const UserSelectionScreen = ({ navigation }) => {
   const [isSupervisorPressed, setSupervisorPressed] = useState(false);
   const [isPatientPressed, setPatientPressed] = useState(false);
   const [showTextPatient, setShowTextPatient] = useState(true);
@@ -166,4 +165,4 @@ Questions = ({ navigation }) => {
     </View>
   );
 };
-export default Questions;
+export default UserSelectionScreen;

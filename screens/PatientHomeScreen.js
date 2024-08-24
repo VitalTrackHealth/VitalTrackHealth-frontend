@@ -14,7 +14,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useState } from "react";
 import { handleFood_search } from "../scripts/handle_register";
 
-const Patientpage = () => {
+const PatientHomeScreen = () => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   return (
     <LinearGradient
@@ -103,4 +103,4 @@ const Patientpage = () => {
   });
 };
 
-export default Patientpage;
+export default PatientHomeScreen;

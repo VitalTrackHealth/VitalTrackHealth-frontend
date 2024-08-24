@@ -2,10 +2,8 @@
   "expo": {
     "name": "VitalTrack",
     "slug": "VitalTrack",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "version": "0.0.1",
+    "assetBundlePatterns": ["**/*"]
   },
   "name": "VitalTrack"
 }
