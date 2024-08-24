@@ -1,22 +1,28 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
-import COLORS from "../../constants/colors";
-import Ring from "./ring";
+import COLORS from "../constants/colors";
+import Ring from "./Ring";
 
 export default function Card(props) {
   return (
-    <TouchableOpacity onPress={{/*Add onPress Here*/ }}>
+    <TouchableOpacity
+      onPress={
+        {
+          /*Add onPress Here*/
+        }
+      }
+    >
       <View style={styles.Card}>
         <View style={styles.cardContent}>{props.children}</View>
-        
-        <View 
+
+        <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems: 'center', // Align items vertically center
+            alignItems: "center", // Align items vertically center
           }}
         >
-          <View 
+          <View
             style={{
               flexDirection: "column",
               justifyContent: "space-between",
@@ -34,23 +40,22 @@ export default function Card(props) {
             <Text style={{ fontSize: 10, fontWeight: "bold", marginBottom: 0 }}>
               Appt time : 10:00 AM - 11:00 AM
             </Text>
-            <Text style={{ fontSize: 10, fontWeight: "bold", marginBottom: 10 }}>
-              Appt Date : 12/12/2021 
+            <Text
+              style={{ fontSize: 10, fontWeight: "bold", marginBottom: 10 }}
+            >
+              Appt Date : 12/12/2021
             </Text>
 
-
-                  <Image
-        source={{uri: "https://banner2.cleanpng.com/20180722/gfc/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c0968c377.0307553315323166814291.jpg"
-        }
-        }
-        style={styles.image}
-       
-      />
-  
+            <Image
+              source={{
+                uri: "https://banner2.cleanpng.com/20180722/gfc/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c0968c377.0307553315323166814291.jpg",
+              }}
+              style={styles.image}
+            />
           </View>
 
           <View style={{ flexDirection: "column", alignItems: "flex-end" }}>
-          <Ring />
+            <Ring />
             <View style={styles.box}>
               <Text style={{ textAlign: "left", color: COLORS.primary }}>
                 Carbohydrates: 15g
@@ -60,7 +65,6 @@ export default function Card(props) {
               </Text>
               <Text style={{ textAlign: "left", color: "red" }}>Fat: 20g</Text>
             </View>
-            
           </View>
         </View>
       </View>
@@ -93,7 +97,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   image: {
-    
     height: 100,
     width: 100,
   },

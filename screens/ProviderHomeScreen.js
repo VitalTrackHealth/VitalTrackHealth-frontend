@@ -1,13 +1,9 @@
 import { View, Text, ScrollView } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-web";
-import Card from "../ios/components/card";
+import { Button, Card, Ring, SearchBar } from "../components";
 import { Image } from "react-native";
-import { Button } from "../ios/components/Buttom";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import Ring from "../ios/components/ring";
-import AddButtom from "../ios/components/AddButtom";
-import SearchBar from "../ios/components/SearchBar";
 
 const ProviderHomeScreen = ({ navigation }) => {
   return (

@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import COLORS from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
-import Button from "../ios/components/Buttom";
+import { Button } from "../components";
 import { password_complexity } from "../scripts/register_complexity";
 import { handleRegister } from "../scripts/handle_register";
 import { email_complexity } from "../scripts/register_complexity";
@@ -264,6 +264,8 @@ const RegisterScreen = ({ navigation }) => {
           console.log("Email", Email);
           console.log("password", password);
 
+          navigation.navigate("RegisterQuestions");
+
           if (!email_complexity(Email))
             setEmailWarning("* Please enter a valid email address");
           else if (!password_complexity(password))
@@ -272,7 +274,6 @@ const RegisterScreen = ({ navigation }) => {
             );
           else {
             handleRegister(name, password, phoneNumber, Email);
-            navigation.navigate("questionspage");
           }
         }}
         title="Sign Up"

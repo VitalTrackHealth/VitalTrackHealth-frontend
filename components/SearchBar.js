@@ -1,9 +1,20 @@
-// SearchBar.js
 import React from "react";
 import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
-const SearchBar = ({ clicked, searchPhrase, setSearchPhrase, setCLicked }) => {
+const SearchBar = ({
+  clicked,
+  searchPhrase,
+  setSearchPhrase,
+  setClicked,
+  onSearch,
+}) => {
+  const handleSearch = () => {
+    onSearch();
+    Keyboard.dismiss();
+    setClicked(false);
+  };
+
   return (
     <View style={styles.container}>
       <View
@@ -25,31 +36,22 @@ const SearchBar = ({ clicked, searchPhrase, setSearchPhrase, setCLicked }) => {
           value={searchPhrase}
           onChangeText={setSearchPhrase}
           onFocus={() => {
-            setCLicked(true);
+            setClicked(true);
           }}
-          placeholderTextColor="grey"
+          onSubmitEditing={handleSearch}
+          placeholderTextColor="gray"
         />
-        {/* cross Icon, depending on whether the search bar is clicked or not */}
-        {clicked && (
-          <Entypo
-            name="cross"
-            size={20}
-            color="black"
-            style={{ padding: 1 }}
-            onPress={() => {
-              setSearchPhrase("");
-            }}
-          />
-        )}
       </View>
       {/* cancel button, depending on whether the search bar is clicked or not */}
       {clicked && (
         <View>
           <Button
-            title="Cancel"
+            title="Clear"
+            color="White"
             onPress={() => {
               Keyboard.dismiss();
-              setCLicked(false);
+              setClicked(false);
+              setSearchPhrase("");
             }}
           ></Button>
         </View>
@@ -57,6 +59,7 @@ const SearchBar = ({ clicked, searchPhrase, setSearchPhrase, setCLicked }) => {
     </View>
   );
 };
+
 export default SearchBar;
 
 // styles
@@ -67,6 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: "90%",
+    marginTop: 60,
   },
   searchBar__unclicked: {
     padding: 10,
@@ -79,8 +83,8 @@ const styles = StyleSheet.create({
   searchBar__clicked: {
     padding: 10,
     flexDirection: "row",
-    width: "80%",
-    backgroundColor: "#d9dbda",
+    width: "90%",
+    backgroundColor: "#FFFFFF",
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-evenly",

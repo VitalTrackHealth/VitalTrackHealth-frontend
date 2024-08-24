@@ -144,7 +144,11 @@ const LoginScreen = ({ navigation }) => {
 
         <Text>Remember Me</Text>
       </View>
-      {/* <Button title="Login" onPress={navigation.navigate("Home")} /> */}
+      <Button
+        onPress={() => navigation.navigate("Home")}
+        title="Login"
+        color="#841584"
+      />
 
       <View
         style={{
@@ -178,7 +182,7 @@ const LoginScreen = ({ navigation }) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("questionspage")}
+          onPress={() => console.log("click")}
           style={{
             flex: 1,
             alignItems: "center",

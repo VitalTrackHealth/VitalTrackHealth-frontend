@@ -2,7 +2,7 @@ import react from "react";
 import { View } from "react-native";
 import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Button from "../ios/components/Buttom";
+import { Button } from "../components";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import COLORS from "../constants/colors";

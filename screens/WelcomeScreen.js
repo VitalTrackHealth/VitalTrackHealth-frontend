@@ -73,7 +73,9 @@ const WelcomeScreen = ({ navigation }) => {
         />
 
         <Button
-          onPress={() => navigation.navigate("ProviderStack")}
+          onPress={() =>
+            navigation.navigate("ProviderStack", { screen: "Home" })
+          }
           title="Provider"
           color="#841584"
         />

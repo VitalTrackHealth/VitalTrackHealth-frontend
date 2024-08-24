@@ -1,4 +1,4 @@
-package com.vitaltrack
+package com.anonymous.VitalTrack
 
 import android.os.Build
 import android.os.Bundle
