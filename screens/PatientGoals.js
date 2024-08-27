@@ -16,7 +16,7 @@ const PatientGoals = ({ navigation, route }) => {
 
   const backbtnclicked = () => {
     console.log("Current Calories: ", calorieGoal);
-    navigation.navigate("patientpage", { calorieGoal });
+    navigation.navigate("Home", { calorieGoal });
   };
 
   useEffect(() => {

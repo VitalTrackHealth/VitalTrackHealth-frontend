@@ -28,7 +28,7 @@ const PatientHomeScreen = ({ route, navigation }) => {
   const handleIconPress = (icon) => {
     setSelectedIcon(icon);
     if (icon === "goal") {
-      navigation.navigate("patientgoals", { calorieGoal });
+      navigation.navigate("PatientGoals", { calorieGoal });
     }
   };
 
