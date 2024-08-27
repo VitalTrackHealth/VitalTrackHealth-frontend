@@ -1,4 +1,4 @@
-export function password_complexity(password) {
+export const passwordComplexity = (password) => {
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
   const hasNumber = /\d/.test(password);
@@ -25,9 +25,9 @@ export function password_complexity(password) {
   }
 
   return true;
-}
+};
 
-export function email_complexity(email) {
+export const emailComplexity = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isValidEmail = emailRegex.test(email);
 
@@ -36,4 +36,4 @@ export function email_complexity(email) {
   }
 
   return true;
-}
+};

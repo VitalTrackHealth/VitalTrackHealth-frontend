@@ -1,30 +1,46 @@
+import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   Pressable,
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import COLORS from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
-import { Button } from "../components";
-import { password_complexity } from "../scripts/register_complexity";
-import { handleRegister } from "../scripts/handle_register";
-import { email_complexity } from "../scripts/register_complexity";
+
+import { Button } from "@/components";
+import { useUser } from "@/context";
+import COLORS from "@/constants/colors";
+import { emailComplexity, passwordComplexity } from "@/utils";
+import { handleRegister } from "@/services";
 
 const RegisterScreen = ({ navigation }) => {
-  const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [Email, setEmail] = useState("");
+  const { user, setUser } = useUser(); // User context for state across register screens
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
   const [emailWarning, setEmailWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState("");
+
+  const handlerSignUpClick = () => {
+    if (!emailComplexity(email))
+      setEmailWarning("* Please enter a valid email address");
+    else if (!passwordComplexity(password))
+      setPasswordWarning(
+        "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
+      );
+    else {
+      // setUser({ ...user, username, password, email, conditions });
+      handleRegister(name, password, phoneNumber, email);
+      navigation.navigate("RegisterQuestions");
+    }
+  };
 
   return (
     <View
@@ -121,7 +137,7 @@ const RegisterScreen = ({ navigation }) => {
               setEmail(text);
               setEmailWarning("");
             }}
-            value={Email}
+            value={email}
           />
         </View>
 
@@ -260,22 +276,7 @@ const RegisterScreen = ({ navigation }) => {
       ></View>
 
       <Button
-        onPress={() => {
-          console.log("Email", Email);
-          console.log("password", password);
-
-          navigation.navigate("RegisterQuestions");
-
-          if (!email_complexity(Email))
-            setEmailWarning("* Please enter a valid email address");
-          else if (!password_complexity(password))
-            setPasswordWarning(
-              "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
-            );
-          else {
-            handleRegister(name, password, phoneNumber, Email);
-          }
-        }}
+        onPress={handlerSignUpClick()}
         title="Sign Up"
         filled
         style={{
