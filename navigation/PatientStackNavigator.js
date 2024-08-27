@@ -42,6 +42,11 @@ const PatientStackNavigator = () => {
         component={FullNutritionScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="patientgoals"
+        component={Patientgoals}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

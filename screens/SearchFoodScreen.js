@@ -7,7 +7,7 @@ import {
 import { FoodCard, SearchBar } from "../components";
 
 const SearchFoodScreen = ({ navigation, route }) => {
-  const { mealType } = route.params;
+  const { mealType, conditionData } = route.params;
   const [images, setImages] = useState([
     "https://i0.wp.com/static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg?ssl=1",
   ]);
@@ -41,12 +41,10 @@ const SearchFoodScreen = ({ navigation, route }) => {
         );
         const newNames = foodDataResponse.data.all.map((item) => item.label);
         const newNutrients = foodDataResponse.data.all.map((item) => ({
-          calories: item.nutrients.ENERC_KCAL || 0,
+          calories: item.nutrients.CALORIES || 0,
           fats: item.nutrients.FAT || 0,
-          proteins: item.nutrients.PROCNT || 0,
-          carbs: item.nutrients.CHOCDF || 0,
-          fibers: item.nutrients.FIBTG || 0,
-          sugars: item.nutrients.SUGAR || 0,
+          proteins: item.nutrients.PROTEIN || 0,
+          carbs: item.nutrients.CARBOHYDRATE || 0,
         }));
         const newFoodIds = foodDataResponse.data.all.map(
           (item) => item.food_id
@@ -104,6 +102,7 @@ const SearchFoodScreen = ({ navigation, route }) => {
         ingredients: ingredientData,
         servingSize,
         mealType,
+        conditionData,
       });
     } else {
       console.error(`Food ID ${foodId} not found in the list.`);

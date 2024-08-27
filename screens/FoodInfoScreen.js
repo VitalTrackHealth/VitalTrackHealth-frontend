@@ -10,12 +10,13 @@ import {
   Dimensions,
   Alert,
 } from "react-native";
-import { FoodRing } from "../components";
+import { useNavigation } from "@react-navigation/native";
+import FoodRing from "../components/FoodRing";
 import COLORS from "../constants/colors";
 
 const { width, height } = Dimensions.get("window");
 
-const FoodInfoScreen = ({ navigation, route }) => {
+const FoodInfoPage = ({ navigation, route }) => {
   const backbtnclicked = () => {
     navigation.goBack();
   };
@@ -30,7 +31,7 @@ const FoodInfoScreen = ({ navigation, route }) => {
   };
 
   const addBtnClicked = () => {
-    if (name === "Twinkie") {
+    if (nutrients.carbs > 60 && conditionData == "Diabetes") {
       Alert.alert(
         "High Sugar Alert!!!",
         "You have selected a food with high sugar which is not ideal for diabetes! Are you sure you want to add?",
@@ -50,6 +51,7 @@ const FoodInfoScreen = ({ navigation, route }) => {
                 carbs: nutrients.carbs,
                 fats: nutrients.fats,
                 proteins: nutrients.proteins,
+                conditionData,
               };
               navigation.navigate("Home", {
                 selectedFood: {
@@ -73,16 +75,25 @@ const FoodInfoScreen = ({ navigation, route }) => {
       };
       navigation.navigate("Home", {
         selectedFood: {
-          mealType, // Pass the mealType back
+          mealType,
           food: foodItem,
         },
       });
     }
   };
 
-  const { name, imagei, nutrients, ingredients, brand, servingSize, mealType } =
-    route.params;
-  console.log("Brand in FoodInfoScreen:", brand);
+  const {
+    name,
+    imagei,
+    nutrients,
+    ingredients,
+    brand,
+    servingSize,
+    mealType,
+    conditionData,
+  } = route.params;
+  console.log("Condition:", conditionData);
+  console.log("Brand in FoodInfoPage:", brand);
 
   const totalMacros = nutrients.fats + nutrients.proteins + nutrients.carbs;
   const proteinPercentage = (nutrients.proteins / totalMacros) * 100;
@@ -305,21 +316,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9f9f9",
     borderRadius: 10,
     marginTop: height * 0.02,
-    width: "90%", // Ensure the container takes up most of the screen width
-    alignSelf: "center", // Center the container within the parent
-    maxWidth: 360, // Cap the maximum width for larger screens
+    width: "90%",
+    alignSelf: "center",
+    maxWidth: 360,
   },
   largeCaloriesText: {
-    fontSize: Platform.OS == "web" ? width * 0.035 : width * 0.07, // This ensures the text scales proportionally to the screen width
+    fontSize: Platform.OS == "web" ? width * 0.035 : width * 0.07,
     fontWeight: "bold",
-    marginRight: 10, // Added margin to provide spacing between the elements
+    marginRight: 10,
   },
 
   servingSizeText: {
-    fontSize: Platform.OS == "web" ? width * 0.02 : width * 0.045, // This ensures the text scales proportionally to the screen width
+    fontSize: Platform.OS == "web" ? width * 0.02 : width * 0.045,
     fontWeight: "bold",
-    marginLeft: 10, // Added margin to provide spacing between the elements
-    marginTop: height * 0.01, // Added a top margin to create space between the calories and serving size text
+    marginLeft: 10,
+    marginTop: height * 0.01,
   },
   separator: {
     height: 1,
@@ -379,4 +390,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodInfoScreen;
+export default FoodInfoPage;

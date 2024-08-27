@@ -11,6 +11,8 @@
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
     "@expo/vector-icons": "^14.0.0",
+    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-community/slider": "^4.5.2",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.10.1",
     "babel-eslint": "^10.1.0",
@@ -19,6 +21,7 @@
     "expo-linear-gradient": "~13.0.2",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
+    "react-datepicker": "^7.3.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.3",
     "react-native-circular-progress": "^1.4.0",
@@ -31,7 +34,9 @@
     "react-native-search-bar": "^3.5.1",
     "react-native-search-box": "^0.0.20",
     "react-native-svg": "15.2.0",
-    "react-native-web": "~0.19.10"
+    "react-native-web": "~0.19.10",
+    "react-slider": "^2.0.6",
+    "rsuite": "^5.69.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

@@ -8,7 +8,13 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const FoodDiary = ({ mealData, onAddFood, onDeleteFood, navigation }) => {
+const FoodDiary = ({
+  mealData,
+  onAddFood,
+  onDeleteFood,
+  conditionData,
+  navigation,
+}) => {
   const handleNavigate = (mealType) => {
     navigation.navigate("SearchFood", {
       mealType,

@@ -3,11 +3,12 @@ import { StyleSheet, View, Text } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { ProgressBar, MD3Colors } from "react-native-paper";
 
-export default function PatientCard({
+export default function Patientcard({
   totalCalories = 0,
   totalProtein = 0,
   totalCarbs = 0,
   totalFats = 0,
+  caloriesGoal,
 }) {
   const proteinCalories = totalProtein * 4;
   const carbsCalories = totalCarbs * 4;
@@ -21,17 +22,28 @@ export default function PatientCard({
   const fatsPercentage =
     totalMacroCalories > 0 ? (fatsCalories / totalMacroCalories) * 100 : 0;
 
-  const calorieGoal = 2000;
-  const caloriePercentage = totalCalories / calorieGoal;
+  const calorieGoals = caloriesGoal;
+  const caloriePercentage = totalCalories / calorieGoals;
 
   return (
     <View>
+      <View style={styles.calorieContainer}>
+        <Text>Calories</Text>
+        <ProgressBar
+          progress={caloriePercentage}
+          color="#4CAF50"
+          style={styles.progressBar}
+        />
+        <Text style={styles.calorieText}>
+          {Math.round(totalCalories)} / {calorieGoals} cal
+        </Text>
+      </View>
       <View style={styles.cardContainer}>
         <View style={styles.nutrientContainer}>
           <Text>Fat</Text>
           <AnimatedCircularProgress
-            size={100}
-            width={12}
+            size={75}
+            width={10}
             fill={fatsPercentage}
             tintColor="#f7bf05"
             backgroundColor="#C1C7C9"
@@ -45,8 +57,8 @@ export default function PatientCard({
         <View style={styles.nutrientContainer}>
           <Text>Protein</Text>
           <AnimatedCircularProgress
-            size={100}
-            width={12}
+            size={75}
+            width={10}
             fill={proteinPercentage}
             tintColor="#a410fe"
             backgroundColor="#C1C7C9"
@@ -60,8 +72,8 @@ export default function PatientCard({
         <View style={styles.nutrientContainer}>
           <Text>Carbohydrates</Text>
           <AnimatedCircularProgress
-            size={100}
-            width={12}
+            size={75}
+            width={10}
             fill={carbsPercentage}
             tintColor="#27d8ef"
             backgroundColor="#C1C7C9"
@@ -71,17 +83,6 @@ export default function PatientCard({
           </Text>
           <Text>{Math.round(totalCarbs)}g</Text>
         </View>
-      </View>
-      <View style={styles.calorieContainer}>
-        <Text style={styles.labelText}>Calories</Text>
-        <ProgressBar
-          progress={caloriePercentage}
-          color="#4CAF50"
-          style={styles.progressBar}
-        />
-        <Text style={styles.calorieText}>
-          {Math.round(totalCalories)} / {calorieGoal} cal
-        </Text>
       </View>
     </View>
   );
@@ -99,26 +100,29 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     marginHorizontal: 4,
     marginVertical: 2,
-    justifyContent: "space-between",
-    marginTop: 50,
-    padding: 20,
+    justifyContent: "center",
+    marginTop: 0,
+    padding: 5,
   },
   progressBar: {
     height: 10,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 0,
   },
   nutrientContainer: {
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: 20,
+    marginRight: 20,
   },
   percentageText: {
     position: "absolute",
   },
   calorieContainer: {
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
+    marginTop: 70,
   },
 });
