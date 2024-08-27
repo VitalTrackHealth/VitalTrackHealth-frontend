@@ -5,6 +5,7 @@ import {
   FullNutritionScreen,
   LoginScreen,
   PatientHomeScreen,
+  PatientGoalsScreen,
   RegisterScreen,
   RegisterQuestionsScreen,
   SearchFoodScreen,
@@ -43,8 +44,8 @@ const PatientStackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="patientgoals"
-        component={Patientgoals}
+        name="PatientGoals"
+        component={PatientGoalsScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

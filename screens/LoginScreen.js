@@ -145,7 +145,7 @@ const LoginScreen = ({ navigation }) => {
         <Text>Remember Me</Text>
       </View>
       <Button
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("PatientStack", { screen: "Home" })}
         title="Login"
         color="#841584"
       />

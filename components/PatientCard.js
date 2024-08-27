@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { ProgressBar, MD3Colors } from "react-native-paper";
 
-export default function Patientcard({
+export default function PatientCard({
   totalCalories = 0,
   totalProtein = 0,
   totalCarbs = 0,

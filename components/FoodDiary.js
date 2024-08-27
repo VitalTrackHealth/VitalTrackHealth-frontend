@@ -17,6 +17,7 @@ const FoodDiary = ({
 }) => {
   const handleNavigate = (mealType) => {
     navigation.navigate("SearchFood", {
+      conditionData,
       mealType,
       onSelectFood: (food) => {
         onAddFood(mealType, food);

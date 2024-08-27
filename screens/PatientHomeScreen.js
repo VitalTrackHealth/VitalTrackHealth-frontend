@@ -85,7 +85,9 @@ const PatientHomeScreen = ({ route, navigation }) => {
     setDate(newDate);
   };
 
-  const { condition } = route.params;
+  const condition = route.params?.condition
+    ? route.params?.condition
+    : "Diabetes";
   const { totalCalories, totalProtein, totalCarbs, totalFats } =
     calculateTotalNutrients();
 
@@ -127,7 +129,7 @@ const PatientHomeScreen = ({ route, navigation }) => {
       </View>
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Patientcard
+        <PatientCard
           totalCalories={totalCalories}
           totalProtein={totalProtein}
           totalCarbs={totalCarbs}

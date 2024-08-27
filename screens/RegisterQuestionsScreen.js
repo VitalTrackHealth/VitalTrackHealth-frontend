@@ -41,7 +41,9 @@ const ConditionQuestions = ({ navigation }) => {
         onPress={() =>
           navigation.navigate("PatientStack", {
             screen: "Home",
-            condition: selectedCondition,
+            params: {
+              condition: selectedCondition,
+            },
           })
         }
         title="Continue"

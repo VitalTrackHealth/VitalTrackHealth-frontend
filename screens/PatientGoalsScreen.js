@@ -9,7 +9,7 @@ import {
 import Slider from "@react-native-community/slider";
 import COLORS from "../constants/colors";
 
-const PatientGoals = ({ navigation, route }) => {
+const PatientGoalsScreen = ({ navigation, route }) => {
   const [calorieGoal, setCalorieGoal] = useState(
     route.params?.calorieGoal || 2000
   );
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PatientGoals;
+export default PatientGoalsScreen;
