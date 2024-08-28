@@ -76,6 +76,7 @@ const SearchFoodScreen = ({ navigation, route }) => {
     fetchFoodData("Pasta");
   }, []);
 
+  // Test Commit to ensure I am updating develop
   const handleCardPress = async (foodId) => {
     const index = foodids.indexOf(foodId);
 
