@@ -2,7 +2,7 @@ import FoodInfoScreen from "./FoodInfoScreen";
 import FullNutritionScreen from "./FullNutritionScreen";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
-import RegisterQuestionsScreen from "./RegisterQuestionsScreen";
+import RegisterConditionQuestionScreen from "./RegisterConditionQuestionScreen";
 import PatientHomeScreen from "./PatientHomeScreen";
 import PatientGoalsScreen from "./PatientGoalsScreen";
 import ProviderHomeScreen from "./ProviderHomeScreen";
@@ -18,7 +18,7 @@ export {
   PatientGoalsScreen,
   ProviderHomeScreen,
   RegisterScreen,
-  RegisterQuestionsScreen,
+  RegisterConditionQuestionScreen,
   SearchFoodScreen,
   UserSelectionScreen,
   WelcomeScreen,

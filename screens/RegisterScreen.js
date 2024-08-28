@@ -9,18 +9,22 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 
-import { Button } from "@/components";
-import { useUser } from "@/context";
-import COLORS from "@/constants/colors";
-import { emailComplexity, passwordComplexity } from "@/utils";
-import { handleRegister } from "@/services";
+import { Button } from "../components";
+import COLORS from "../constants/colors";
+import { useUser } from "../context";
+import { handleRegister } from "../services";
+import { emailComplexity, passwordComplexity } from "../utils";
 
 const RegisterScreen = ({ navigation }) => {
-  const { user, setUser } = useUser(); // User context for state across register screens
+  // User context for state across register screens
+  const { user, setUser } = useUser();
+  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -28,17 +32,32 @@ const RegisterScreen = ({ navigation }) => {
   const [emailWarning, setEmailWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState("");
 
-  const handlerSignUpClick = () => {
-    if (!emailComplexity(email))
-      setEmailWarning("* Please enter a valid email address");
-    else if (!passwordComplexity(password))
-      setPasswordWarning(
-        "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
-      );
-    else {
-      // setUser({ ...user, username, password, email, conditions });
-      handleRegister(name, password, phoneNumber, email);
-      navigation.navigate("RegisterQuestions");
+  const handlerSignUpClick = async () => {
+    // if (!emailComplexity(email))
+    //   setEmailWarning("* Please enter a valid email address");
+    // else if (!passwordComplexity(password))
+    //   setPasswordWarning(
+    //     "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
+    //   );
+    // else {
+    // }
+    const result = await handleRegister({
+      firstName,
+      lastName,
+      username,
+      phoneNumber,
+      email,
+      password,
+      bodyMeasurements: {},
+    });
+
+    if (result.success) {
+      console.log("Registration successful:", result.data);
+      navigation.navigate("PatientStack", {
+        screen: "RegisterConditionQuestion",
+      });
+    } else {
+      console.error("Registration failed:", result.error);
     }
   };
 
@@ -276,7 +295,7 @@ const RegisterScreen = ({ navigation }) => {
       ></View>
 
       <Button
-        onPress={handlerSignUpClick()}
+        onPress={handlerSignUpClick}
         title="Sign Up"
         filled
         style={{

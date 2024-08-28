@@ -3,9 +3,18 @@ import { View, Text, TouchableOpacity } from "react-native";
 
 import { Button } from "../components";
 import COLORS from "../constants/colors";
+import { useUser } from "../context";
 
-const ConditionQuestions = ({ navigation }) => {
+const RegisterConditionQuestionScreen = ({ navigation, route }) => {
+  // User context for state across register screens
+  const { user, setUser } = useUser();
   const [selectedCondition, setSelectedCondition] = useState(null);
+
+  const handleContinueClick = () => {
+    navigation.navigate("PatientStack", {
+      screen: "Home",
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,14 +47,7 @@ const ConditionQuestions = ({ navigation }) => {
         )}
       </View>
       <Button
-        onPress={() =>
-          navigation.navigate("PatientStack", {
-            screen: "Home",
-            params: {
-              condition: selectedCondition,
-            },
-          })
-        }
+        onPress={handleContinueClick}
         title="Continue"
         color="black"
         style={{
@@ -119,4 +121,4 @@ const styles = {
   },
 };
 
-export default ConditionQuestions;
+export default RegisterConditionQuestionScreen;

@@ -6,12 +6,12 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
-    username: "",
-    password: "",
     email: "",
     conditions: [],
-    bodyMeasurements: {},
-    providerCode: "",
+    bodyMeasurements: {
+      height: 0.0,
+      weight: 0.0,
+    },
   });
 
   return (

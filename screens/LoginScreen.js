@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import COLORS from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
-import { handleLogin, handleRegister } from "../scripts/handle_register";
 
 const LoginScreen = ({ navigation }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
