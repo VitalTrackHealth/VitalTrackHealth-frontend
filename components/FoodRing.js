@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import PieChart from "react-native-pie-chart";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 
 const FoodRing = ({ proteinPercentage, fatPercentage, carbPercentage }) => {
   const widthAndHeight = 100;
@@ -13,7 +13,7 @@ const FoodRing = ({ proteinPercentage, fatPercentage, carbPercentage }) => {
         series={series}
         sliceColor={sliceColor}
         coverRadius={0.6}
-        coverFill={COLORS.white}
+        coverFill={colors.white}
       />
     </View>
   );

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 
@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }) => {
   const [PASSWORD, setPassword] = useState("");
   return (
     <View
-      style={{ flex: 1, marginHorizontal: 22, backgroundColor: COLORS.white }}
+      style={{ flex: 1, marginHorizontal: 22, backgroundColor: colors.white }}
     >
       <View style={{ marginVertical: 22 }}>
         <Text
@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
             fontSize: 22,
             fontWeight: "bold",
             marginVertical: 12,
-            color: COLORS.black,
+            color: colors.black,
           }}
         >
           Hi Welcome Back ! 👋
@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
         <Text
           style={{
             fontSize: 16,
-            color: COLORS.black,
+            color: colors.black,
           }}
         >
           Hello again you have been missed!
@@ -57,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
           style={{
             width: "100%",
             height: 48,
-            borderColor: COLORS.black,
+            borderColor: colors.black,
             borderWidth: 1,
             borderRadius: 8,
             alignItems: "center",
@@ -93,7 +93,7 @@ const LoginScreen = ({ navigation }) => {
           style={{
             width: "100%",
             height: 48,
-            borderColor: COLORS.black,
+            borderColor: colors.black,
             borderWidth: 1,
             borderRadius: 8,
             alignItems: "center",
@@ -121,9 +121,9 @@ const LoginScreen = ({ navigation }) => {
             }}
           >
             {isPasswordShown == true ? (
-              <Ionicons name="eye-off" size={24} color={COLORS.black} />
+              <Ionicons name="eye-off" size={24} color={colors.black} />
             ) : (
-              <Ionicons name="eye" size={24} color={COLORS.black} />
+              <Ionicons name="eye" size={24} color={colors.black} />
             )}
           </TouchableOpacity>
         </View>
@@ -138,7 +138,7 @@ const LoginScreen = ({ navigation }) => {
           style={{ marginRight: 8 }}
           value={isChecked}
           onValueChange={setIsChecked}
-          color={isChecked ? COLORS.primary : undefined}
+          color={isChecked ? colors.primary : undefined}
         />
 
         <Text>Remember Me</Text>
@@ -160,7 +160,7 @@ const LoginScreen = ({ navigation }) => {
           style={{
             flex: 1,
             height: 1,
-            backgroundColor: COLORS.grey,
+            backgroundColor: colors.grey,
             marginHorizontal: 10,
           }}
         />
@@ -169,7 +169,7 @@ const LoginScreen = ({ navigation }) => {
           style={{
             flex: 1,
             height: 1,
-            backgroundColor: COLORS.grey,
+            backgroundColor: colors.grey,
             marginHorizontal: 10,
           }}
         />
@@ -189,7 +189,7 @@ const LoginScreen = ({ navigation }) => {
             flexDirection: "row",
             height: 52,
             borderWidth: 1,
-            borderColor: COLORS.grey,
+            borderColor: colors.grey,
             marginRight: 4,
             borderRadius: 10,
           }}
@@ -216,7 +216,7 @@ const LoginScreen = ({ navigation }) => {
             flexDirection: "row",
             height: 52,
             borderWidth: 1,
-            borderColor: COLORS.grey,
+            borderColor: colors.grey,
             marginRight: 4,
             borderRadius: 10,
           }}
@@ -241,14 +241,14 @@ const LoginScreen = ({ navigation }) => {
           marginVertical: 22,
         }}
       >
-        <Text style={{ fontSize: 16, color: COLORS.black }}>
+        <Text style={{ fontSize: 16, color: colors.black }}>
           Don't have an account ?{" "}
         </Text>
         <Pressable onPress={() => navigation.navigate("Register")}>
           <Text
             style={{
               fontSize: 16,
-              color: COLORS.primary,
+              color: colors.primary,
               fontWeight: "bold",
               marginLeft: 6,
             }}

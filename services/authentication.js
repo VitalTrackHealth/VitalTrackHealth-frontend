@@ -5,9 +5,8 @@ export const handleRegister = async (userToRegister) => {
     firstName: first_name,
     lastName: last_name,
     password,
+    phoneNumber: phone_number,
     email,
-    conditions,
-    bodyMeasurements: body_measurements,
     providerCode: provider_code,
   } = userToRegister;
 
@@ -21,9 +20,8 @@ export const handleRegister = async (userToRegister) => {
         first_name,
         last_name,
         password,
+        phone_number,
         email,
-        conditions,
-        body_measurements,
         provider_code,
       }),
     });
@@ -35,8 +33,8 @@ export const handleRegister = async (userToRegister) => {
       );
     }
 
-    const data = await response.json();
-    return { success: true, data };
+    const results = await response.json();
+    return { success: true, results };
   } catch (error) {
     console.error("error:", error);
     return { success: false, error: error.message };

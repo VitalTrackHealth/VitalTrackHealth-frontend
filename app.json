@@ -1,17 +1,12 @@
 {
-  "expo": {
-    "name": "VitalTrack",
-    "slug": "VitalTrack",
-    "version": "0.0.1",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "android": {
-      "package": "com.anonymous.VitalTrack"
-    },
-    "ios": {
-      "bundleIdentifier": "com.anonymous.VitalTrack"
-    }
+  "name": "VitalTrack",
+  "slug": "VitalTrack",
+  "version": "0.0.1",
+  "assetBundlePatterns": ["**/*"],
+  "android": {
+    "package": "com.anonymous.VitalTrack"
   },
-  "name": "VitalTrack"
+  "ios": {
+    "bundleIdentifier": "com.anonymous.VitalTrack"
+  }
 }

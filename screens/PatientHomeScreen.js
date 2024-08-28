@@ -6,12 +6,15 @@ import {
   ScrollView,
   Text,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { FoodDiary, PatientCard } from "../components";
-import COLORS from "../constants/colors";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { AntDesign } from "@expo/vector-icons";
+
+import { FoodDiary, PatientCard } from "../components";
+import { colors } from "../constants";
+import { useUser } from "../context";
 
 const PatientHomeScreen = ({ route, navigation }) => {
+  const { user, setUser } = useUser();
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [mealData, setMealData] = useState({
     breakfast: [],
@@ -40,6 +43,7 @@ const PatientHomeScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
+    console.log(user);
     if (route.params?.selectedFood) {
       const { mealType, food } = route.params.selectedFood;
       addFoodItem(mealType, food);
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
     padding: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 import Ring from "./Ring";
 
 export default function Card(props) {
@@ -57,7 +57,7 @@ export default function Card(props) {
           <View style={{ flexDirection: "column", alignItems: "flex-end" }}>
             <Ring />
             <View style={styles.box}>
-              <Text style={{ textAlign: "left", color: COLORS.primary }}>
+              <Text style={{ textAlign: "left", color: colors.primary }}>
                 Carbohydrates: 15g
               </Text>
               <Text style={{ textAlign: "left", color: "blue" }}>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "rgba(255, 255, 255, 0.0)",
     borderWidth: 0.7,
-    borderColor: COLORS.primary,
+    borderColor: colors.primary,
     shadowOpacity: 0.3,
     shadowRadius: 2,
     marginHorizontal: 4,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   cardContent: {},
   box: {
     borderWidth: 1,
-    borderColor: COLORS.primary,
+    borderColor: colors.primary,
     letterSpacing: 20,
     marginTop: 10,
     padding: 10,

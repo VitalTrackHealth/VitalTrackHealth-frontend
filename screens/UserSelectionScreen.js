@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Button } from "../components";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 import { Image } from "react-native";
 
 const UserSelectionScreen = ({ navigation }) => {
@@ -60,11 +60,11 @@ const UserSelectionScreen = ({ navigation }) => {
             flexDirection: "row",
             height: 52,
             borderWidth: 1,
-            borderColor: COLORS.grey,
+            borderColor: colors.grey,
             marginRight: 0,
             marginLeft: 0,
             borderRadius: 10,
-            backgroundColor: isSupervisorPressed ? "#b3ecec" : COLORS.white,
+            backgroundColor: isSupervisorPressed ? "#b3ecec" : colors.white,
           }}
         >
           <Image
@@ -96,11 +96,11 @@ const UserSelectionScreen = ({ navigation }) => {
             flexDirection: "row",
             height: 52,
             borderWidth: 1,
-            borderColor: COLORS.grey,
+            borderColor: colors.grey,
             marginTop: 30,
 
             borderRadius: 10,
-            backgroundColor: isPatientPressed ? "#b3ecec" : COLORS.white,
+            backgroundColor: isPatientPressed ? "#b3ecec" : colors.white,
           }}
         >
           <Image

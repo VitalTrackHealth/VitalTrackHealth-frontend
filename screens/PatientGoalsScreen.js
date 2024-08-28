@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Slider from "@react-native-community/slider";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 
 const PatientGoalsScreen = ({ navigation, route }) => {
   const [calorieGoal, setCalorieGoal] = useState(
@@ -45,7 +45,7 @@ const PatientGoalsScreen = ({ navigation, route }) => {
               step={50}
               value={calorieGoal}
               onValueChange={(value) => setCalorieGoal(value)}
-              minimumTrackTintColor={COLORS.primary}
+              minimumTrackTintColor={colors.primary}
               maximumTrackTintColor="grey"
             />
             <View style={styles.markerContainer}>

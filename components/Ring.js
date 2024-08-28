@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-//import COLORS from '../constants/colors';
 import { ProgressBar } from "react-native";
 
 const Ring = () => {

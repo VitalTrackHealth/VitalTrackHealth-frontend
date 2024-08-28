@@ -2,18 +2,30 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
 import { Button } from "../components";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 import { useUser } from "../context";
+import { handleUserUpdate } from "../services";
 
 const RegisterConditionQuestionScreen = ({ navigation, route }) => {
   // User context for state across register screens
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   const [selectedCondition, setSelectedCondition] = useState(null);
+  const { email } = route.params;
 
-  const handleContinueClick = () => {
-    navigation.navigate("PatientStack", {
-      screen: "Home",
+  const handleContinueClick = async () => {
+    const result = await handleUserUpdate({
+      email,
+      conditions: [selectedCondition],
     });
+
+    if (result.success) {
+      setUser(result.results.data);
+      navigation.navigate("PatientStack", {
+        screen: "Home",
+      });
+    } else {
+      console.error("User update failed:", result.error);
+    }
   };
 
   return (
@@ -83,7 +95,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     width: "90%",
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
     padding: 30,
     margin: 20,
     borderRadius: 20,
@@ -97,7 +109,7 @@ const styles = {
     alignItems: "center",
   },
   selectedButtonOption: {
-    backgroundColor: COLORS.secondary,
+    backgroundColor: colors.secondary,
   },
   buttonText: {
     color: "black",

@@ -1,9 +1,10 @@
-const COLORS = {
+const colors = {
   white: "#FFFFFF",
   black: "#222222",
-  primary: "#007260",
-  secondary: "#398680",
   grey: "#CCCCCC",
+  primary: "#007260", // Turquoise
+  secondary: "#00414D", // Dark Blue
+  accent: "#F4FBFA", // Very Very Light Turquoise
 };
 
-export default COLORS;
+export default colors;

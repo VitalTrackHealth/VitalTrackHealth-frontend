@@ -10,7 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 
 import { Button } from "../components";
-import COLORS from "../constants/colors";
+import { colors } from "../constants";
 import { useUser } from "../context";
 import { handleRegister } from "../services";
 import { emailComplexity, passwordComplexity } from "../utils";
@@ -21,7 +21,6 @@ const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,17 +43,15 @@ const RegisterScreen = ({ navigation }) => {
     const result = await handleRegister({
       firstName,
       lastName,
-      username,
       phoneNumber,
       email,
       password,
-      bodyMeasurements: {},
     });
 
     if (result.success) {
-      console.log("Registration successful:", result.data);
       navigation.navigate("PatientStack", {
         screen: "RegisterConditionQuestion",
+        params: { email: result.results.data.email },
       });
     } else {
       console.error("Registration failed:", result.error);
@@ -63,7 +60,7 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View
-      style={{ flex: 1, marginHorizontal: 22, backgroundColor: COLORS.white }}
+      style={{ flex: 1, marginHorizontal: 22, backgroundColor: colors.white }}
     >
       <View style={{ marginVertical: 22 }}>
         <Text
@@ -71,7 +68,7 @@ const RegisterScreen = ({ navigation }) => {
             fontSize: 22,
             fontWeight: "bold",
             marginVertical: 12,
-            color: COLORS.black,
+            color: colors.black,
           }}
         >
           Create Account
@@ -80,7 +77,7 @@ const RegisterScreen = ({ navigation }) => {
         <Text
           style={{
             fontSize: 16,
-            color: COLORS.black,
+            color: colors.black,
           }}
         >
           Connect with your nutrition today!
@@ -101,7 +98,7 @@ const RegisterScreen = ({ navigation }) => {
           style={{
             width: "100%",
             height: 48,
-            borderColor: COLORS.black,
+            borderColor: colors.black,
             borderWidth: 1,
             borderRadius: 8,
             alignItems: "center",
@@ -137,7 +134,7 @@ const RegisterScreen = ({ navigation }) => {
           style={{
             width: "100%",
             height: 48,
-            borderColor: COLORS.black,
+            borderColor: colors.black,
             borderWidth: 1,
             borderRadius: 8,
             alignItems: "center",
@@ -196,7 +193,7 @@ const RegisterScreen = ({ navigation }) => {
             style={{
               width: "12%",
               borderRightWidth: 1,
-              borderLeftColor: COLORS.grey,
+              borderLeftColor: colors.grey,
               height: "100%",
             }}
           />
@@ -281,7 +278,7 @@ const RegisterScreen = ({ navigation }) => {
           style={{ marginRight: 8 }}
           value={isChecked}
           onValueChange={setIsChecked}
-          color={isChecked ? COLORS.primary : undefined}
+          color={isChecked ? colors.primary : undefined}
         />
 
         <Text>I agree to the terms and conditions</Text>
@@ -311,14 +308,14 @@ const RegisterScreen = ({ navigation }) => {
           marginVertical: 22,
         }}
       >
-        <Text style={{ fontSize: 16, color: COLORS.black }}>
+        <Text style={{ fontSize: 16, color: colors.black }}>
           Already have an account
         </Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
           <Text
             style={{
               fontSize: 16,
-              color: COLORS.primary,
+              color: colors.primary,
               fontWeight: "bold",
               marginLeft: 6,
             }}

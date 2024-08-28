@@ -10,9 +10,7 @@ import {
   Dimensions,
   Alert,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import FoodRing from "../components/FoodRing";
-import COLORS from "../constants/colors";
 
 const { width, height } = Dimensions.get("window");
 
