@@ -10,11 +10,11 @@ const WelcomeScreen = ({ navigation }) => {
         resizeMode="contain"
       />
       <View>
-        <Text> Let's get started</Text>
+        <Text>
+          Creating a bridge between healthcare professionals and nutrition.
+        </Text>
         <View>
-          <Text>
-            Creating a bridge between healthcare professionals and nutrition
-          </Text>
+          <Text>Let's get started</Text>
         </View>
         <Pressable
           onPress={() =>
