@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Button,
   View,
   Text,
   Pressable,
@@ -9,11 +10,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 
-import { Button } from "../components";
-import { colors } from "../constants";
-import { useUser } from "../context";
-import { handleRegister } from "../services";
-import { emailComplexity, passwordComplexity } from "../utils";
+import { useUser } from "@/context";
+import { handleRegister } from "@/services";
+import { colors } from "@/styles";
+import { emailComplexity, passwordComplexity } from "@/utils";
 
 const RegisterScreen = ({ navigation }) => {
   // User context for state across register screens

@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-web";
-import { Button, Card, Ring, SearchBar } from "../components";
+import { Card, Ring, SearchBar } from "@/components";
 import { Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import { colors } from "../constants";
+import { colors } from "@/styles";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 
@@ -195,7 +195,7 @@ const LoginScreen = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../assets/trail-track2.png")}
+            source={require("@/assets/trail-track2.png")}
             style={{
               height: 36,
               width: 36,
@@ -222,7 +222,7 @@ const LoginScreen = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../assets/trail-track2.png")}
+            source={require("@/assets/trail-track2.png")}
             style={{
               height: 36,
               width: 36,

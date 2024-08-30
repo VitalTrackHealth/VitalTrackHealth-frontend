@@ -10,7 +10,7 @@ import {
   Dimensions,
   Alert,
 } from "react-native";
-import FoodRing from "../components/FoodRing";
+import { FoodRing } from "@/components";
 
 const { width, height } = Dimensions.get("window");
 

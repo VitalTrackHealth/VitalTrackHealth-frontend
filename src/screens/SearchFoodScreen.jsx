@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
-import { handleFood_search, handleFood_request_nutrients } from "../services";
-import { FoodCard, SearchBar } from "../components";
+import { handleFood_search, handleFood_request_nutrients } from "@/services";
+import { FoodCard, SearchBar } from "@/components";
 
 const SearchFoodScreen = ({ navigation, route }) => {
   const { mealType, conditionData } = route.params;

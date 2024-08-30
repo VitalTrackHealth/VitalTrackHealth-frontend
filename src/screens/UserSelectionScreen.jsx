@@ -2,10 +2,10 @@ import react from "react";
 import { View } from "react-native";
 import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Button } from "../components";
+import { Button } from "@/components";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { colors } from "../constants";
+import { colors } from "@/styles";
 import { Image } from "react-native";
 
 const UserSelectionScreen = ({ navigation }) => {
@@ -68,7 +68,7 @@ const UserSelectionScreen = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../assets/supervisor.png")}
+            source={require("@/assets/supervisor.png")}
             style={{
               height: 40,
               width: 40,
@@ -104,7 +104,7 @@ const UserSelectionScreen = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../assets/patient.png")}
+            source={require("@/assets/patient.png")}
             style={{
               height: 40,
               width: 40,

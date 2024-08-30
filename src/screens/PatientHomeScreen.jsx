@@ -9,9 +9,9 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from "@expo/vector-icons";
 
-import { FoodDiary, PatientCard } from "../components";
-import { colors } from "../constants";
-import { useUser } from "../context";
+import { FoodDiary, PatientCard } from "@/components";
+import { colors } from "@/styles";
+import { useUser } from "@/context";
 
 const PatientHomeScreen = ({ route, navigation }) => {
   const { user, setUser } = useUser();

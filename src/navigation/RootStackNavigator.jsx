@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { WelcomeScreen } from "../screens";
+import { WelcomeScreen } from "@/screens";
 import PatientStackNavigator from "./PatientStackNavigator";
 import ProviderStackNavigator from "./ProviderStackNavigator";
 

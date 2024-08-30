@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
-import { Button } from "../components";
-import { colors } from "../constants";
-import { useUser } from "../context";
-import { handleUserUpdate } from "../services";
+import { Button } from "@/components";
+import { colors } from "@/styles";
+import { useUser } from "@/context";
+import { handleUserUpdate } from "@/services";
 
 const RegisterConditionQuestionScreen = ({ navigation, route }) => {
   // User context for state across register screens

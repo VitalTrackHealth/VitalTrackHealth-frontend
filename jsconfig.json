@@ -3,13 +3,12 @@
     "baseUrl": ".",
     "paths": {
       "@/assets/*": ["assets/*"],
-      "@/components/*": ["components/*"],
-      "@/constants/*": ["constants/*"],
-      "@/context/*": ["context/*"],
-      "@/navigation/*": ["navigation/*"],
-      "@/screens/*": ["screens/*"],
-      "@/services/*": ["services/*"],
-      "@/utils/*": ["utils/*"]
+      "@/components/*": ["src/components/*"],
+      "@/context/*": ["src/context/*"],
+      "@/navigation/*": ["src/navigation/*"],
+      "@/screens/*": ["src/screens/*"],
+      "@/services/*": ["src/services/*"],
+      "@/utils/*": ["src/utils/*"]
     }
   },
   "exclude": ["./android", "./ios"]

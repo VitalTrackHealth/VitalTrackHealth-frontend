@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { UserProvider } from "../context";
+import { UserProvider } from "@/context";
 import {
   FoodInfoScreen,
   FullNutritionScreen,
@@ -10,7 +10,7 @@ import {
   RegisterScreen,
   RegisterConditionQuestionScreen,
   SearchFoodScreen,
-} from "../screens";
+} from "@/screens";
 
 const Stack = createNativeStackNavigator();
 

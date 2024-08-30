@@ -2,7 +2,7 @@ import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import RootStackNavigator from "./navigation/RootStackNavigator";
+import RootStackNavigator from "./src/navigation/RootStackNavigator";
 
 const App = () => {
   return (

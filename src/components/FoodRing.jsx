@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import PieChart from "react-native-pie-chart";
-import { colors } from "../constants";
+import { colors } from "@/styles";
 
 const FoodRing = ({ proteinPercentage, fatPercentage, carbPercentage }) => {
   const widthAndHeight = 100;

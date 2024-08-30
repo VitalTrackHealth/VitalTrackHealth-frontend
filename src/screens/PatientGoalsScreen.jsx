@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Slider from "@react-native-community/slider";
-import { colors } from "../constants";
+import { colors } from "@/styles";
 
 const PatientGoalsScreen = ({ navigation, route }) => {
   const [calorieGoal, setCalorieGoal] = useState(
