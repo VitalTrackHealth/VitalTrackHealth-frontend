@@ -1,36 +1,22 @@
-import { View, Text, Image } from "react-native";
+import { Text, Image } from "react-native";
 
-import { Button } from "@/components";
-import { createStyles, padding, margin, fonts, colors } from "@/styles";
+import { Button, Page, PageTop, PageBottom } from "@/components";
+import { createStyles, margin, fonts, colors } from "@/styles";
 
 const styles = createStyles({
-  container: {
-    flex: 1,
-    padding: padding.lg,
-    justifyContent: "space-between",
-  },
-  topContent: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  bottomContent: {
-    width: "100%",
-    marginBottom: margin.md,
-  },
   logo: {
     width: "100%",
     height: 100,
   },
   mainText: {
-    fontSize: fonts.xl,
+    fontSize: fonts.lg,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: margin.sm,
   },
   subText: {
     fontSize: fonts.md,
-    color: colors.darkGray,
+    color: colors.gray.medium,
     textAlign: "center",
     marginBottom: margin.xl,
   },
@@ -42,23 +28,25 @@ const styles = createStyles({
 
 const WelcomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.topContent}>
+    <Page>
+      <PageTop>
         <Image
           source={require("@/assets/logo-no-background.png")}
           style={styles.logo}
           resizeMode="contain"
         />
-      </View>
-      <View style={styles.bottomContent}>
+      </PageTop>
+      <PageBottom>
         <Text style={styles.mainText}>
           Creating a bridge between{" "}
-          <Text style={{ color: colors.orange }}>healthcare professionals</Text>{" "}
-          and <Text style={{ color: colors.lightBlue }}>nutrition</Text>.
+          <Text style={{ color: colors.primary }}>
+            healthcare professionals
+          </Text>{" "}
+          and <Text style={{ color: colors.green.light }}>nutrition</Text>.
         </Text>
         <Text style={styles.subText}>Sign up today!</Text>
         <Button
-          text="Get Started"
+          text="Patient"
           onPress={() =>
             navigation.navigate("PatientStack", { screen: "Login" })
           }
@@ -66,15 +54,15 @@ const WelcomeScreen = ({ navigation }) => {
           variant="primary"
         />
         <Button
-          text="Sign in"
+          text="Provider"
           onPress={() =>
             navigation.navigate("ProviderStack", { screen: "Home" })
           }
           style={styles.button}
           variant="secondary"
         />
-      </View>
-    </View>
+      </PageBottom>
+    </Page>
   );
 };
 

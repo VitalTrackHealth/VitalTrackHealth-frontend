@@ -1,24 +1,53 @@
 import React, { useState } from "react";
+import { View, Text, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
 import {
   Button,
-  View,
-  Text,
-  Pressable,
+  TextHeader,
   TextInput,
-  TouchableOpacity,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import Checkbox from "expo-checkbox";
-
-import { useUser } from "@/context";
+  Page,
+  PageTop,
+  PageBottom,
+  Checkbox,
+  ClickableText,
+} from "@/components";
 import { handleRegister } from "@/services";
 import { colors } from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
+import { createStyles, fonts, margin } from "@/styles";
+
+const styles = createStyles({
+  halfWidthInput: {
+    width: "48%",
+  },
+  nameContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  checkboxContainer: {
+    justifyContent: "center",
+    marginBottom: margin.sm,
+  },
+  loginContainer: {
+    marginTop: margin.lg,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  loginText: {
+    color: colors.gray.med,
+    fontSize: fonts.md,
+  },
+  loginLink: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: fonts.md,
+  },
+});
 
 const RegisterScreen = ({ navigation }) => {
   // User context for state across register screens
-  const { user, setUser } = useUser();
-  const [name, setName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -26,12 +55,17 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const [emailWarning, setEmailWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState("");
+  // TODO: Warnings for email and password
 
-  const handlerSignUpClick = async () => {
+  const handleLoginClick = () => {
+    navigation.navigate("Login");
+  };
+
+  const handleSignUpClick = async () => {
     if (!emailComplexity(email))
       setEmailWarning("* Please enter a valid email address");
     else if (!passwordComplexity(password))
@@ -59,272 +93,80 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View
-      style={{ flex: 1, marginHorizontal: 22, backgroundColor: colors.white }}
-    >
-      <View style={{ marginVertical: 22 }}>
-        <Text
-          style={{
-            fontSize: 22,
-            fontWeight: "bold",
-            marginVertical: 12,
-            color: colors.black,
-          }}
-        >
-          Create Account
-        </Text>
-
-        <Text
-          style={{
-            fontSize: 16,
-            color: colors.black,
-          }}
-        >
-          Connect with your nutrition today!
-        </Text>
-      </View>
-
-      <View style={{ marginBottom: 12 }}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            marginVertical: 8,
-          }}
-        >
-          Name
-        </Text>
-        <View
-          style={{
-            width: "100%",
-            height: 48,
-            borderColor: colors.black,
-            borderWidth: 1,
-            borderRadius: 8,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingLeft: 22,
-          }}
-        >
+    <Page>
+      <PageTop>
+        <TextHeader
+          text="Create an Account ☀️"
+          subText="Take control of your nutrition today!"
+        />
+        <View style={styles.nameContainer}>
           <TextInput
-            placeholder="Enter your full name"
-            placeholderTextColor={"#000000"}
+            placeholder="First Name"
+            value={firstName}
+            onChangeText={setFirstName}
             keyboardType="default"
-            style={{
-              width: "100%",
-            }}
-            onChangeText={(text) => {
-              setName(text);
-            }}
+            containerStyle={styles.halfWidthInput}
+          />
+          <TextInput
+            placeholder="Last Name"
+            value={lastName}
+            onChangeText={setLastName}
+            keyboardType="default"
+            containerStyle={styles.halfWidthInput}
           />
         </View>
-      </View>
-
-      <View style={{ marginBottom: 12 }}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            marginVertical: 8,
-          }}
-        >
-          Email address
-        </Text>
-        <View
-          style={{
-            width: "100%",
-            height: 48,
-            borderColor: colors.black,
-            borderWidth: 1,
-            borderRadius: 8,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingLeft: 22,
-          }}
-        >
-          <TextInput
-            placeholder="Enter your email address"
-            placeholderTextColor={"#000000"}
-            keyboardType="email-address"
-            style={{
-              width: "100%",
-            }}
-            onChangeText={(text) => {
-              setEmail(text);
-              setEmailWarning("");
-            }}
-            value={email}
-          />
-        </View>
-
-        {emailWarning ? (
-          <Text style={{ color: "red" }}>{emailWarning}</Text>
-        ) : null}
-      </View>
-
-      <View style={{ marginBottom: 12 }}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            marginVertical: 8,
-          }}
-        >
-          Mobile Number
-        </Text>
-
-        <View
-          style={{
-            width: "100%",
-            height: 48,
-            borderColor: "#000000",
-            borderWidth: 1,
-            borderRadius: 8,
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingLeft: 22,
-          }}
-        >
-          <TextInput
-            placeholder="+1"
-            placeholderTextColor={"#000000"}
-            keyboardType="numeric"
-            style={{
-              width: "12%",
-              borderRightWidth: 1,
-              borderLeftColor: colors.grey,
-              height: "100%",
-            }}
-          />
-
-          <TextInput
-            placeholder="Enter your phone number"
-            placeholderTextColor={"#000000"}
-            keyboardType="numeric"
-            style={{
-              width: "80%",
-            }}
-            onChangeText={(text) => {
-              setPhoneNumber(text);
-            }}
-          />
-        </View>
-      </View>
-
-      <View style={{ marginBottom: 12 }}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            marginVertical: 8,
-          }}
-        >
-          Password
-        </Text>
-
-        <View
-          style={{
-            width: "100%",
-            height: 48,
-            borderColor: "#000000",
-            borderWidth: 1,
-            borderRadius: 8,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingLeft: 22,
-          }}
-        >
-          <TextInput
-            placeholder="Enter your password"
-            placeholderTextColor={"#000000"}
-            secureTextEntry={isPasswordShown}
-            style={{
-              width: "100%",
-            }}
-            onChangeText={(text) => {
-              setPassword(text);
-              setPasswordWarning("");
-            }}
-            value={password}
-          />
-
-          <TouchableOpacity
-            onPress={() => setIsPasswordShown(!isPasswordShown)}
-            style={{
-              position: "absolute",
-              right: 12,
-            }}
-          >
-            {isPasswordShown == true ? (
-              <Ionicons name="eye-off" size={24} color={"#000000"} />
-            ) : (
-              <Ionicons name="eye" size={24} color="#000000" />
-            )}
-          </TouchableOpacity>
-        </View>
-        {passwordWarning ? (
-          <Text style={{ color: "red" }}>{passwordWarning}</Text>
-        ) : null}
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          marginVertical: 6,
-        }}
-      >
-        <Checkbox
-          style={{ marginRight: 8 }}
-          value={isChecked}
-          onValueChange={setIsChecked}
-          color={isChecked ? colors.primary : undefined}
+        <TextInput
+          placeholder="Email address"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
+        <TextInput
+          placeholder="Mobile Number"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+          keyboardType="numeric"
         />
 
-        <Text>I agree to the terms and conditions</Text>
-      </View>
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!isPasswordShown}
+        >
+          <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
+            <Ionicons
+              name={isPasswordShown ? "eye-off" : "eye"}
+              size={24}
+              color={colors.gray.dark}
+            />
+          </Pressable>
+        </TextInput>
+      </PageTop>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      ></View>
+      <PageBottom>
+        <Checkbox
+          label="I agree to the Terms and Conditions."
+          checked={isTermsChecked}
+          onValueChange={setIsTermsChecked}
+          containerStyle={styles.checkboxContainer}
+        />
+        <Button
+          onPress={handleSignUpClick}
+          text="Sign Up"
+          disabled={!isTermsChecked}
+        />
 
-      <Button
-        onPress={handlerSignUpClick}
-        title="Sign Up"
-        filled
-        style={{
-          marginTop: 18,
-          marginBottom: 4,
-        }}
-      />
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginVertical: 22,
-        }}
-      >
-        <Text style={{ fontSize: 16, color: colors.black }}>
-          Already have an account
-        </Text>
-        <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text
-            style={{
-              fontSize: 16,
-              color: colors.primary,
-              fontWeight: "bold",
-              marginLeft: 6,
-            }}
-          >
-            Login
-          </Text>
-        </Pressable>
-      </View>
-    </View>
+        <View style={styles.loginContainer}>
+          <Text style={styles.loginText}>Already have an account? </Text>
+          <ClickableText
+            onPress={handleLoginClick}
+            text="Login"
+            textStyle={styles.loginLink}
+          />
+        </View>
+      </PageBottom>
+    </Page>
   );
 };
 

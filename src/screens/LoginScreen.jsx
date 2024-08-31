@@ -1,263 +1,164 @@
+import { useState } from "react";
+import { View, Text, Image, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
 import {
   Button,
-  View,
-  Text,
-  Image,
-  Pressable,
+  ClickableText,
   TextInput,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
-import { colors } from "@/styles";
-import { Ionicons } from "@expo/vector-icons";
-import Checkbox from "expo-checkbox";
+  Page,
+  PageTop,
+  PageBottom,
+  TextHeader,
+} from "@/components";
+import {
+  createStyles,
+  padding,
+  colors,
+  margin,
+  fonts,
+  borderRadius,
+} from "@/styles";
+
+const styles = createStyles({
+  forgotPassword: {
+    alignSelf: "flex-end",
+    marginBottom: margin.sm,
+  },
+  orText: {
+    color: colors.gray.dark,
+    textAlign: "center",
+    marginVertical: margin.sm,
+    fontSize: fonts.md,
+  },
+  socialContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: margin.lg,
+  },
+  socialButton: {
+    marginHorizontal: padding.md,
+    padding: padding.sm,
+    borderRadius: borderRadius,
+    backgroundColor: colors.white,
+  },
+  socialIcon: {
+    width: 24,
+    height: 24,
+  },
+  registerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  registerText: {
+    color: colors.gray.med,
+    fontSize: fonts.md,
+  },
+  registerLink: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: fonts.md,
+  },
+});
 
 const LoginScreen = ({ navigation }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [EMAIL, setEmail] = useState("");
-  const [PASSWORD, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // TODO: Add email and password validation
+
+  const handleLoginClick = () => {
+    navigation.navigate("PatientStack", { screen: "Home" });
+  };
+
+  const handleRegisterClick = () => {
+    navigation.navigate("Register");
+  };
+
+  const handleForgotPasswordClick = () => {
+    console.log("Forgot Password");
+  };
+
+  const handleGoogleLoginClick = () => {
+    console.log("Google Login");
+  };
+
+  const handleFacebookLoginClick = () => {
+    console.log("Facebook Login");
+  };
+
   return (
-    <View
-      style={{ flex: 1, marginHorizontal: 22, backgroundColor: colors.white }}
-    >
-      <View style={{ marginVertical: 22 }}>
-        <Text
-          style={{
-            fontSize: 22,
-            fontWeight: "bold",
-            marginVertical: 12,
-            color: colors.black,
-          }}
+    <Page>
+      <PageTop>
+        <TextHeader text="Welcome Back! 👋" subText="Sign in to your Account" />
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!isPasswordShown}
         >
-          Hi Welcome Back ! 👋
-        </Text>
+          <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
+            <Ionicons
+              name={isPasswordShown ? "eye-off" : "eye"}
+              size={24}
+              color={colors.gray.dark}
+            />
+          </Pressable>
+        </TextInput>
+        <ClickableText
+          onPress={handleForgotPasswordClick}
+          text="Forgot Password?"
+          containerStyle={styles.forgotPassword}
+        />
+      </PageTop>
 
-        <Text
-          style={{
-            fontSize: 16,
-            color: colors.black,
-          }}
-        >
-          Hello again you have been missed!
-        </Text>
-      </View>
-      <View style={{ marginBottom: 12 }}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            marginVertical: 8,
-          }}
-        >
-          Email address
-        </Text>
+      <PageBottom>
+        <Button
+          onPress={handleLoginClick}
+          text="Login"
+          disabled={!email || !password}
+        />
 
-        <View
-          style={{
-            width: "100%",
-            height: 48,
-            borderColor: colors.black,
-            borderWidth: 1,
-            borderRadius: 8,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingLeft: 22,
-          }}
-        >
-          <TextInput
-            placeholder="Enter your email address"
-            placeholderTextColor={"#000000"}
-            keyboardType="email-address"
-            style={{
-              width: "100%",
-            }}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
+        <Text style={styles.orText}>Or Sign in with</Text>
+
+        <View style={styles.socialContainer}>
+          <Pressable
+            onPress={handleGoogleLoginClick}
+            style={styles.socialButton}
+          >
+            <Image
+              source={require("@/assets/google-icon.png")}
+              style={styles.socialIcon}
+            />
+          </Pressable>
+          <Pressable
+            onPress={handleFacebookLoginClick}
+            style={styles.socialButton}
+          >
+            <Image
+              source={require("@/assets/facebook-icon.png")}
+              style={styles.socialIcon}
+            />
+          </Pressable>
+        </View>
+
+        <View style={styles.registerContainer}>
+          <Text style={styles.registerText}>Don't have an account? </Text>
+          <ClickableText
+            onPress={handleRegisterClick}
+            text="Sign Up"
+            textStyle={styles.registerLink}
           />
         </View>
-      </View>
-      <View style={{ marginBottom: 12 }}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 400,
-            marginVertical: 8,
-          }}
-        >
-          Password
-        </Text>
-
-        <View
-          style={{
-            width: "100%",
-            height: 48,
-            borderColor: colors.black,
-            borderWidth: 1,
-            borderRadius: 8,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingLeft: 22,
-          }}
-        >
-          <TextInput
-            placeholder="Enter your password"
-            placeholderTextColor={"#000000"}
-            secureTextEntry={isPasswordShown}
-            style={{
-              width: "100%",
-            }}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
-          />
-
-          <TouchableOpacity
-            onPress={() => setIsPasswordShown(!isPasswordShown)}
-            style={{
-              position: "absolute",
-              right: 12,
-            }}
-          >
-            {isPasswordShown == true ? (
-              <Ionicons name="eye-off" size={24} color={colors.black} />
-            ) : (
-              <Ionicons name="eye" size={24} color={colors.black} />
-            )}
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          marginVertical: 6,
-        }}
-      >
-        <Checkbox
-          style={{ marginRight: 8 }}
-          value={isChecked}
-          onValueChange={setIsChecked}
-          color={isChecked ? colors.primary : undefined}
-        />
-
-        <Text>Remember Me</Text>
-      </View>
-      <Button
-        onPress={() => navigation.navigate("PatientStack", { screen: "Home" })}
-        title="Login"
-        color="#841584"
-      />
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginVertical: 20,
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            height: 1,
-            backgroundColor: colors.grey,
-            marginHorizontal: 10,
-          }}
-        />
-        <Text style={{ fontSize: 14 }}>Or Login with</Text>
-        <View
-          style={{
-            flex: 1,
-            height: 1,
-            backgroundColor: colors.grey,
-            marginHorizontal: 10,
-          }}
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => console.log("click")}
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-            height: 52,
-            borderWidth: 1,
-            borderColor: colors.grey,
-            marginRight: 4,
-            borderRadius: 10,
-          }}
-        >
-          <Image
-            source={require("@/assets/trail-track2.png")}
-            style={{
-              height: 36,
-              width: 36,
-              marginRight: 8,
-            }}
-            resizeMode="contain"
-          />
-
-          <Text>Facebook</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => console.log("Pressed")}
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-            height: 52,
-            borderWidth: 1,
-            borderColor: colors.grey,
-            marginRight: 4,
-            borderRadius: 10,
-          }}
-        >
-          <Image
-            source={require("@/assets/trail-track2.png")}
-            style={{
-              height: 36,
-              width: 36,
-              marginRight: 8,
-            }}
-            resizeMode="contain"
-          />
-
-          <Text>Google</Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginVertical: 22,
-        }}
-      >
-        <Text style={{ fontSize: 16, color: colors.black }}>
-          Don't have an account ?{" "}
-        </Text>
-        <Pressable onPress={() => navigation.navigate("Register")}>
-          <Text
-            style={{
-              fontSize: 16,
-              color: colors.primary,
-              fontWeight: "bold",
-              marginLeft: 6,
-            }}
-          >
-            Register
-          </Text>
-        </Pressable>
-      </View>
-    </View>
+      </PageBottom>
+    </Page>
   );
 };
 
