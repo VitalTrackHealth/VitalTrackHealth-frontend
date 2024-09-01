@@ -11,7 +11,7 @@
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
     "@expo/vector-icons": "^14.0.0",
-    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-community/datetimepicker": "^8.0.1",
     "@react-native-community/slider": "^4.5.2",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.10.1",
@@ -24,7 +24,7 @@
     "react": "18.2.0",
     "react-datepicker": "^7.3.0",
     "react-dom": "18.2.0",
-    "react-native": "0.74.3",
+    "react-native": "^0.74.5",
     "react-native-circular-progress": "^1.4.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-paper": "^5.12.5",

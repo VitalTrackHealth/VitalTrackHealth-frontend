@@ -1,4 +1,4 @@
-import { Text, Image } from "react-native";
+import { Text, Image, } from "react-native";
 
 import { Button, Page, PageTop, PageBottom } from "@/components";
 import { createStyles, margin, fonts, colors } from "@/styles";

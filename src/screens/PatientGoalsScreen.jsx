@@ -5,9 +5,11 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import { colors } from "@/styles";
+import { Button } from "react-native-paper";
 
 const PatientGoalsScreen = ({ navigation, route }) => {
   const [calorieGoal, setCalorieGoal] = useState(
@@ -26,7 +28,7 @@ const PatientGoalsScreen = ({ navigation, route }) => {
   }, [route.params?.calorieGoal]);
 
   return (
-    <View>
+    <View style =  {{backgroundColor: "D6F7F7"}}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.button} onPress={backbtnclicked}>
           <Text style={styles.buttonText}>Back</Text>
@@ -65,8 +67,86 @@ const PatientGoalsScreen = ({ navigation, route }) => {
           <View style={styles.mealContainer}>
             <Text>Set Fat Goal</Text>
           </View>
+
+        
         </View>
       </ScrollView>
+  
+{/* All circular buttons */}
+        <View style = {styles.Conditions}> 
+<View style = {{marginTop: 15}}>
+            <Text> List Your Chronic  condition </Text>
+</View>
+    {/* First Row */}
+            <View style = {{flexDirection: "row"}}> 
+
+      {/* Diabetes */}
+      <TouchableOpacity onPress={() => ""}> 
+               <View style = {{flexDirection: "column", alignItems:"center"}}> 
+                
+                  <View style  = {styles.CircularButton}>
+                    <Image source = {require("@/assets/diabetes.png")}/>
+                  </View>
+                    <Text> Diabetes </Text>
+               </View>  
+      </TouchableOpacity>
+      {/* Obesity */}
+       <TouchableOpacity onPress={() => ""}> 
+               <View style = {{flexDirection: "column", alignItems:"center"}}> 
+                  <View style  = {styles.CircularButton}>
+                    <Image source = {require("@/assets/obesity.png")}/>
+                  </View>
+                    <Text> Obesity </Text>
+               </View>
+        </TouchableOpacity>
+
+      {/* Hypertension */}
+      <TouchableOpacity onPress={() => ""}> 
+               <View style = {{flexDirection: "column", alignItems:"center"}}> 
+                  <View style  = {styles.CircularButton}>
+                    <Image source = {require("@/assets/hypertension.png")}/>
+                  </View>
+                    <Text> Hypertension </Text>
+               </View>
+      </TouchableOpacity>
+      
+                </View>
+                
+
+  {/* Second Row */}
+            <View style = {{flexDirection: "row"}}>
+
+    {/* Osteoporosis */}
+    <TouchableOpacity onPress={() => ""}> 
+               <View style = {{flexDirection: "column", alignItems:"center"}}> 
+                  <View style  = {styles.CircularButton}>
+                    <Image source = {require("@/assets/osteoporosi.png")}/>
+                  </View>
+                    <Text> Diabetes </Text>
+               </View>
+    </TouchableOpacity>
+
+    {/* Cardiovascular Disease */}
+    <TouchableOpacity onPress={() => ""}> 
+               <View style = {{flexDirection: "column", alignItems:"center"}}> 
+                  <View style  = {styles.CircularButton}>
+                    <Image source = {require("@/assets/cardio.png")}/>
+                  </View>
+                    <Text> Cardio disease </Text>
+               </View>
+    </TouchableOpacity>
+
+    {/* Gastroesophageal Reflux Disease */}
+    <TouchableOpacity onPress={() => ""}> 
+               <View style = {{flexDirection: "column", alignItems:"center"}}> 
+                  <View style  = {styles.CircularButton}>
+                   <Image source = {require("@/assets/stomach.png")}/>
+                  </View>
+                    <Text>reflux disease </Text>
+               </View>
+              </TouchableOpacity>
+            </View>
+        </View>
     </View>
   );
 };
@@ -88,10 +168,30 @@ const styles = StyleSheet.create({
     width: 70,
     height: 50,
   },
+    CircularButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
+ 
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    backgroundColor: "#FFDDDD",
+  },
   buttonText: {
     color: "white",
     fontSize: 24,
   },
+
+  Conditions:{
+
+    
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 100,
+  },
+  
   container: {
     flex: 1,
     padding: 16,
