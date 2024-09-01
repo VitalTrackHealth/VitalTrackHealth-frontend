@@ -10,6 +10,8 @@ import {
 import Slider from "@react-native-community/slider";
 import { colors } from "@/styles";
 import { Button } from "react-native-paper";
+import { NavigationMenu } from "@/components";
+
 
 const PatientGoalsScreen = ({ navigation, route }) => {
   const [calorieGoal, setCalorieGoal] = useState(
@@ -29,10 +31,8 @@ const PatientGoalsScreen = ({ navigation, route }) => {
 
   return (
     <View style =  {{backgroundColor: "D6F7F7"}}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.button} onPress={backbtnclicked}>
-          <Text style={styles.buttonText}>Back</Text>
-        </TouchableOpacity>
+      <View >
+  
       </View>
       <ScrollView>
         <View style={styles.container}>
@@ -61,9 +61,12 @@ const PatientGoalsScreen = ({ navigation, route }) => {
           <View style={styles.mealContainer}>
             <Text>Set Protein Goal</Text>
           </View>
+
           <View style={styles.mealContainer}>
             <Text>Set Carbohydrate Goal</Text>
           </View>
+
+
           <View style={styles.mealContainer}>
             <Text>Set Fat Goal</Text>
           </View>
@@ -145,9 +148,15 @@ const PatientGoalsScreen = ({ navigation, route }) => {
                     <Text>reflux disease </Text>
                </View>
               </TouchableOpacity>
+              
             </View>
+            <NavigationMenu/>
         </View>
+        
+          
+        
     </View>
+    
   );
 };
 

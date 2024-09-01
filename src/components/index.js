@@ -12,10 +12,12 @@ import Ring from "./Ring";
 import SearchBar from "./SearchBar";
 import TextInput from "./TextInput";
 import ClickableText from "./ClickableText";
+import NavigationMenu from "./NavigationMenu";
 
 export {
   BackButton,
   Button,
+  NavigationMenu,
   Card,
   Checkbox,
   ClickableText,
