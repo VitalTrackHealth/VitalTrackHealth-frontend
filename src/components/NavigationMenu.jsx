@@ -1,43 +1,61 @@
-import { View, Text, StyleSheet,  Image } from "react-native";
+import { View, Text, StyleSheet,  Image, TouchableOpacity  } from "react-native";
 import PieChart from "react-native-pie-chart";
 import { colors } from "@/styles";
 import { AntDesign } from "@expo/vector-icons";
+import PatientStack from "@/navigation/PatientStackNavigator";
 
 
-const NavigationMenu = ({ }) => {
+
+
+
+const NavigationMenu = ({ navigation }) => {
+    const homebuttom = () => {
+  {/* OK WTF why doesnt it work???? */}
+  navigation.navigate("PatientStack", { screen: "Login" });
+  };
   return (
     <View style={styles.container}>
       {/* Add your content here */}
       <View style = {{flexDirection: "row",justifyContent: 'space-around',}}>
 
-       
+        <TouchableOpacity onPress={() => ""}> 
           <View style = {styles.regularbuttom}> 
            <AntDesign name="setting" size={40} color="black" />
            
 
         </View>  
+        </TouchableOpacity>
+    
+    <TouchableOpacity onPress={() =>   homebuttom()}> 
                <View style = {styles.regularbuttom}> 
            <AntDesign name="user" size={40} color="black" />
            
 
-        </View>  
+        </View> 
+    </TouchableOpacity> 
+    <TouchableOpacity onPress={() => ""}> 
                <View style = {styles.circularbuttom}> 
            <AntDesign name="home" size={50} color="white" />
            
 
-        </View>  
+        </View>
+    </TouchableOpacity>  
+    <TouchableOpacity onPress={() => ""}> 
                <View style = {styles.regularbuttom}> 
            <AntDesign name="book" size={40} color="black" />
            
 
         </View>  
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => ""}> 
                <View style = {styles.regularbuttom}> 
            <AntDesign name="heart" size={40} color="red" />
            
 
         </View>  
 
-        
+        </TouchableOpacity>
             
        
 

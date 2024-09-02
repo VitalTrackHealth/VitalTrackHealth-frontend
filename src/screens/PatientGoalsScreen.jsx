@@ -22,6 +22,10 @@ const PatientGoalsScreen = ({ navigation, route }) => {
     console.log("Current Calories: ", calorieGoal);
     navigation.navigate("Home", { calorieGoal });
   };
+    const homebuttom = () => {
+    
+    navigation.navigate("Home", { calorieGoal });
+  };
 
   useEffect(() => {
     if (route.params?.calorieGoal) {

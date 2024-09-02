@@ -11,6 +11,7 @@ import {
   RegisterConditionQuestionScreen,
   SearchFoodScreen,
 } from "@/screens";
+import { NavigationMenu} from "@/components";
 
 const Stack = createNativeStackNavigator();
 
