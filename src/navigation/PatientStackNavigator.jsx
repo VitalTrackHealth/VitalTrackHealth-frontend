@@ -2,67 +2,48 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { UserProvider } from "@/context";
 import {
-  FoodInfoScreen,
-  FullNutritionScreen,
   LoginScreen,
-  PatientHomeScreen,
-  PatientGoalsScreen,
   RegisterScreen,
   RegisterConditionQuestionScreen,
-  SearchFoodScreen,
 } from "@/screens";
-import { NavigationMenu} from "@/components";
+import MainTabNavigator from "./MainTabNavigator";
 
-const Stack = createNativeStackNavigator();
+const PatientStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
+
+const AuthStackNavigator = () => {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="RegisterConditionQuestion"
+        component={RegisterConditionQuestionScreen}
+        options={{ headerShown: false }}
+      />
+    </AuthStack.Navigator>
+  );
+};
 
 const PatientStackNavigator = () => {
   return (
     <UserProvider>
-      <Stack.Navigator>
-        {/* Auth Group */}
-        <Stack.Group>
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Register"
-            component={RegisterScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="RegisterConditionQuestion"
-            component={RegisterConditionQuestionScreen}
-            options={{ headerShown: false }}
-          />
-        </Stack.Group>
-        <Stack.Screen
-          name="Home"
-          component={PatientHomeScreen}
-          options={{ headerShown: false }}
+      <PatientStack.Navigator screenOptions={{ headerShown: false }}>
+        <PatientStack.Screen name="Auth" component={AuthStackNavigator} />
+        <PatientStack.Screen
+          name="Main"
+          component={MainTabNavigator}
+          options={{ headerLeft: null, gestureEnabled: false }}
         />
-        <Stack.Screen
-          name="SearchFood"
-          component={SearchFoodScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="FoodInfo"
-          component={FoodInfoScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="FullNutrition"
-          component={FullNutritionScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="PatientGoals"
-          component={PatientGoalsScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      </PatientStack.Navigator>
     </UserProvider>
   );
 };

@@ -17,12 +17,12 @@ const RootStackNavigator = () => {
       <RootStack.Screen
         name="PatientStack"
         component={PatientStackNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <RootStack.Screen
         name="ProviderStack"
         component={ProviderStackNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
     </RootStack.Navigator>
   );

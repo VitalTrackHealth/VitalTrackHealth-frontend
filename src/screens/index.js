@@ -4,7 +4,7 @@ import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
 import RegisterConditionQuestionScreen from "./RegisterConditionQuestionScreen";
 import PatientHomeScreen from "./PatientHomeScreen";
-import PatientGoalsScreen from "./PatientGoalsScreen";
+import NutritionProfileScreen from "./NutritionProfileScreen";
 import ProviderHomeScreen from "./ProviderHomeScreen";
 import SearchFoodScreen from "./SearchFoodScreen";
 import UserSelectionScreen from "./UserSelectionScreen";
@@ -15,7 +15,7 @@ export {
   FullNutritionScreen,
   LoginScreen,
   PatientHomeScreen,
-  PatientGoalsScreen,
+  NutritionProfileScreen,
   ProviderHomeScreen,
   RegisterScreen,
   RegisterConditionQuestionScreen,

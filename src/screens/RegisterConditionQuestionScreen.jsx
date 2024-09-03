@@ -13,19 +13,22 @@ const RegisterConditionQuestionScreen = ({ navigation, route }) => {
   const { email } = route.params;
 
   const handleContinueClick = async () => {
-    const result = await handleUserUpdate({
-      email,
-      conditions: [selectedCondition],
+    navigation.navigate("Main", {
+      screen: "Home",
     });
+    // const result = await handleUserUpdate({
+    //   email,
+    //   conditions: [selectedCondition],
+    // });
 
-    if (result.success) {
-      setUser(result.results.data);
-      navigation.navigate("PatientStack", {
-        screen: "Home",
-      });
-    } else {
-      console.error("User update failed:", result.error);
-    }
+    // if (result.success) {
+    //   setUser(result.results.data);
+    //   navigation.navigate("PatientStack", {
+    //     screen: "Home",
+    //   });
+    // } else {
+    //   console.error("User update failed:", result.error);
+    // }
   };
 
   return (

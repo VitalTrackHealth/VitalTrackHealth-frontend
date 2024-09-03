@@ -6,6 +6,7 @@ import {
   ScrollView,
   Text,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -96,14 +97,8 @@ const PatientHomeScreen = ({ route, navigation }) => {
     calculateTotalNutrients();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => handleIconPress("setting")}
-        >
-          <AntDesign name="setting" size={35} color="white" />
-        </TouchableOpacity>
         <View style={styles.dateContainer}>
           <TouchableOpacity onPress={() => changeDateByDays(-1)}>
             <AntDesign name="left" size={35} color="white" />
@@ -124,15 +119,12 @@ const PatientHomeScreen = ({ route, navigation }) => {
             <AntDesign name="right" size={35} color="white" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => handleIconPress("goal")}
-        >
-          <AntDesign name="user" size={35} color="white" />
-        </TouchableOpacity>
       </View>
 
-      <ScrollView contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <PatientCard
           totalCalories={totalCalories}
           totalProtein={totalProtein}
@@ -149,7 +141,7 @@ const PatientHomeScreen = ({ route, navigation }) => {
           conditionData={condition}
         />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

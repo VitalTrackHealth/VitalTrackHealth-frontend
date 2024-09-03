@@ -68,7 +68,7 @@ const LoginScreen = ({ navigation }) => {
   // TODO: Add email and password validation
 
   const handleLoginClick = () => {
-    navigation.navigate("PatientStack", { screen: "Home" });
+    navigation.navigate("Main", { screen: "Home" });
   };
 
   const handleRegisterClick = () => {

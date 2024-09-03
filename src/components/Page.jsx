@@ -13,7 +13,7 @@ const styles = createStyles({
   },
   topContent: {
     width: "100%",
-   // marginTop: margin.sm,
+    marginTop: margin.sm,
   },
   bottomContent: {
     width: "100%",

@@ -66,30 +66,34 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   const handleSignUpClick = async () => {
-    if (!emailComplexity(email))
-      setEmailWarning("* Please enter a valid email address");
-    else if (!passwordComplexity(password))
-      setPasswordWarning(
-        "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
-      );
-    else {
-      const result = await handleRegister({
-        firstName,
-        lastName,
-        phoneNumber,
-        email,
-        password,
-      });
+    navigation.navigate("Auth", {
+      screen: "RegisterConditionQuestion",
+      params: { email: "" },
+    });
+    // if (!emailComplexity(email))
+    //   setEmailWarning("* Please enter a valid email address");
+    // else if (!passwordComplexity(password))
+    //   setPasswordWarning(
+    //     "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
+    //   );
+    // else {
+    //   const result = await handleRegister({
+    //     firstName,
+    //     lastName,
+    //     phoneNumber,
+    //     email,
+    //     password,
+    //   });
 
-      if (result.success) {
-        navigation.navigate("PatientStack", {
-          screen: "RegisterConditionQuestion",
-          params: { email: result.results.data.email },
-        });
-      } else {
-        console.error("Registration failed:", result.error);
-      }
-    }
+    //   if (result.success) {
+    //     navigation.navigate("Main", {
+    //       screen: "RegisterConditionQuestion",
+    //       params: { email: result.results.data.email },
+    //     });
+    //   } else {
+    //     console.error("Registration failed:", result.error);
+    //   }
+    // }
   };
 
   return (
