@@ -39,7 +39,7 @@ const styles = createStyles({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: 60,
+    height: 60, // Must be the same as the tabBar height
   },
 });
 
