@@ -99,10 +99,11 @@ const PatientHomeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
-        <View style={styles.dateContainer}>
+        <View style={{flexDirection: "row", marginTop: 40, justifyContent: "space-around" }}>
           <TouchableOpacity onPress={() => changeDateByDays(-1)}>
-            <AntDesign name="left" size={35} color="white" />
+            <AntDesign name="left" size={30} color="white" />
           </TouchableOpacity>
+          
           <TouchableOpacity onPress={() => handleDateChange()}>
             <Text style={styles.dateText}>
               {
@@ -115,8 +116,10 @@ const PatientHomeScreen = ({ route, navigation }) => {
               }
             </Text>
           </TouchableOpacity>
+
+         
           <TouchableOpacity onPress={() => changeDateByDays(1)}>
-            <AntDesign name="right" size={35} color="white" />
+            <AntDesign name="right" size={30} color="white" />
           </TouchableOpacity>
         </View>
       </View>
@@ -159,6 +162,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     position: "absolute",
+    justifyContent: "space-around" ,
     top: 0,
     width: "100%",
     backgroundColor: colors.primary,
