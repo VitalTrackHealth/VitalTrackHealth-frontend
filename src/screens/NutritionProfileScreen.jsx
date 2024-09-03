@@ -34,7 +34,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ backgroundColor: "D6F7F7" }}>
       <View></View>
-      <ScrollView>
+      <ScrollView style  =  {{height: "100%"}}>
         <View style={styles.container}>
           <Text>Johnathan's Account</Text>
           <View style={styles.mealContainer}>
@@ -70,8 +70,8 @@ const NutritionProfileScreen = ({ navigation, route }) => {
             <Text>Set Fat Goal</Text>
           </View>
         </View>
-      </ScrollView>
-<ScrollView style = {{height: "50%"}}>
+      
+
       {/* All circular buttons */}
       <View style={styles.Conditions}>
  
@@ -113,7 +113,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
         
 
         {/* Second Row */}
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", marginBottom: 20 }}>
           {/* Osteoporosis */}
           <Pressable onPress={() => ""}>
             <View style={{ flexDirection: "column", alignItems: "center" }}>
@@ -148,6 +148,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
         
         
       </View>
+      
       </ScrollView>
     </SafeAreaView>
   );
@@ -190,15 +191,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     height: 100,
+   
   },
 
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+    
   },
   mealContainer: {
-    marginBottom: 20,
+    marginBottom: 15,
     padding: 16,
     backgroundColor: "#f0f0f0",
     borderRadius: 8,
