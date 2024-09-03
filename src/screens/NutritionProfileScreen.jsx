@@ -71,13 +71,15 @@ const NutritionProfileScreen = ({ navigation, route }) => {
           </View>
         </View>
       </ScrollView>
-
+<ScrollView style = {{height: "50%"}}>
       {/* All circular buttons */}
       <View style={styles.Conditions}>
+ 
         <View style={{ marginTop: 15 }}>
           <Text> List Your Chronic condition </Text>
         </View>
         {/* First Row */}
+       
         <View style={{ flexDirection: "row" }}>
           {/* Diabetes */}
           <Pressable onPress={() => ""}>
@@ -108,6 +110,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
             </View>
           </Pressable>
         </View>
+        
 
         {/* Second Row */}
         <View style={{ flexDirection: "row" }}>
@@ -140,8 +143,12 @@ const NutritionProfileScreen = ({ navigation, route }) => {
               <Text>reflux disease </Text>
             </View>
           </Pressable>
+          
         </View>
+        
+        
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

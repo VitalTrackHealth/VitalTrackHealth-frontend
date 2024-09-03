@@ -16,6 +16,7 @@ const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 const NutritionProfileStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
+const FavouritesStack = createNativeStackNavigator();
 
 const styles = createStyles({
   tabBar: {
@@ -94,6 +95,18 @@ const SettingsStackNavigator = () => {
   );
 };
 
+const FavouritesStackNavigator = () => {
+  return (
+    <FavouritesStack.Navigator>
+      <FavouritesStack.Screen
+        name="Favourites"
+        component={NutritionProfileScreen}
+        options={{ headerShown: false }}
+      />
+    </FavouritesStack.Navigator>
+  );
+};
+
 const MainTabNavigator = () => {
   return (
     <Tab.Navigator
@@ -113,6 +126,16 @@ const MainTabNavigator = () => {
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="setting" color={color} size={size} />
+          ),
+        }}
+      />
+            <Tab.Screen
+        name="FavouritesStack"
+        component={FavouritesStackNavigator }
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="heart" color={color} size={size} />
           ),
         }}
       />
