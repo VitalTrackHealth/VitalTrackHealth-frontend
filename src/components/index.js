@@ -14,17 +14,6 @@ import TextInput from "./TextInput";
 import ClickableText from "./ClickableText";
 import NavigationMenu from "./NavigationMenu";
 
-import FoodInfoScreen from "../screens/FoodInfoScreen";
-import FullNutritionScreen from "../screens/FullNutritionScreen";
-import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
-import RegisterConditionQuestionScreen from "../screens/RegisterConditionQuestionScreen";
-import PatientHomeScreen from "../screens/PatientHomeScreen";
-import PatientGoalsScreen from "../screens/PatientGoalsScreen";
-
-import SearchFoodScreen from "../screens/SearchFoodScreen";
-import UserSelectionScreen from "../screens/UserSelectionScreen";
-import WelcomeScreen from "../screens/WelcomeScreen";
 export {
   BackButton,
   Button,
@@ -32,7 +21,6 @@ export {
   Card,
   Checkbox,
   ClickableText,
-  PatientHomeScreen,
   FoodCard,
   FoodDiary,
   FoodRing,
@@ -44,13 +32,4 @@ export {
   PageBottom,
   SearchBar,
   TextInput,
-  FoodInfoScreen,
-  FullNutritionScreen,
-  LoginScreen,
-  PatientGoalsScreen,
-  RegisterScreen,
-  RegisterConditionQuestionScreen,
-  SearchFoodScreen,
-  UserSelectionScreen,
-  WelcomeScreen,
 };
