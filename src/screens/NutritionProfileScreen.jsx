@@ -32,9 +32,9 @@ const NutritionProfileScreen = ({ navigation, route }) => {
   }, [route.params?.calorieGoal]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "D6F7F7" }}>
-      <View></View>
-      <ScrollView style  =  {{height: "100%"}}>
+    <SafeAreaView style={{ backgroundColor: "#ffffff", flex:1 }}>
+      
+      <ScrollView>
         <View style={styles.container}>
           <Text>Johnathan's Account</Text>
           <View style={styles.mealContainer}>
@@ -60,22 +60,83 @@ const NutritionProfileScreen = ({ navigation, route }) => {
           </View>
           <View style={styles.mealContainer}>
             <Text>Set Protein Goal</Text>
+            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
+            <Slider
+              style={{ width: "100%", height: 40 }}
+              minimumValue={900}
+              maximumValue={3500}
+              step={50}
+              value={calorieGoal}
+              onValueChange={(value) => setCalorieGoal(value)}
+              minimumTrackTintColor={colors.primary}
+              maximumTrackTintColor="grey"
+            />
+            <View style={styles.markerContainer}>
+              <Text style={styles.markerText}>900</Text>
+              <Text style={styles.markerText}>1200</Text>
+              <Text style={styles.markerText}>2000</Text>
+              <Text style={styles.markerText}>3000</Text>
+              <Text style={styles.markerText}>3500</Text>
+            </View>
           </View>
 
           <View style={styles.mealContainer}>
-            <Text>Set Carbohydrate Goal</Text>
+            <Text>Set Carbohydrates Goal</Text>
+            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
+            <Slider
+              style={{ width: "100%", height: 40 }}
+              minimumValue={900}
+              maximumValue={3500}
+              step={50}
+              value={calorieGoal}
+              onValueChange={(value) => setCalorieGoal(value)}
+              minimumTrackTintColor={colors.primary}
+              maximumTrackTintColor="grey"
+            />
+            <View style={styles.markerContainer}>
+              <Text style={styles.markerText}>900</Text>
+              <Text style={styles.markerText}>1200</Text>
+              <Text style={styles.markerText}>2000</Text>
+              <Text style={styles.markerText}>3000</Text>
+              <Text style={styles.markerText}>3500</Text>
+            </View>
           </View>
 
+
           <View style={styles.mealContainer}>
-            <Text>Set Fat Goal</Text>
+            <Text>Set Fats Goal</Text>
+            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
+            <Slider
+              style={{ width: "100%", height: 40 }}
+              minimumValue={900}
+              maximumValue={3500}
+              step={50}
+              value={calorieGoal}
+              onValueChange={(value) => setCalorieGoal(value)}
+              minimumTrackTintColor={colors.primary}
+              maximumTrackTintColor="grey"
+            />
+            <View style={styles.markerContainer}>
+              <Text style={styles.markerText}>900</Text>
+              <Text style={styles.markerText}>1200</Text>
+              <Text style={styles.markerText}>2000</Text>
+              <Text style={styles.markerText}>3000</Text>
+              <Text style={styles.markerText}>3500</Text>
+            </View>
           </View>
+          
+          
+
+
+          
         </View>
+        
       
 
       {/* All circular buttons */}
       <View style={styles.Conditions}>
  
-        <View style={{ marginTop: 15 }}>
+        <View style={{ marginTop: 15, }}>
           <Text> List Your Chronic condition </Text>
         </View>
         {/* First Row */}
@@ -83,7 +144,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
         <View style={{ flexDirection: "row" }}>
           {/* Diabetes */}
           <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
               <View style={styles.CircularButton}>
                 <Image source={require("@/assets/diabetes.png")} />
               </View>
@@ -92,7 +153,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
           </Pressable>
           {/* Obesity */}
           <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
               <View style={styles.CircularButton}>
                 <Image source={require("@/assets/obesity.png")} />
               </View>
@@ -102,7 +163,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
 
           {/* Hypertension */}
           <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
               <View style={styles.CircularButton}>
                 <Image source={require("@/assets/hypertension.png")} />
               </View>
@@ -113,10 +174,10 @@ const NutritionProfileScreen = ({ navigation, route }) => {
         
 
         {/* Second Row */}
-        <View style={{ flexDirection: "row", marginBottom: 20 }}>
+        <View style={{ flexDirection: "row", marginBottom: 20,  flexGrow: 1 }}>
           {/* Osteoporosis */}
           <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
               <View style={styles.CircularButton}>
                 <Image source={require("@/assets/osteoporosi.png")} />
               </View>
@@ -126,7 +187,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
 
           {/* Cardiovascular Disease */}
           <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
               <View style={styles.CircularButton}>
                 <Image source={require("@/assets/cardio.png")} />
               </View>
@@ -136,7 +197,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
 
           {/* Gastroesophageal Reflux Disease */}
           <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
               <View style={styles.CircularButton}>
                 <Image source={require("@/assets/stomach.png")} />
               </View>
@@ -172,6 +233,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   CircularButton: {
+    
     alignItems: "center",
     justifyContent: "center",
     margin: 10,
@@ -187,21 +249,24 @@ const styles = StyleSheet.create({
   },
 
   Conditions: {
+    flexGrow: 1,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 100,
+   // height: 100,
+   marginBottom: 35
    
   },
 
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 16,
     backgroundColor: "#fff",
     
   },
   mealContainer: {
     marginBottom: 15,
+    flexGrow: 1,
     padding: 16,
     backgroundColor: "#f0f0f0",
     borderRadius: 8,
