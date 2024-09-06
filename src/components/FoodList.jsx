@@ -10,7 +10,7 @@ import {
   Dimensions,
 } from "react-native";
 
-const FoodCard = ({
+const FoodList = ({
   images,
   names,
   nutrients,
@@ -20,7 +20,7 @@ const FoodCard = ({
   condition,
 }) => {
   const screenWidth = Dimensions.get("window").width;
-  const cardWidth = screenWidth / 2 - 40;
+  const cardWidth = screenWidth / 1 - 40;
 
   const getCardBackgroundColor = (index) => {
     if (condition === "Diabetes" && nutrients[index]?.carbs > 60) {
@@ -45,28 +45,20 @@ const FoodCard = ({
 
   const renderCards = () => {
     const rows = [];
-    for (let i = 0; i < images.length; i += 2) {
-      const rowItems = images.slice(i, i + 2).map((image, index) => (
+    for (let i = 0; i < images.length; i += 1) {
+      const rowItems = images.slice(i, i + 1).map((image, index) => (
         <TouchableOpacity
           key={i + index}
           style={[
             styles.card,
             {
               width: cardWidth,
-              height: cardWidth * 1.4,
+              height: cardWidth * 0.2,
               backgroundColor: getCardBackgroundColor(i + index), // Set dynamic background color
             },
           ]}
           onPress={() => onCardPress(foodIds[i + index])} // Pass foodId to onCardPress
         >
-          <TouchableOpacity style={styles.favoriteBtn}>
-            <AntDesign
-              name={getName(i + index)}
-              size={28}
-              color={getHeartColor(i + index)} // Set dynamic heart color
-            />
-          </TouchableOpacity>
-          <Image source={{ uri: image }} style={styles.image} />
           <View style={styles.textContainer}>
             <Text
               style={styles.name}
@@ -131,7 +123,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 8,
     overflow: "hidden",
-    width: Dimensions.get("window").width / 2 - 40,
+    width: Dimensions.get("window").width / 1 - 40,
   },
   favoriteBtn: {
     alignContent: "flex-end",
@@ -142,12 +134,12 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     borderRadius: 10,
-    resizeMode: "center",
-    alignItems: "center",
-    marginBottom: 50,
-    marginRight: 20,
-    marginLeft: 20,
-    marginTop: 10,
+    resizeMode: "flex-start",
+    alignItems: "flex-start",
+    resizeMode: "contain",
+    marginBottom: 10
+    
+    
   },
   textContainer: {
     position: "absolute",
@@ -171,6 +163,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodCard;
-
-
+export default FoodList;

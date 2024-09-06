@@ -11,6 +11,7 @@ import {
   Alert,
 } from "react-native";
 import { FoodRing } from "@/components";
+import { colors } from "@/styles";
 
 const { width, height } = Dimensions.get("window");
 
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    backgroundColor: "#007260",
+    backgroundColor: colors.primary,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

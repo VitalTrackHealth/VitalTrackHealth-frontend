@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
-import { Feather, Entypo } from "@expo/vector-icons";
+import { StyleSheet, TextInput, View, Keyboard, TouchableOpacity, Text } from "react-native";
+import { Feather, AntDesign } from "@expo/vector-icons";
+import { colors } from "@/styles";
 
 const SearchBar = ({
   clicked,
@@ -8,6 +9,7 @@ const SearchBar = ({
   setSearchPhrase,
   setClicked,
   onSearch,
+  navigation,
 }) => {
   const handleSearch = () => {
     onSearch();
@@ -15,57 +17,49 @@ const SearchBar = ({
     setClicked(false);
   };
 
+  const backBtnPressed = () => {
+    navigation.goBack();
+  };
+
+  const handleDone = () => {
+    Keyboard.dismiss();
+    setClicked(false);
+  };
+
   return (
     <View style={styles.container}>
-      <View
-        style={
-          clicked ? styles.searchBar__clicked : styles.searchBar__unclicked
-        }
-      >
-        {/* search Icon */}
-        <Feather
-          name="search"
-          size={20}
-          color="black"
-          style={{ marginLeft: 1 }}
-        />
-        {/* Input field */}
+      {clicked ? (
+        <TouchableOpacity style={styles.doneBtn} onPress={handleDone}>
+          <Text style={styles.doneText}>Done</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.backBtn} onPress={backBtnPressed}>
+          <AntDesign name="arrowleft" size={28} color={colors.grey} />
+        </TouchableOpacity>
+      )}
+      <View style={clicked ? styles.searchBar__clicked : styles.searchBar__unclicked}>
         <TextInput
           style={styles.input}
           placeholder="Search"
           value={searchPhrase}
-          onChangeText={setSearchPhrase}
-          onFocus={() => {
-            setClicked(true);
+          onChangeText={(text) => {
+            setSearchPhrase(text);  // Update the search phrase state
+            onSearch(text);         // Trigger search/filtering logic
           }}
-          onSubmitEditing={handleSearch}
+          onFocus={() => setClicked(true)}
           placeholderTextColor="gray"
         />
+        <Feather style={styles.searchIcon} name="search" size={20} color="black" />
       </View>
-      {/* cancel button, depending on whether the search bar is clicked or not */}
-      {clicked && (
-        <View>
-          <Button
-            title="Clear"
-            color="White"
-            onPress={() => {
-              Keyboard.dismiss();
-              setClicked(false);
-              setSearchPhrase("");
-            }}
-          ></Button>
-        </View>
-      )}
     </View>
   );
 };
 
 export default SearchBar;
 
-// styles
 const styles = StyleSheet.create({
   container: {
-    margin: 15,
+    margin: 5,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
@@ -77,6 +71,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "95%",
     backgroundColor: "#FFFFFF",
+    borderWidth: 0.2,
+    borderColor: "grey",
     borderRadius: 15,
     alignItems: "center",
   },
@@ -86,6 +82,8 @@ const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "#FFFFFF",
     borderRadius: 15,
+    borderWidth: 0.2,
+    borderColor: "grey",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
@@ -95,4 +93,18 @@ const styles = StyleSheet.create({
     width: "90%",
     color: "black",
   },
+  backBtn: {
+    marginLeft: 10,
+    marginRight: 5,
+  },
+  doneBtn: {
+    marginLeft: 10,
+    marginRight: 5,
+  },
+  doneText: {
+    fontSize: 18,
+    color: colors.grey,
+  },
 });
+
+

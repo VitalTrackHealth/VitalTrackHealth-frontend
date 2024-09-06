@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar";
 import TextInput from "./TextInput";
 import ClickableText from "./ClickableText";
 import NavigationMenu from "./NavigationMenu";
+import FoodList from "./FoodList";
 
 export {
   BackButton,
@@ -32,4 +33,5 @@ export {
   PageBottom,
   SearchBar,
   TextInput,
+  FoodList,
 };

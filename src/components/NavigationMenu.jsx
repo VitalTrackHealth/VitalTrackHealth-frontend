@@ -10,6 +10,10 @@ const NavigationMenu = ({ navigation }) => {
     }
     navigation.navigate("PatientStack", { screen: "Login" });
   };
+
+  const favoriteButton = () => {
+    navigation.navigate("FoodSeatchRecPage");
+  }
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
@@ -35,7 +39,7 @@ const NavigationMenu = ({ navigation }) => {
           </View>
         </Pressable>
 
-        <Pressable onPress={() => ""}>
+        <Pressable onPress={() => favoriteButton()}>
           <View style={styles.regularbuttom}>
             <AntDesign name="heart" size={40} color="red" />
           </View>

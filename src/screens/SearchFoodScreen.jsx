@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from "react-native";
 import { handleFood_search, handleFood_request_nutrients } from "@/services";
-import { FoodCard, SearchBar } from "@/components";
+import { FoodCard, SearchBar, FoodList } from "@/components";
+import { colors } from "@/styles";
+import { AntDesign } from "@expo/vector-icons";
 
 const SearchFoodScreen = ({ navigation, route }) => {
   const { mealType, conditionData } = route.params;
-  const [images, setImages] = useState([
-    "https://i0.wp.com/static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg?ssl=1",
-  ]);
+  const [images, setImages] = useState([]);
   const [names, setNames] = useState([]);
   const [nutrients, setNutrients] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -22,8 +22,6 @@ const SearchFoodScreen = ({ navigation, route }) => {
     try {
       const foodDataResponse = await handleFood_search(query);
 
-      console.log("API Response:", foodDataResponse);
-
       if (
         foodDataResponse &&
         foodDataResponse.data &&
@@ -34,7 +32,7 @@ const SearchFoodScreen = ({ navigation, route }) => {
         const newImages = foodDataResponse.data.all.map(
           (item) =>
             item.image ||
-            "https://i0.wp.com/static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg?ssl=1"
+            "https://img.freepik.com/premium-psd/italian-pasta-fettuccine-bowl-isolated-transparent-background_838900-15717.jpg?w=1060"
         );
         const newNames = foodDataResponse.data.all.map((item) => item.label);
         const newNutrients = foodDataResponse.data.all.map((item) => ({
@@ -43,11 +41,9 @@ const SearchFoodScreen = ({ navigation, route }) => {
           proteins: item.nutrients.PROTEIN || 0,
           carbs: item.nutrients.CARBOHYDRATE || 0,
         }));
-        const newFoodIds = foodDataResponse.data.all.map(
-          (item) => item.food_id
-        );
+        const newFoodIds = foodDataResponse.data.all.map((item) => item.food_id);
         const newBrands = foodDataResponse.data.all.map(
-          (item, index) => item.brand || "Generic Brand"
+          (item) => item.brand || "Generic Brand"
         );
         const newServingSize = foodDataResponse.data.all.map((item) => 100);
         const newIngredients = foodDataResponse.data.all.map((item) =>
@@ -72,11 +68,13 @@ const SearchFoodScreen = ({ navigation, route }) => {
     }
   };
 
+  // Effect to fetch food data whenever the search phrase changes
   useEffect(() => {
-    fetchFoodData("Pasta");
-  }, []);
+    if (searchPhrase.length > 0) {
+      fetchFoodData(searchPhrase);
+    }
+  }, [searchPhrase]);
 
-  // Test Commit to ensure I am updating develop
   const handleCardPress = async (foodId) => {
     const index = foodids.indexOf(foodId);
 
@@ -87,10 +85,6 @@ const SearchFoodScreen = ({ navigation, route }) => {
       let servingSize = servingSizes[index];
       let name = names[index];
       let image = images[index];
-
-      console.log(
-        `Selected Food ID: ${foodId} at Index: ${index}, Brand: ${brand}`
-      );
 
       navigation.navigate("FoodInfo", {
         brand,
@@ -107,8 +101,8 @@ const SearchFoodScreen = ({ navigation, route }) => {
     }
   };
 
-  const handleSearch = async () => {
-    await fetchFoodData(searchPhrase);
+  const handleSearch = (phrase) => {
+    setSearchPhrase(phrase);
   };
 
   return (
@@ -120,25 +114,46 @@ const SearchFoodScreen = ({ navigation, route }) => {
           setSearchPhrase={setSearchPhrase}
           setClicked={setClicked}
           onSearch={handleSearch}
+          navigation={navigation}
         />
       </View>
+
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>Results:</Text>
-
-          {noResults ? (
-            <Text style={styles.noResultsText}>
-              No results found. Please try a different search term.
-            </Text>
+          {clicked ? (
+            <>
+              {noResults ? (
+                <Text style={styles.noResultsText}>
+                  No results found. Please try a different search term.
+                </Text>
+              ) : (
+                <View>
+                  <Text style={styles.title}>Results: </Text>
+                  <FoodList
+                    foodIds={foodids}
+                    names={names}
+                    images={images}
+                    nutrients={nutrients}
+                    brands={brands}
+                    condition={conditionData}
+                    onCardPress={handleCardPress}
+                  />
+                </View>
+              )}
+            </>
           ) : (
-            <FoodCard
-              foodIds={foodids}
-              names={names}
-              images={images}
-              nutrients={nutrients}
-              brands={brands}
-              onCardPress={handleCardPress}
-            />
+            <>
+              <Text style={styles.title}>Suggested Foods: </Text>
+              <FoodCard
+                foodIds={foodids}
+                names={names}
+                images={images}
+                nutrients={nutrients}
+                brands={brands}
+                condition={conditionData}
+                onCardPress={handleCardPress}
+              />
+            </>
           )}
 
           <View style={styles.spacer} />
@@ -151,17 +166,16 @@ const SearchFoodScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
     alignItems: "center",
   },
   title: {
-    alignSelf: "start",
+    alignSelf: "flex-start",
     fontSize: 24,
     marginLeft: 20,
+    marginBottom: 20,
     color: "#636363",
   },
   header: {
-    backgroundColor: "#007260",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -179,3 +193,5 @@ const styles = StyleSheet.create({
 });
 
 export default SearchFoodScreen;
+
+
