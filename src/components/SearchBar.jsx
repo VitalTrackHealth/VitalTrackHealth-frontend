@@ -23,6 +23,8 @@ const SearchBar = ({
 
   const handleDone = () => {
     Keyboard.dismiss();
+    setSearchPhrase(""); 
+    onSearch("");         
     setClicked(false);
   };
 
@@ -43,8 +45,8 @@ const SearchBar = ({
           placeholder="Search"
           value={searchPhrase}
           onChangeText={(text) => {
-            setSearchPhrase(text);  // Update the search phrase state
-            onSearch(text);         // Trigger search/filtering logic
+            setSearchPhrase(text); 
+            onSearch(text);        
           }}
           onFocus={() => setClicked(true)}
           placeholderTextColor="gray"
@@ -106,5 +108,6 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
 });
+
 
 

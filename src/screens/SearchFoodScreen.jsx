@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from "react-native";
-import { handleFood_search, handleFood_request_nutrients } from "@/services";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { handleFood_search } from "@/services";
 import { FoodCard, SearchBar, FoodList } from "@/components";
 import { colors } from "@/styles";
-import { AntDesign } from "@expo/vector-icons";
 
 const SearchFoodScreen = ({ navigation, route }) => {
   const { mealType, conditionData } = route.params;
@@ -29,11 +28,7 @@ const SearchFoodScreen = ({ navigation, route }) => {
         Array.isArray(foodDataResponse.data.all) &&
         foodDataResponse.data.all.length > 0
       ) {
-        const newImages = foodDataResponse.data.all.map(
-          (item) =>
-            item.image ||
-            "https://img.freepik.com/premium-psd/italian-pasta-fettuccine-bowl-isolated-transparent-background_838900-15717.jpg?w=1060"
-        );
+        const newImages = foodDataResponse.data.all.map((item) => item.image);
         const newNames = foodDataResponse.data.all.map((item) => item.label);
         const newNutrients = foodDataResponse.data.all.map((item) => ({
           calories: item.nutrients.CALORIES || 0,
@@ -68,12 +63,13 @@ const SearchFoodScreen = ({ navigation, route }) => {
     }
   };
 
-  // Effect to fetch food data whenever the search phrase changes
   useEffect(() => {
     if (searchPhrase.length > 0) {
       fetchFoodData(searchPhrase);
+    } else if (!clicked) {
+      fetchFoodData("Pasta");
     }
-  }, [searchPhrase]);
+  }, [searchPhrase, clicked]);
 
   const handleCardPress = async (foodId) => {
     const index = foodids.indexOf(foodId);
@@ -193,5 +189,6 @@ const styles = StyleSheet.create({
 });
 
 export default SearchFoodScreen;
+
 
 
