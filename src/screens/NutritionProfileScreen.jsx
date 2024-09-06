@@ -6,9 +6,11 @@ import {
   Text,
   Pressable,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Slider from "@react-native-community/slider";
+import { AntDesign } from "@expo/vector-icons";
 
 import { colors } from "@/styles";
 
@@ -17,13 +19,19 @@ const NutritionProfileScreen = ({ navigation, route }) => {
     route.params?.calorieGoal || 2000
   );
 
-  const backbtnclicked = () => {
-    console.log("Current Calories: ", calorieGoal);
-    navigation.navigate("Home", { calorieGoal });
-  };
-  const homebuttom = () => {
-    navigation.navigate("Home", { calorieGoal });
-  };
+    const [fatGoal, setFatGoal] = useState(
+    route.params?.fatGoal || 50
+  );
+
+    const [proteinGoal, setProteinGoal] = useState(
+    route.params?.proteinGoal || 50
+  );
+
+    const [carbsGoal, setCarbsGoal] = useState(
+    route.params?.proteinGoal || 50
+  );
+
+
 
   useEffect(() => {
     if (route.params?.calorieGoal) {
@@ -31,35 +39,30 @@ const NutritionProfileScreen = ({ navigation, route }) => {
     }
   }, [route.params?.calorieGoal]);
 
+    useEffect(() => {
+    if (route.params?.fatGoal) {
+      setFatgoal(route.params.fatGoal);
+    }
+  }, [route.params?.fatGoal]);
+
+    useEffect(() => {
+    if (route.params?.carbsGoal) {
+      setCarbsgoal(route.params.carbsGoal);
+    }
+  }, [route.params?.carbsGoal]);
+
   return (
     <SafeAreaView style={{ backgroundColor: "#ffffff", flex:1 }}>
       
       <ScrollView>
         <View style={styles.container}>
-          <Text>Johnathan's Account</Text>
+          {/* Insert header here */}
+   
+
+
+          {/* Calorie  goal slider */}
           <View style={styles.mealContainer}>
-            <Text>Set Calorie Goal</Text>
-            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
-            <Slider
-              style={{ width: "100%", height: 40 }}
-              minimumValue={900}
-              maximumValue={3500}
-              step={50}
-              value={calorieGoal}
-              onValueChange={(value) => setCalorieGoal(value)}
-              minimumTrackTintColor={colors.primary}
-              maximumTrackTintColor="grey"
-            />
-            <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>900</Text>
-              <Text style={styles.markerText}>1200</Text>
-              <Text style={styles.markerText}>2000</Text>
-              <Text style={styles.markerText}>3000</Text>
-              <Text style={styles.markerText}>3500</Text>
-            </View>
-          </View>
-          <View style={styles.mealContainer}>
-            <Text>Set Protein Goal</Text>
+            
             <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
             <Slider
               style={{ width: "100%", height: 40 }}
@@ -80,48 +83,75 @@ const NutritionProfileScreen = ({ navigation, route }) => {
             </View>
           </View>
 
+          {/* Protein goal slider */}
           <View style={styles.mealContainer}>
-            <Text>Set Carbohydrates Goal</Text>
-            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
+            
+            <Text style={styles.calorieText}>{proteinGoal} Grams of Protein</Text>
             <Slider
               style={{ width: "100%", height: 40 }}
-              minimumValue={900}
-              maximumValue={3500}
-              step={50}
-              value={calorieGoal}
-              onValueChange={(value) => setCalorieGoal(value)}
+              minimumValue={80}
+              maximumValue={250}
+              step={5}
+              value={proteinGoal}
+              onValueChange={(value) => setProteinGoal(value)}
               minimumTrackTintColor={colors.primary}
               maximumTrackTintColor="grey"
             />
             <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>900</Text>
-              <Text style={styles.markerText}>1200</Text>
-              <Text style={styles.markerText}>2000</Text>
-              <Text style={styles.markerText}>3000</Text>
-              <Text style={styles.markerText}>3500</Text>
+              <Text style={styles.markerText}>80</Text>
+              <Text style={styles.markerText}>110</Text>
+              <Text style={styles.markerText}>140</Text>
+              <Text style={styles.markerText}>170</Text>
+              <Text style={styles.markerText}>200</Text>
+              <Text style={styles.markerText}>250+</Text>
             </View>
           </View>
 
 
+          {/* Carbohydrates  goal slider */}
           <View style={styles.mealContainer}>
-            <Text>Set Fats Goal</Text>
-            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
+            
+            <Text style={styles.calorieText}>{carbsGoal} Grams of Carbs</Text>
             <Slider
               style={{ width: "100%", height: 40 }}
-              minimumValue={900}
-              maximumValue={3500}
+              minimumValue={50}
+              maximumValue={500}
               step={50}
-              value={calorieGoal}
-              onValueChange={(value) => setCalorieGoal(value)}
+              value={carbsGoal}
+              onValueChange={(value) => setCarbsGoal(value)}
               minimumTrackTintColor={colors.primary}
               maximumTrackTintColor="grey"
             />
             <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>900</Text>
-              <Text style={styles.markerText}>1200</Text>
-              <Text style={styles.markerText}>2000</Text>
-              <Text style={styles.markerText}>3000</Text>
-              <Text style={styles.markerText}>3500</Text>
+              <Text style={styles.markerText}>50</Text>
+              <Text style={styles.markerText}>150</Text>
+              <Text style={styles.markerText}>250</Text>
+              <Text style={styles.markerText}>350</Text>
+              <Text style={styles.markerText}>500+</Text>
+            </View>
+          </View>
+
+
+           {/* Fats  goal slider */}
+          <View style={styles.mealContainer}>
+          
+            <Text style={styles.calorieText}>{fatGoal} Grams of Fat</Text>
+            <Slider
+              style={{ width: "100%", height: 40 }}
+              minimumValue={0}
+              maximumValue={150}
+              step={10}
+              value={fatGoal}
+              onValueChange={(value) => setFatGoal(value)}
+              minimumTrackTintColor={colors.primary}
+              maximumTrackTintColor="grey"
+            />
+            <View style={styles.markerContainer}>
+              <Text style={styles.markerText}>0g</Text>
+              <Text style={styles.markerText}>40g</Text>
+              <Text style={styles.markerText}>70g</Text>
+              <Text style={styles.markerText}>100g</Text>
+              <Text style={styles.markerText}>150g</Text>
             </View>
           </View>
           
@@ -287,6 +317,22 @@ const styles = StyleSheet.create({
   },
   markerText: {
     fontSize: 12,
+  },
+    header: {
+   
+    justifyContent: "space-between",
+    position: "absolute",
+    justifyContent: "space-around" ,
+    top: 0,
+    width: "100%",
+    backgroundColor: colors.primary,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    zIndex: 10,
   },
 });
 
