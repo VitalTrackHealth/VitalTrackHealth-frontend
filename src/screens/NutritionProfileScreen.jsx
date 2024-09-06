@@ -52,7 +52,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
   }, [route.params?.carbsGoal]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#ffffff", flex:1 }}>
+    <View style={{ backgroundColor: "#ffffff", flex:1 }}>
       
       <ScrollView>
         <View style={styles.container}>
@@ -241,7 +241,7 @@ const NutritionProfileScreen = ({ navigation, route }) => {
       </View>
       
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

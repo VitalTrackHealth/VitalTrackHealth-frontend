@@ -150,10 +150,29 @@ const MainTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="ProfileStack"
+        name="Goals"
         component={NutritionProfileStackNavigator}
         options={{
-          headerShown: false,
+          headerShown: true,
+               headerStyle: {
+            backgroundColor: colors.primary, // Change the background color
+                                    shadowColor: '#000', // Shadow color
+            shadowOffset: { width: 0, height: 2 }, // Shadow offset
+            shadowOpacity: 0.5, // Shadow opacity
+            shadowRadius: 3.84, // Shadow radius
+            elevation: 5, // Elevation for Android
+            
+
+          },
+            headerTintColor: '#fff', // Change the text color
+          headerTitleStyle: {
+            fontWeight: 'bold', // Change the font weight
+                        shadowColor: '#000', // Shadow color
+            shadowOffset: { width: 0, height: 2 }, // Shadow offset
+            shadowOpacity: 2, // Shadow opacity
+            shadowRadius: 3.84, // Shadow radius
+            elevation: 5, // Elevation for Android
+          },
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="user" color={color} size={size} />
           ),

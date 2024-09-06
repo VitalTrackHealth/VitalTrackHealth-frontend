@@ -41,7 +41,7 @@ const PatientStackNavigator = () => {
         <PatientStack.Screen
           name="Main"
           component={MainTabNavigator}
-          options={{ headerLeft: null, gestureEnabled: false }}
+          options={{ headerLeft: null, gestureEnabled: false,  }}
         />
       </PatientStack.Navigator>
     </UserProvider>
