@@ -17,35 +17,6 @@ import { colors } from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
 import { createStyles, fonts, margin } from "@/styles";
 
-const styles = createStyles({
-  halfWidthInput: {
-    width: "48%",
-  },
-  nameContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-  },
-  checkboxContainer: {
-    justifyContent: "center",
-    marginBottom: margin.sm,
-  },
-  loginContainer: {
-    marginTop: margin.lg,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  loginText: {
-    color: colors.gray.med,
-    fontSize: fonts.md,
-  },
-  loginLink: {
-    color: colors.primary,
-    fontWeight: "bold",
-    fontSize: fonts.md,
-  },
-});
-
 const RegisterScreen = ({ navigation }) => {
   // User context for state across register screens
   const [firstName, setFirstName] = useState("");
@@ -59,41 +30,52 @@ const RegisterScreen = ({ navigation }) => {
 
   const [emailWarning, setEmailWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState("");
-  // TODO: Warnings for email and password
+  const [showWarningModal, setShowWarningModal] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
 
   const handleLoginClick = () => {
     navigation.navigate("Login");
   };
 
   const handleSignUpClick = async () => {
-    navigation.navigate("Auth", {
-      screen: "RegisterConditionQuestion",
-      params: { email: "" },
-    });
-    // if (!emailComplexity(email))
-    //   setEmailWarning("* Please enter a valid email address");
-    // else if (!passwordComplexity(password))
-    //   setPasswordWarning(
-    //     "* Password must be at least 8 characters long,  have one special character one uppercase and one lowercase letter"
-    //   );
-    // else {
-    //   const result = await handleRegister({
-    //     firstName,
-    //     lastName,
-    //     phoneNumber,
-    //     email,
-    //     password,
-    //   });
+    let warningMessage = "Registration failed. Please try again.";
 
-    //   if (result.success) {
-    //     navigation.navigate("Main", {
-    //       screen: "RegisterConditionQuestion",
-    //       params: { email: result.results.data.email },
-    //     });
-    //   } else {
-    //     console.error("Registration failed:", result.error);
-    //   }
-    // }
+    if (!emailComplexity(email)) {
+      warningMessage = "Please enter a valid email address";
+      setEmailWarning(warningMessage);
+      setWarningMessage(warningMessage);
+      setShowWarningModal(true);
+    } else if (!passwordComplexity(password)) {
+      warningMessage =
+        "Password must be at least 8 characters long, have one special character, one uppercase and one lowercase letter";
+      setPasswordWarning(warningMessage);
+      setWarningMessage(warningMessage);
+      setShowWarningModal(true);
+    } else {
+      const result = await handleRegister({
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        password,
+      });
+
+      if (result.success) {
+        navigation.navigate("Auth", {
+          screen: "RegisterConditionQuestion",
+          params: { email: result.results.data.email },
+        });
+      } else {
+        console.error("Registration failed:", result.error);
+        setWarningMessage(warningMessage);
+        setShowWarningModal(true);
+      }
+    }
+  };
+
+  const closeWarningModal = () => {
+    setShowWarningModal(false);
+    setWarningMessage("");
   };
 
   return (
@@ -173,5 +155,34 @@ const RegisterScreen = ({ navigation }) => {
     </Page>
   );
 };
+
+const styles = createStyles({
+  halfWidthInput: {
+    width: "48%",
+  },
+  nameContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  checkboxContainer: {
+    justifyContent: "center",
+    marginBottom: margin.sm,
+  },
+  loginContainer: {
+    marginTop: margin.lg,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  loginText: {
+    color: colors.gray.med,
+    fontSize: fonts.md,
+  },
+  loginLink: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: fonts.md,
+  },
+});
 
 export default RegisterScreen;

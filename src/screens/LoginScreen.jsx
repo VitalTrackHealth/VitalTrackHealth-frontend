@@ -20,47 +20,6 @@ import {
   borderRadius,
 } from "@/styles";
 
-const styles = createStyles({
-  forgotPassword: {
-    alignSelf: "flex-end",
-    marginBottom: margin.sm,
-  },
-  orText: {
-    color: colors.gray.dark,
-    textAlign: "center",
-    marginVertical: margin.sm,
-    fontSize: fonts.md,
-  },
-  socialContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: margin.lg,
-  },
-  socialButton: {
-    marginHorizontal: padding.md,
-    padding: padding.sm,
-    borderRadius: borderRadius,
-    backgroundColor: colors.white,
-  },
-  socialIcon: {
-    width: 24,
-    height: 24,
-  },
-  registerContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  registerText: {
-    color: colors.gray.med,
-    fontSize: fonts.md,
-  },
-  registerLink: {
-    color: colors.primary,
-    fontWeight: "bold",
-    fontSize: fonts.md,
-  },
-});
-
 const LoginScreen = ({ navigation }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
@@ -161,5 +120,46 @@ const LoginScreen = ({ navigation }) => {
     </Page>
   );
 };
+
+const styles = createStyles({
+  forgotPassword: {
+    alignSelf: "flex-end",
+    marginBottom: margin.sm,
+  },
+  orText: {
+    color: colors.gray.dark,
+    textAlign: "center",
+    marginVertical: margin.sm,
+    fontSize: fonts.md,
+  },
+  socialContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: margin.lg,
+  },
+  socialButton: {
+    marginHorizontal: padding.md,
+    padding: padding.sm,
+    borderRadius: borderRadius,
+    backgroundColor: colors.white,
+  },
+  socialIcon: {
+    width: 24,
+    height: 24,
+  },
+  registerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  registerText: {
+    color: colors.gray.med,
+    fontSize: fonts.md,
+  },
+  registerLink: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: fonts.md,
+  },
+});
 
 export default LoginScreen;

@@ -4,24 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { createStyles, padding, margin } from "@/styles";
 
-const styles = createStyles({
-  container: {
-    flex: 1,
-    flexGrow: 1,
-    padding: padding.lg,
-    justifyContent: "space-between",
-  },
-  topContent: {
-    width: "100%",
-    marginTop: margin.sm,
-  },
-  bottomContent: {
-    width: "100%",
-    justifyContent: "flex-end",
-    marginBottom: margin.sm,
-  },
-});
-
 const PageTop = ({ children }) => children;
 const PageBottom = ({ children }) => children;
 
@@ -65,5 +47,23 @@ const Page = ({
     </SafeAreaView>
   );
 };
+
+const styles = createStyles({
+  container: {
+    flex: 1,
+    flexGrow: 1,
+    padding: padding.lg,
+    justifyContent: "space-between",
+  },
+  topContent: {
+    width: "100%",
+    marginTop: margin.sm,
+  },
+  bottomContent: {
+    width: "100%",
+    justifyContent: "flex-end",
+    marginBottom: margin.sm,
+  },
+});
 
 export { Page, PageTop, PageBottom };

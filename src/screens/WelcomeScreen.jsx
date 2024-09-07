@@ -1,30 +1,7 @@
-import { Text, Image, } from "react-native";
+import { Text, Image } from "react-native";
 
 import { Button, Page, PageTop, PageBottom } from "@/components";
 import { createStyles, margin, fonts, colors } from "@/styles";
-
-const styles = createStyles({
-  logo: {
-    width: "100%",
-    height: 100,
-  },
-  mainText: {
-    fontSize: fonts.lg,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: margin.sm,
-  },
-  subText: {
-    fontSize: fonts.md,
-    color: colors.gray.medium,
-    textAlign: "center",
-    marginBottom: margin.xl,
-  },
-  button: {
-    width: "100%",
-    marginBottom: margin.md,
-  },
-});
 
 const WelcomeScreen = ({ navigation }) => {
   return (
@@ -65,5 +42,28 @@ const WelcomeScreen = ({ navigation }) => {
     </Page>
   );
 };
+
+const styles = createStyles({
+  logo: {
+    width: "100%",
+    height: 100,
+  },
+  mainText: {
+    fontSize: fonts.lg,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: margin.sm,
+  },
+  subText: {
+    fontSize: fonts.md,
+    color: colors.gray.medium,
+    textAlign: "center",
+    marginBottom: margin.xl,
+  },
+  button: {
+    width: "100%",
+    marginBottom: margin.md,
+  },
+});
 
 export default WelcomeScreen;
