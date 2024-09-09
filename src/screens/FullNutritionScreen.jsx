@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { colors } from "src/styles";
 
 const FullNutritionScreen = ({ navigation, route }) => {
   const backbtnclicked = () => {
@@ -186,11 +187,11 @@ const FullNutritionScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#007260",
+    backgroundColor: colors.primary,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 100,
+    height: "auto",
   },
   button: {
     alignItems: "center",

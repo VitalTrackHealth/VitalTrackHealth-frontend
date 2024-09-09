@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    height: height * 0.12,
+    height: "auto",
     paddingHorizontal: width * 0.05,
     paddingTop: Platform.OS === "web" ? 20 : 40,
   },

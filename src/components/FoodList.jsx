@@ -20,7 +20,7 @@ const FoodList = ({
   condition,
 }) => {
   const screenWidth = Dimensions.get("window").width;
-  const cardWidth = screenWidth / 1 - 40;
+  const cardWidth = screenWidth - 40;
 
   const getCardBackgroundColor = (index) => {
     if (condition === "Diabetes" && nutrients[index]?.carbs > 60) {
@@ -28,20 +28,6 @@ const FoodList = ({
     }
     return colors.blue.lightest;
   };
-
-  const getHeartColor = (index) => {
-    if (condition === "Diabetes" && nutrients[index]?.carbs > 60) {
-      return colors.red.medium; 
-    }
-    return colors.blue.medium; 
-  };
-
-  const getName = (index) => {
-    if (condition === "Diabetes" && nutrients[index]?.carbs > 60) {
-      return "warning";
-    }
-    return "heart";
-  }
 
   const renderCards = () => {
     const rows = [];
@@ -53,40 +39,26 @@ const FoodList = ({
             styles.card,
             {
               width: cardWidth,
-              height: cardWidth * 0.2,
-              backgroundColor: getCardBackgroundColor(i + index), // Set dynamic background color
+              backgroundColor: getCardBackgroundColor(i + index),
             },
           ]}
-          onPress={() => onCardPress(foodIds[i + index])} // Pass foodId to onCardPress
+          onPress={() => onCardPress(foodIds[i + index])}
         >
-          <View style={styles.textContainer}>
-            <Text
-              style={styles.name}
-              adjustsFontSizeToFit
-              numberOfLines={1}
-              minimumFontScale={0.7}
-            >
+
+        <Image source={{ uri: image }} style={styles.image} />
+        <View style={styles.textContainer}>
+            <Text style={styles.name} adjustsFontSizeToFit numberOfLines={1} minimumFontScale={0.7}>
               {names[i + index]}
             </Text>
-            <Text
-              style={styles.calories}
-              adjustsFontSizeToFit
-              numberOfLines={1}
-              minimumFontScale={0.7}
-            >
+            <Text style={styles.brand} adjustsFontSizeToFit numberOfLines={1} minimumFontScale={0.7}>
               {brands[i + index]}
             </Text>
             {nutrients[i + index] && (
-              <Text
-                style={styles.calories}
-                adjustsFontSizeToFit
-                numberOfLines={1}
-                minimumFontScale={0.7}
-              >
+              <Text style={styles.calories} adjustsFontSizeToFit numberOfLines={1} minimumFontScale={0.7}>
                 Cals: {Math.round(nutrients[i + index].calories)}
               </Text>
             )}
-          </View>
+        </View>
         </TouchableOpacity>
       ));
       rows.push(
@@ -114,6 +86,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   card: {
+    flexDirection: "row", 
     borderRadius: 20,
     elevation: 3,
     shadowOffset: { width: 1, height: 1 },
@@ -123,43 +96,36 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 8,
     overflow: "hidden",
-    width: Dimensions.get("window").width / 1 - 40,
-  },
-  favoriteBtn: {
-    alignContent: "flex-end",
-    alignSelf: "flex-end",
-    marginRight: 10,
-    marginTop: 10,
-  },
-  image: {
-    flex: 1,
-    borderRadius: 10,
-    resizeMode: "flex-start",
-    alignItems: "flex-start",
-    resizeMode: "contain",
-    marginBottom: 10
-    
-    
+    padding: 5,
+    width: Dimensions.get("window").width - 40,
   },
   textContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    alignItems: "start",
+    flex: 6,
+    flexDirection: "column",
+    justifyContent: "start",
+  },
+  image: {
+    flex: 1, 
+    borderRadius: 100,
+    width: 40,
+    height: 40,
+    resizeMode: "contain",
   },
   name: {
     color: "black",
     fontWeight: "bold",
     fontSize: 18,
-    textAlign: "center",
+    textAlign: "left",
+  },
+  brand: {
+    color: "black",
+    fontSize: 14,
+    textAlign: "left",
   },
   calories: {
     fontSize: 16,
     color: "black",
-    textAlign: "center",
+    textAlign: "left",
   },
 });
 

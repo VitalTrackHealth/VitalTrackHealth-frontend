@@ -8,6 +8,7 @@ import {
   Image,
   Text,
   Dimensions,
+  ScrollView, // Import ScrollView
 } from "react-native";
 
 const FoodCard = ({
@@ -24,16 +25,16 @@ const FoodCard = ({
 
   const getCardBackgroundColor = (index) => {
     if (condition === "Diabetes" && nutrients[index]?.carbs > 60) {
-      return colors.red.lightest; 
+      return colors.red.lightest;
     }
     return colors.blue.lightest;
   };
 
   const getHeartColor = (index) => {
     if (condition === "Diabetes" && nutrients[index]?.carbs > 60) {
-      return colors.red.medium; 
+      return colors.red.medium;
     }
-    return colors.blue.medium; 
+    return colors.blue.medium;
   };
 
   const getName = (index) => {
@@ -41,72 +42,67 @@ const FoodCard = ({
       return "warning";
     }
     return "heart";
-  }
+  };
 
   const renderCards = () => {
-    const rows = [];
-    for (let i = 0; i < images.length; i += 2) {
-      const rowItems = images.slice(i, i + 2).map((image, index) => (
-        <TouchableOpacity
-          key={i + index}
-          style={[
-            styles.card,
-            {
-              width: cardWidth,
-              height: cardWidth * 1.4,
-              backgroundColor: getCardBackgroundColor(i + index), // Set dynamic background color
-            },
-          ]}
-          onPress={() => onCardPress(foodIds[i + index])} // Pass foodId to onCardPress
-        >
-          <TouchableOpacity style={styles.favoriteBtn}>
-            <AntDesign
-              name={getName(i + index)}
-              size={28}
-              color={getHeartColor(i + index)} // Set dynamic heart color
-            />
-          </TouchableOpacity>
-          <Image source={{ uri: image }} style={styles.image} />
-          <View style={styles.textContainer}>
-            <Text
-              style={styles.name}
-              adjustsFontSizeToFit
-              numberOfLines={1}
-              minimumFontScale={0.7}
-            >
-              {names[i + index]}
-            </Text>
+    return images.map((image, index) => (
+      <TouchableOpacity
+        key={index}
+        style={[
+          styles.card,
+          {
+            width: cardWidth,
+            height: cardWidth * 1.4,
+            backgroundColor: getCardBackgroundColor(index), // Set dynamic background color
+          },
+        ]}
+        onPress={() => onCardPress(foodIds[index])} // Pass foodId to onCardPress
+      >
+        <TouchableOpacity style={styles.favoriteBtn}>
+          <AntDesign
+            name={getName(index)}
+            size={28}
+            color={getHeartColor(index)} // Set dynamic heart color
+          />
+        </TouchableOpacity>
+        <Image source={{ uri: image }} style={styles.image} />
+        <View style={styles.textContainer}>
+          <Text
+            style={styles.name}
+            adjustsFontSizeToFit
+            numberOfLines={1}
+            minimumFontScale={0.7}
+          >
+            {names[index]}
+          </Text>
+          <Text
+            style={styles.calories}
+            adjustsFontSizeToFit
+            numberOfLines={1}
+            minimumFontScale={0.7}
+          >
+            {brands[index]}
+          </Text>
+          {nutrients[index] && (
             <Text
               style={styles.calories}
               adjustsFontSizeToFit
               numberOfLines={1}
               minimumFontScale={0.7}
             >
-              {brands[i + index]}
+              Cals: {Math.round(nutrients[index].calories)}
             </Text>
-            {nutrients[i + index] && (
-              <Text
-                style={styles.calories}
-                adjustsFontSizeToFit
-                numberOfLines={1}
-                minimumFontScale={0.7}
-              >
-                Cals: {Math.round(nutrients[i + index].calories)}
-              </Text>
-            )}
-          </View>
-        </TouchableOpacity>
-      ));
-      rows.push(
-        <View key={i} style={styles.row}>
-          {rowItems}
+          )}
         </View>
-      );
-    }
-    return rows;
+      </TouchableOpacity>
+    ));
   };
 
-  return <View style={styles.container}>{renderCards()}</View>;
+  return (
+    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+      {renderCards()}
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -114,12 +110,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
   },
-  row: {
+  horizontalScroll: {
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexWrap: "wrap",
-    width: "100%",
+    paddingHorizontal: 8,
   },
   card: {
     borderRadius: 20,
@@ -156,7 +149,7 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    alignItems: "start",
+    alignItems: "center",
   },
   name: {
     color: "black",
@@ -172,5 +165,6 @@ const styles = StyleSheet.create({
 });
 
 export default FoodCard;
+
 
 

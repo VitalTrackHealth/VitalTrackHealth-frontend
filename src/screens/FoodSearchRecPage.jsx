@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
-import { handleFood_search } from "@/services";
-import { FoodCard, SearchBar, FoodList } from "@/components";
-import { colors } from "@/styles";
+import { handleFood_search, handleFood_request_nutrients } from "@/services";
+import { FoodCard, SearchBar } from "@/components";
 
-const SearchFoodScreen = ({ navigation, route }) => {
+const FoodSearchRecPage = ({ navigation, route }) => {
   const { mealType, conditionData } = route.params;
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([
+    "https://i0.wp.com/static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg?ssl=1",
+  ]);
   const [names, setNames] = useState([]);
   const [nutrients, setNutrients] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -21,6 +22,8 @@ const SearchFoodScreen = ({ navigation, route }) => {
     try {
       const foodDataResponse = await handleFood_search(query);
 
+      console.log("API Response:", foodDataResponse);
+
       if (
         foodDataResponse &&
         foodDataResponse.data &&
@@ -28,7 +31,11 @@ const SearchFoodScreen = ({ navigation, route }) => {
         Array.isArray(foodDataResponse.data.all) &&
         foodDataResponse.data.all.length > 0
       ) {
-        const newImages = foodDataResponse.data.all.map((item) => item.image);
+        const newImages = foodDataResponse.data.all.map(
+          (item) =>
+            item.image ||
+            "https://i0.wp.com/static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg?ssl=1"
+        );
         const newNames = foodDataResponse.data.all.map((item) => item.label);
         const newNutrients = foodDataResponse.data.all.map((item) => ({
           calories: item.nutrients.CALORIES || 0,
@@ -36,9 +43,11 @@ const SearchFoodScreen = ({ navigation, route }) => {
           proteins: item.nutrients.PROTEIN || 0,
           carbs: item.nutrients.CARBOHYDRATE || 0,
         }));
-        const newFoodIds = foodDataResponse.data.all.map((item) => item.food_id);
+        const newFoodIds = foodDataResponse.data.all.map(
+          (item) => item.food_id
+        );
         const newBrands = foodDataResponse.data.all.map(
-          (item) => item.brand || "Generic Brand"
+          (item, index) => item.brand || "Generic Brand"
         );
         const newServingSize = foodDataResponse.data.all.map((item) => 100);
         const newIngredients = foodDataResponse.data.all.map((item) =>
@@ -64,12 +73,8 @@ const SearchFoodScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    if (searchPhrase.length > 0) {
-      fetchFoodData(searchPhrase);
-    } else if (!clicked) {
-      fetchFoodData("Chicken");
-    }
-  }, [searchPhrase, clicked]);
+    fetchFoodData("Pasta");
+  }, []);
 
   const handleCardPress = async (foodId) => {
     const index = foodids.indexOf(foodId);
@@ -81,6 +86,10 @@ const SearchFoodScreen = ({ navigation, route }) => {
       let servingSize = servingSizes[index];
       let name = names[index];
       let image = images[index];
+
+      console.log(
+        `Selected Food ID: ${foodId} at Index: ${index}, Brand: ${brand}`
+      );
 
       navigation.navigate("FoodInfo", {
         brand,
@@ -97,12 +106,12 @@ const SearchFoodScreen = ({ navigation, route }) => {
     }
   };
 
-  const handleSearch = (phrase) => {
-    setSearchPhrase(phrase);
+  const handleSearch = async () => {
+    await fetchFoodData(searchPhrase);
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.header}>
         <SearchBar
           clicked={clicked}
@@ -110,82 +119,30 @@ const SearchFoodScreen = ({ navigation, route }) => {
           setSearchPhrase={setSearchPhrase}
           setClicked={setClicked}
           onSearch={handleSearch}
-          navigation={navigation}
         />
       </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title}>Results:</Text>
 
-      {clicked ? (
-        <ScrollView style={styles.verticalScroll}>
           {noResults ? (
             <Text style={styles.noResultsText}>
               No results found. Please try a different search term.
             </Text>
           ) : (
-            <View>
-              <Text style={styles.title}>Results: </Text>
-              <FoodList
-                foodIds={foodids}
-                names={names}
-                images={images}
-                nutrients={nutrients}
-                brands={brands}
-                condition={conditionData}
-                onCardPress={handleCardPress}
-              />
-            </View>
+            <FoodCard
+              foodIds={foodids}
+              names={names}
+              images={images}
+              nutrients={nutrients}
+              brands={brands}
+              onCardPress={handleCardPress}
+            />
           )}
-        </ScrollView>
-      ) : (
-        
-        
-        <>
-        <ScrollView>
-        <View>
-          <Text style={styles.title2}>Foods Based on your Condition </Text>
-          <ScrollView horizontal style={styles.horizontalScroll} showsHorizontalScrollIndicator={false}>
-            <FoodCard
-              foodIds={foodids}
-              names={names}
-              images={images}
-              nutrients={nutrients}
-              brands={brands}
-              condition={conditionData}
-              onCardPress={handleCardPress}
-            />
-          </ScrollView>
 
-          <Text style={styles.title2}>Foods You Have Eaten Before</Text>
-          <ScrollView horizontal style={styles.horizontalScroll} showsHorizontalScrollIndicator={false}>
-            <FoodCard
-              foodIds={foodids}
-              names={names}
-              images={images}
-              nutrients={nutrients}
-              brands={brands}
-              condition={conditionData}
-              onCardPress={handleCardPress}
-            />
-          </ScrollView>
-
-          <Text style={styles.title2}>Favorites</Text>
-          <ScrollView horizontal style={styles.horizontalScroll} showsHorizontalScrollIndicator={false}>
-            <FoodCard
-              foodIds={foodids}
-              names={names}
-              images={images}
-              nutrients={nutrients}
-              brands={brands}
-              condition={conditionData}
-              onCardPress={handleCardPress}
-            />
-          </ScrollView>
-          </View>
-          </ScrollView>
-
-        </>
-      )}
-
-      <View style={styles.spacer} />
+          <View style={styles.spacer} />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -193,27 +150,21 @@ const SearchFoodScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
+    alignItems: "center",
   },
   title: {
-    alignSelf: "flex-start",
+    alignSelf: "start",
     fontSize: 24,
     marginLeft: 20,
-    marginBottom: 20,
     color: "#636363",
   },
-  title2: {
-    alignSelf: "stretch",
-    fontSize: 24,
-    marginLeft: 20,
-    marginBottom: 10,
-    color: "black",
-    marginTop: 20,
-  },
   header: {
+    backgroundColor: "#007260",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    height: "auto",
+    height: 150,
   },
   noResultsText: {
     fontSize: 18,
@@ -221,20 +172,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     margin: 20,
   },
-  verticalScroll: {
-    flex: 1,
-    width: "100%",
-  },
-  horizontalScroll: {
-    flexGrow: 0,
-    height: "auto",
-  },
   spacer: {
-    height: 100,
+    height: 250,
   },
 });
 
-export default SearchFoodScreen;
-
-
-
+export default FoodSearchRecPage;
