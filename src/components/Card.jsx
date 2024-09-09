@@ -46,10 +46,7 @@ export default function Card(props) {
               Appt Date : 12/12/2021
             </Text>
 
-            <Image
-              source={{
-                uri: "https://banner2.cleanpng.com/20180722/gfc/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c0968c377.0307553315323166814291.jpg",
-              }}
+         <Image source={require("@/assets/diabetes.png")} 
               style={styles.image}
             />
           </View>
@@ -97,7 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 50,
+    width: 50,
   },
 });

@@ -4,6 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import {
   PatientHomeScreen,
+  ProviderHomeScreen,
   NutritionProfileScreen,
   FoodInfoScreen,
   FullNutritionScreen,
@@ -101,7 +102,7 @@ const FavouritesStackNavigator = () => {
       <FavouritesStack.Screen
         name="Favourites"
         component={NutritionProfileScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </FavouritesStack.Navigator>
   );

@@ -1,19 +1,51 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { ProviderHomeScreen } from "@/screens";
+import { UserProvider } from "@/context";
+import {
+  LoginScreen,
+  RegisterScreen,
+  RegisterConditionQuestionScreen,
+} from "@/screens";
+import MainTabNavigatorProvider from "./MainTabNavigatorProvider";
 
-const Stack = createNativeStackNavigator();
+const PatientStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
 
-const ProviderStackNavigator = () => {
+const AuthStackNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={ProviderHomeScreen}
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name="Login"
+        component={LoginScreen}
         options={{ headerShown: false }}
       />
-    </Stack.Navigator>
+      <AuthStack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="RegisterConditionQuestion"
+        component={RegisterConditionQuestionScreen}
+        options={{ headerShown: false }}
+      />
+    </AuthStack.Navigator>
   );
 };
 
-export default ProviderStackNavigator;
+const PatientStackNavigator = () => {
+  return (
+    <UserProvider>
+      <PatientStack.Navigator screenOptions={{ headerShown: false }}>
+        <PatientStack.Screen name="Auth" component={AuthStackNavigator} />
+        <PatientStack.Screen
+          name="Main"
+          component={MainTabNavigatorProvider}
+          options={{ headerLeft: null, gestureEnabled: false,  }}
+        />
+      </PatientStack.Navigator>
+    </UserProvider>
+  );
+};
+
+export default PatientStackNavigator;
