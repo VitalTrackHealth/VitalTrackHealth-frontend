@@ -6,7 +6,6 @@ import {
   RegisterScreen,
   RegisterConditionQuestionScreen,
 } from "@/screens";
-import MainTabNavigatorProvider from "./MainTabNavigatorProvider";
 
 const PatientStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -38,11 +37,6 @@ const PatientStackNavigator = () => {
     <UserProvider>
       <PatientStack.Navigator screenOptions={{ headerShown: false }}>
         <PatientStack.Screen name="Auth" component={AuthStackNavigator} />
-        <PatientStack.Screen
-          name="Main"
-          component={MainTabNavigatorProvider}
-          options={{ headerLeft: null, gestureEnabled: false,  }}
-        />
       </PatientStack.Navigator>
     </UserProvider>
   );

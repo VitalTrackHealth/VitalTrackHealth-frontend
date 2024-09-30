@@ -96,18 +96,6 @@ const SettingsStackNavigator = () => {
   );
 };
 
-const FavouritesStackNavigator = () => {
-  return (
-    <FavouritesStack.Navigator>
-      <FavouritesStack.Screen
-        name="Favourites"
-        component={NutritionProfileScreen}
-        options={{ headerShown: true }}
-      />
-    </FavouritesStack.Navigator>
-  );
-};
-
 const MainTabNavigator = () => {
   return (
     <Tab.Navigator
@@ -130,16 +118,6 @@ const MainTabNavigator = () => {
           ),
         }}
       />
-            <Tab.Screen
-        name="FavouritesStack"
-        component={FavouritesStackNavigator }
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="heart" color={color} size={size} />
-          ),
-        }}
-      />
       <Tab.Screen
         name="HomeStack"
         component={HomeStackNavigator}
@@ -154,26 +132,7 @@ const MainTabNavigator = () => {
         name="Goals"
         component={NutritionProfileStackNavigator}
         options={{
-          headerShown: true,
-               headerStyle: {
-            backgroundColor: colors.primary, // Change the background color
-                                    shadowColor: '#000', // Shadow color
-            shadowOffset: { width: 0, height: 2 }, // Shadow offset
-            shadowOpacity: 0.5, // Shadow opacity
-            shadowRadius: 3.84, // Shadow radius
-            elevation: 5, // Elevation for Android
-            
-
-          },
-            headerTintColor: '#fff', // Change the text color
-          headerTitleStyle: {
-            fontWeight: 'bold', // Change the font weight
-                        shadowColor: '#000', // Shadow color
-            shadowOffset: { width: 0, height: 2 }, // Shadow offset
-            shadowOpacity: 2, // Shadow opacity
-            shadowRadius: 3.84, // Shadow radius
-            elevation: 5, // Elevation for Android
-          },
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="user" color={color} size={size} />
           ),
