@@ -6,8 +6,8 @@ export const dimensions = {
 };
 
 export const colors = {
-  primary: "#40ade0", // Blue
-  secondary: "#dd3830", // Red
+  primary: "#135471", // Blue
+  secondary: "#ff5955", // Red
   tertiary: "#e6cf66", // Yellowish
   white: "#FFFFFF",
   black: "#222222",

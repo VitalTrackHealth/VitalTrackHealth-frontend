@@ -56,6 +56,7 @@ const styles = createStyles({
     borderRadius: borderRadius.md,
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
   primary: {
     backgroundColor: colors.primary,
