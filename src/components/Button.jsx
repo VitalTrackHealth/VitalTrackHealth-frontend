@@ -53,7 +53,7 @@ const styles = createStyles({
   container: {
     paddingVertical: padding.md,
     paddingHorizontal: padding.md,
-    borderRadius: borderRadius,
+    borderRadius: borderRadius.md,
     alignItems: "center",
     justifyContent: "center",
   },

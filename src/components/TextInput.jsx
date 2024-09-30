@@ -42,7 +42,7 @@ const TextInput = ({
 const styles = createStyles({
   inputContainer: {
     backgroundColor: colors.white,
-    borderRadius: borderRadius,
+    borderRadius: borderRadius.md,
     padding: padding.md,
     marginBottom: margin.md,
     flexDirection: "row",

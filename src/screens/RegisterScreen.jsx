@@ -16,7 +16,7 @@ import { handleRegister } from "@/services";
 import { colors } from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
 import { createStyles, fonts, margin } from "@/styles";
-
+import { useSnackbar } from "@/context";
 const RegisterScreen = ({ navigation }) => {
   // User context for state across register screens
   const [firstName, setFirstName] = useState("");
@@ -28,29 +28,20 @@ const RegisterScreen = ({ navigation }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
-  const [emailWarning, setEmailWarning] = useState("");
-  const [passwordWarning, setPasswordWarning] = useState("");
-  const [showWarningModal, setShowWarningModal] = useState(false);
-  const [warningMessage, setWarningMessage] = useState("");
+  const { showSnackbar } = useSnackbar();
 
   const handleLoginClick = () => {
     navigation.navigate("Login");
   };
 
   const handleSignUpClick = async () => {
-    let warningMessage = "Registration failed. Please try again.";
-
     if (!emailComplexity(email)) {
-      warningMessage = "Please enter a valid email address";
-      setEmailWarning(warningMessage);
-      setWarningMessage(warningMessage);
-      setShowWarningModal(true);
+      showSnackbar("Please enter a valid email address", "warning");
     } else if (!passwordComplexity(password)) {
-      warningMessage =
-        "Password must be at least 8 characters long, have one special character, one uppercase and one lowercase letter";
-      setPasswordWarning(warningMessage);
-      setWarningMessage(warningMessage);
-      setShowWarningModal(true);
+      showSnackbar(
+        "Password must be at least 8 characters long, have one special character, one uppercase and one lowercase letter",
+        "warning"
+      );
     } else {
       const result = await handleRegister({
         firstName,
@@ -66,16 +57,10 @@ const RegisterScreen = ({ navigation }) => {
           params: { email: result.results.data.email },
         });
       } else {
-        console.error("Registration failed:", result.error);
-        setWarningMessage(warningMessage);
-        setShowWarningModal(true);
+        console.log("Registration failed:", result.error);
+        showSnackbar(result.error, "error");
       }
     }
-  };
-
-  const closeWarningModal = () => {
-    setShowWarningModal(false);
-    setWarningMessage("");
   };
 
   return (

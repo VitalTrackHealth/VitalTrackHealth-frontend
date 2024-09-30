@@ -140,7 +140,7 @@ const styles = createStyles({
   socialButton: {
     marginHorizontal: padding.md,
     padding: padding.sm,
-    borderRadius: borderRadius,
+    borderRadius: borderRadius.md,
     backgroundColor: colors.white,
   },
   socialIcon: {

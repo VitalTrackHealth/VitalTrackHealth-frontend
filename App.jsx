@@ -2,13 +2,18 @@ import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import RootStackNavigator from "./src/navigation/RootStackNavigator";
+import { SnackbarProvider } from "@/context";
+import { RootStackNavigator } from "@/navigation";
+import { Snackbar } from "@/components";
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <RootStackNavigator />
-    </NavigationContainer>
+    <SnackbarProvider>
+      <NavigationContainer>
+        <RootStackNavigator />
+      </NavigationContainer>
+      <Snackbar />
+    </SnackbarProvider>
   );
 };
 

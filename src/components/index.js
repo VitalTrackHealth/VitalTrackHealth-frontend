@@ -14,6 +14,8 @@ import TextInput from "./TextInput";
 import ClickableText from "./ClickableText";
 import NavigationMenu from "./NavigationMenu";
 import FoodList from "./FoodList";
+import Modal from "./Modal";
+import Snackbar from "./Snackbar";
 
 export {
   BackButton,
@@ -33,5 +35,7 @@ export {
   PageBottom,
   SearchBar,
   TextInput,
+  Snackbar,
   FoodList,
+  Modal,
 };

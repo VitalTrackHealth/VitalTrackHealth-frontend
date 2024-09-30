@@ -36,7 +36,7 @@ export const handleRegister = async (userToRegister) => {
     const results = await response.json();
     return { success: true, results };
   } catch (error) {
-    console.error("error:", error);
+    console.log("error:", error);
     return { success: false, error: error.message };
   }
 };

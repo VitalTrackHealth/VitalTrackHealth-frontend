@@ -88,27 +88,34 @@ export const colors = {
 
 export const fonts = {
   sm: 12,
-  md: 18,
-  lg: 28,
-  xl: 40,
+  md: 16,
+  lg: 24,
+  xl: 32,
   xxl: 60,
 };
 
 export const padding = {
-  sm: 10,
-  md: 20,
-  lg: 30,
+  sm: 8,
+  md: 16,
+  lg: 24,
   xl: 40,
+  xxl: 50,
 };
 
 export const margin = {
-  sm: 10,
-  md: 20,
-  lg: 30,
-  xl: 40,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 40,
 };
 
-export const borderRadius = 16;
+export const borderRadius = {
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+};
 
 export const baseStyles = {};
 
