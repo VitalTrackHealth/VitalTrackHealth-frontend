@@ -23,7 +23,7 @@ const styles = createStyles({
   },
   subText: {
     fontSize: fonts.md,
-    color: colors.gray.medium,
+    color: colors.lightNeutral.medium,
     textAlign: "center",
   },
 });

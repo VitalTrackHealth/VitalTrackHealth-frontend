@@ -80,7 +80,7 @@ const styles = createStyles({
     opacity: 0.8,
   },
   disabled: {
-    backgroundColor: colors.gray.light,
+    backgroundColor: colors.lightNeutral.light,
   },
 });
 

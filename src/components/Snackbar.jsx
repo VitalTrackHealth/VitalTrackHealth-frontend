@@ -93,7 +93,7 @@ const styles = createStyles({
     shadowRadius: 5,
   },
   default: {
-    backgroundColor: colors.gray.dark,
+    backgroundColor: colors.lightNeutral.dark,
   },
   success: {
     backgroundColor: colors.green.medium,

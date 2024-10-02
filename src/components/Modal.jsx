@@ -120,7 +120,7 @@ const styles = createStyles({
     opacity: 0.8,
   },
   cancelButton: {
-    backgroundColor: colors.gray.medium,
+    backgroundColor: colors.lightNeutral.medium,
   },
   confirmButton: {
     backgroundColor: colors.primary,

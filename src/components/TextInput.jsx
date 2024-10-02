@@ -10,7 +10,7 @@ import {
 
 const TextInput = ({
   placeholder,
-  placeholderTextColor = colors.gray.light,
+  placeholderTextColor = colors.lightNeutral.medium,
   value,
   onChangeText,
   keyboardType = "default",

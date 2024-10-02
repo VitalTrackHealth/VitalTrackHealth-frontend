@@ -1,34 +1,51 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  useWindowDimensions,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
 import {
   Button,
   TextHeader,
   TextInput,
-  Page,
-  PageTop,
-  PageBottom,
+  BackButton,
   Checkbox,
   ClickableText,
 } from "@/components";
 import { handleRegister } from "@/services";
-import { colors } from "@/styles";
+import {
+  colors,
+  createStyles,
+  fonts,
+  margin,
+  padding,
+  borderRadius,
+} from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
-import { createStyles, fonts, margin } from "@/styles";
 import { useSnackbar } from "@/context";
+
 const RegisterScreen = ({ navigation }) => {
-  // User context for state across register screens
+  const { width } = useWindowDimensions();
+  const isDesktop = width >= 768;
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const { showSnackbar } = useSnackbar();
+
+  const handleBackButtonClick = () => {
+    navigation.goBack();
+  };
 
   const handleLoginClick = () => {
     navigation.navigate("Login");
@@ -63,85 +80,167 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
+  const registerForm = (
+    <>
+      <View style={styles.nameContainer}>
+        <TextInput
+          placeholder="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
+          keyboardType="default"
+          containerStyle={[
+            styles.halfWidthInput,
+            isDesktop && styles.desktopInput,
+          ]}
+        />
+        <TextInput
+          placeholder="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+          keyboardType="default"
+          containerStyle={[
+            styles.halfWidthInput,
+            isDesktop && styles.desktopInput,
+          ]}
+        />
+      </View>
+      <TextInput
+        placeholder="Email address"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        containerStyle={isDesktop ? styles.desktopInput : null}
+      />
+      <TextInput
+        placeholder="Mobile Number"
+        value={phoneNumber}
+        onChangeText={setPhoneNumber}
+        keyboardType="numeric"
+        containerStyle={isDesktop ? styles.desktopInput : null}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={!isPasswordShown}
+        containerStyle={isDesktop ? styles.desktopInput : null}
+      >
+        <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
+          <Ionicons
+            name={isPasswordShown ? "eye-off" : "eye"}
+            size={24}
+            color={colors.lightNeutral.dark}
+          />
+        </Pressable>
+      </TextInput>
+      <Checkbox
+        label="I agree to the Terms and Conditions."
+        checked={isTermsChecked}
+        onValueChange={setIsTermsChecked}
+        containerStyle={styles.checkboxContainer}
+      />
+      <Button
+        onPress={handleSignUpClick}
+        text="Sign Up"
+        disabled={!isTermsChecked}
+      />
+      <View style={styles.loginContainer}>
+        <Text style={styles.loginText}>Already have an account? </Text>
+        <ClickableText
+          onPress={handleLoginClick}
+          text="Login"
+          textStyle={styles.loginLink}
+        />
+      </View>
+    </>
+  );
+
   return (
-    <Page>
-      <PageTop>
-        <TextHeader
-          text="Create an Account ☀️"
-          subText="Take control of your nutrition today!"
+    <SafeAreaView style={styles.container}>
+      {!isDesktop ? (
+        <BackButton
+          onPress={handleBackButtonClick}
+          variant="secondary"
+          style={styles.mobileBackButton}
         />
-        <View style={styles.nameContainer}>
-          <TextInput
-            placeholder="First Name"
-            value={firstName}
-            onChangeText={setFirstName}
-            keyboardType="default"
-            containerStyle={styles.halfWidthInput}
+      ) : null}
+      {isDesktop ? (
+        <View style={styles.desktopLayout}>
+          <Image
+            source={require("@/assets/logo/full-color.png")}
+            style={styles.desktopLogo}
+            resizeMode="contain"
           />
-          <TextInput
-            placeholder="Last Name"
-            value={lastName}
-            onChangeText={setLastName}
-            keyboardType="default"
-            containerStyle={styles.halfWidthInput}
-          />
-        </View>
-        <TextInput
-          placeholder="Email address"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-        <TextInput
-          placeholder="Mobile Number"
-          value={phoneNumber}
-          onChangeText={setPhoneNumber}
-          keyboardType="numeric"
-        />
-
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={!isPasswordShown}
-        >
-          <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
-            <Ionicons
-              name={isPasswordShown ? "eye-off" : "eye"}
-              size={24}
-              color={colors.gray.dark}
+          <View style={styles.desktopFormContainer}>
+            <BackButton
+              onPress={handleBackButtonClick}
+              variant="secondary"
+              style={styles.desktopBackButton}
             />
-          </Pressable>
-        </TextInput>
-      </PageTop>
-
-      <PageBottom>
-        <Checkbox
-          label="I agree to the Terms and Conditions."
-          checked={isTermsChecked}
-          onValueChange={setIsTermsChecked}
-          containerStyle={styles.checkboxContainer}
-        />
-        <Button
-          onPress={handleSignUpClick}
-          text="Sign Up"
-          disabled={!isTermsChecked}
-        />
-
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>Already have an account? </Text>
-          <ClickableText
-            onPress={handleLoginClick}
-            text="Login"
-            textStyle={styles.loginLink}
-          />
+            <TextHeader
+              text="Create an Account ☀️"
+              subText="Take control of your nutrition today!"
+            />
+            {registerForm}
+          </View>
         </View>
-      </PageBottom>
-    </Page>
+      ) : (
+        <View style={styles.mobileLayout}>
+          <TextHeader
+            text="Create an Account ☀️"
+            subText="Take control of your nutrition today!"
+          />
+          {registerForm}
+        </View>
+      )}
+    </SafeAreaView>
   );
 };
 
 const styles = createStyles({
+  container: {
+    flex: 1,
+  },
+  desktopLayout: {
+    flex: 1,
+    alignItems: "center",
+    padding: margin.lg,
+  },
+  desktopLogo: {
+    width: "30%",
+    height: 100,
+    marginBottom: margin.xl,
+  },
+  desktopInput: {
+    backgroundColor: colors.lightNeutral.lightest,
+  },
+  desktopBackButton: {
+    position: "absolute",
+    top: padding.xl,
+    left: padding.md,
+  },
+  desktopFormContainer: {
+    maxWidth: 600,
+    width: "100%",
+    backgroundColor: colors.white,
+    padding: padding.xl,
+    borderRadius: borderRadius.lg,
+    shadowColor: colors.lightNeutral.dark,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  mobileLayout: {
+    flex: 1,
+    padding: margin.lg,
+    justifyContent: "center",
+  },
+  mobileBackButton: {
+    position: "absolute",
+    top: padding.md,
+    left: padding.md,
+  },
   halfWidthInput: {
     width: "48%",
   },
@@ -160,7 +259,7 @@ const styles = createStyles({
     justifyContent: "center",
   },
   loginText: {
-    color: colors.gray.med,
+    color: colors.lightNeutral.med,
     fontSize: fonts.md,
   },
   loginLink: {

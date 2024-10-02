@@ -47,7 +47,7 @@ const styles = createStyles({
   },
   label: {
     fontSize: fonts.md,
-    color: colors.gray.medium,
+    color: colors.lightNeutral.medium,
   },
 });
 

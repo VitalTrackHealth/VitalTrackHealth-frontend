@@ -8,13 +8,21 @@ const WelcomeScreen = ({ navigation }) => {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
+  const handlePatientLoginClick = () => {
+    navigation.navigate("PatientStack", { screen: "Login" });
+  };
+
+  const handleProviderLoginClick = () => {
+    navigation.navigate("ProviderStack", { screen: "Home" });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {isDesktop ? (
         <View style={styles.desktopLayout}>
           <View style={styles.desktopLeftHalf}>
             <Image
-              source={require("@/assets/logo-no-background.png")}
+              source={require("@/assets/logo/full-white.png")}
               style={styles.logo}
               resizeMode="contain"
             />
@@ -26,17 +34,13 @@ const WelcomeScreen = ({ navigation }) => {
             <View style={styles.buttonContainer}>
               <Button
                 text="Patient"
-                onPress={() =>
-                  navigation.navigate("PatientStack", { screen: "Login" })
-                }
+                onPress={handlePatientLoginClick}
                 style={styles.button}
                 variant="primary"
               />
               <Button
                 text="Provider"
-                onPress={() =>
-                  navigation.navigate("ProviderStack", { screen: "Home" })
-                }
+                onPress={handleProviderLoginClick}
                 style={styles.button}
                 variant="secondary"
               />
@@ -46,31 +50,27 @@ const WelcomeScreen = ({ navigation }) => {
       ) : (
         <View style={styles.mobileLayout}>
           <Image
-            source={require("@/assets/logo-no-background.png")}
+            source={require("@/assets/logo/full-color.png")}
             style={styles.logo}
             resizeMode="contain"
           />
           <View style={styles.mobileContent}>
             <Text style={styles.mobileMainText}>
               Bringing{" "}
-              <Text style={{ color: colors.green.light }}>Nutrition</Text> to
+              <Text style={{ color: colors.green.medium }}>Nutrition</Text> to
               the Heart of{" "}
               <Text style={{ color: colors.red.medium }}>Healthcare</Text>
             </Text>
             <View style={styles.buttonContainer}>
               <Button
                 text="Patient"
-                onPress={() =>
-                  navigation.navigate("PatientStack", { screen: "Login" })
-                }
+                onPress={handlePatientLoginClick}
                 style={styles.button}
                 variant="primary"
               />
               <Button
                 text="Provider"
-                onPress={() =>
-                  navigation.navigate("ProviderStack", { screen: "Home" })
-                }
+                onPress={handleProviderLoginClick}
                 style={styles.button}
                 variant="secondary"
               />

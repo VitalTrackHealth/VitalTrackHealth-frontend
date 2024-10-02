@@ -104,7 +104,7 @@ const MainTabNavigator = () => {
         tabBarStyle: styles.tabBar,
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.gray.dark,
+        tabBarInactiveTintColor: colors.lightNeutral.dark,
         tabBarItemStyle: styles.tabItem,
       }}
     >

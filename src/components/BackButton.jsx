@@ -1,48 +1,80 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import { useRef } from "react";
+import { Pressable, Animated } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-const BackButton = ({ navigation, goBackPage }) => {
+import { createStyles, colors, padding, borderRadius } from "@/styles";
+
+const BackButton = ({
+  onPress = () => {},
+  style = {},
+  iconStyle = {},
+  variant = "primary",
+  disabled = false,
+  size = 24,
+}) => {
+  const buttonStyle = [styles.container, styles[variant], style];
+  const iconColor =
+    variant === "primary" ? colors.white : colors.lightNeutral.dark;
+
+  // Animation
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const onPressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const onPressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.cont}
-      onPress={() => navigation.navigate(goBackPage)}
-    >
-      <Image
-        source={{
-          uri: "https://github.com/herodev-ch/ReactNativeDream/blob/ui/create-add-button/src/assets/icons/plus.png?raw=true",
-        }}
-        style={styles.image}
-      />
-
-      <Text
-        style={{
-          color: "white",
-          textDecorationLine: "underline",
-          fontFamily: "bold",
-        }}
+    <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+      <Pressable
+        style={({ pressed }) => [
+          buttonStyle,
+          pressed && styles.pressed,
+          disabled && styles.disabled,
+        ]}
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        disabled={disabled}
       >
-        Input dietary intake
-      </Text>
-    </TouchableOpacity>
+        <Ionicons
+          name="arrow-back"
+          size={size}
+          color={iconColor}
+          style={iconStyle}
+        />
+      </Pressable>
+    </Animated.View>
   );
 };
-export default BackButton;
 
-const styles = StyleSheet.create({
-  cont: {
-    backgroundColor: "blue",
-
-    height: 50,
-    width: 200,
-    borderRadius: 20,
-    flexDirection: "row", // Add this line
-
-    alignItems: "center", // Change this line
-    paddingHorizontal: 10, // Add this line
+const styles = createStyles({
+  container: {
+    padding: padding.sm,
+    borderRadius: borderRadius.lg,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  image: {
-    tintColor: "white",
-    height: 35,
-    width: 35,
+  primary: {
+    backgroundColor: colors.primary,
+  },
+  secondary: {
+    backgroundColor: "transparent",
+  },
+  pressed: {
+    opacity: 0.8,
+  },
+  disabled: {
+    backgroundColor: colors.lightNeutral.light,
   },
 });
+
+export default BackButton;
