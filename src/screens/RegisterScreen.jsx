@@ -48,7 +48,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   const handleLoginClick = () => {
-    navigation.navigate("Login");
+    navigation.navigate("LoginScreen");
   };
 
   const handleSignUpClick = async () => {
@@ -69,8 +69,8 @@ const RegisterScreen = ({ navigation }) => {
       });
 
       if (result.success) {
-        navigation.navigate("Auth", {
-          screen: "RegisterConditionQuestion",
+        navigation.navigate("AuthStack", {
+          screen: "RegisterConditionQuestionScreen",
           params: { email: result.results.data.email },
         });
       } else {

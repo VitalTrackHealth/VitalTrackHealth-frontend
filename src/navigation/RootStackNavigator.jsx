@@ -8,9 +8,9 @@ const RootStack = createNativeStackNavigator();
 
 const RootStackNavigator = () => {
   return (
-    <RootStack.Navigator initialRouteName="Welcome">
+    <RootStack.Navigator initialRouteName="WelcomeStack">
       <RootStack.Screen
-        name="Welcome"
+        name="WelcomeScreen"
         component={WelcomeScreen}
         options={{ headerShown: false }}
       />

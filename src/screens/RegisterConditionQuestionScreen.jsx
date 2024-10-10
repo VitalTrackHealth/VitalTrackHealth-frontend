@@ -13,8 +13,8 @@ const RegisterConditionQuestionScreen = ({ navigation, route }) => {
   const { email } = route.params;
 
   const handleContinueClick = async () => {
-    navigation.navigate("Main", {
-      screen: "Home",
+    navigation.navigate("MainStack", {
+      screen: "HomeStack",
     });
     // const result = await handleUserUpdate({
     //   email,

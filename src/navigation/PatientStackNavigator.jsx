@@ -15,17 +15,17 @@ const AuthStackNavigator = () => {
   return (
     <AuthStack.Navigator>
       <AuthStack.Screen
-        name="Login"
+        name="LoginScreen"
         component={LoginScreen}
         options={{ headerShown: false }}
       />
       <AuthStack.Screen
-        name="Register"
+        name="RegisterScreen"
         component={RegisterScreen}
         options={{ headerShown: false }}
       />
       <AuthStack.Screen
-        name="RegisterConditionQuestion"
+        name="RegisterConditionQuestionScreen"
         component={RegisterConditionQuestionScreen}
         options={{ headerShown: false }}
       />
@@ -37,11 +37,11 @@ const PatientStackNavigator = () => {
   return (
     <UserProvider>
       <PatientStack.Navigator screenOptions={{ headerShown: false }}>
-        <PatientStack.Screen name="Auth" component={AuthStackNavigator} />
+        <PatientStack.Screen name="AuthStack" component={AuthStackNavigator} />
         <PatientStack.Screen
-          name="Main"
+          name="MainStack"
           component={MainTabNavigator}
-          options={{ headerLeft: null, gestureEnabled: false,  }}
+          options={{ headerLeft: null, gestureEnabled: false }}
         />
       </PatientStack.Navigator>
     </UserProvider>

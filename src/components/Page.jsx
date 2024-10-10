@@ -4,9 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { createStyles, padding, margin } from "@/styles";
 
-const PageTop = ({ children }) => children;
-const PageBottom = ({ children }) => children;
-
 const Page = ({
   children,
   scrollable = true,
@@ -16,18 +13,6 @@ const Page = ({
   const ContentWrapper = scrollable ? ScrollView : View;
 
   let topContent, mainContent, bottomContent;
-
-  React.Children.forEach(children, (child) => {
-    if (React.isValidElement(child)) {
-      if (child.type === PageTop) {
-        topContent = child.props.children;
-      } else if (child.type === PageBottom) {
-        bottomContent = child.props.children;
-      } else {
-        mainContent = mainContent ? [mainContent, child] : child;
-      }
-    }
-  });
 
   return (
     <SafeAreaView style={[styles.container, style]}>
@@ -66,4 +51,4 @@ const styles = createStyles({
   },
 });
 
-export { Page, PageTop, PageBottom };
+export default Page;

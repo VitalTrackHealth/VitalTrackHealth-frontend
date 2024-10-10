@@ -102,7 +102,7 @@ const styles = createStyles({
     backgroundColor: colors.red.medium,
   },
   warning: {
-    backgroundColor: colors.yellow.lightest,
+    backgroundColor: colors.yellow.light,
   },
   message: {
     flex: 1,

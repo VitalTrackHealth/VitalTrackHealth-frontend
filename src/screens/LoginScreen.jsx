@@ -36,15 +36,15 @@ const LoginScreen = ({ navigation }) => {
 
   const handleBackButtonClick = () => {
     cons;
-    navigation.navigate("Welcome");
+    navigation.navigate("WelcomeScreen");
   };
 
   const handleLoginClick = () => {
-    navigation.navigate("Main", { screen: "Home" });
+    navigation.navigate("MainStack", { screen: "HomeStack" });
   };
 
   const handleRegisterClick = () => {
-    navigation.navigate("Register");
+    navigation.navigate("RegisterScreen");
   };
 
   const handleForgotPasswordClick = () => {
@@ -78,8 +78,8 @@ const LoginScreen = ({ navigation }) => {
       >
         <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
           <Ionicons
-            name={isPasswordShown ? "eye-off" : "eye"}
-            size={24}
+            name={isPasswordShown ? "eye" : "eye-off"}
+            size={fonts.lg}
             color={colors.lightNeutral.dark}
           />
         </Pressable>
