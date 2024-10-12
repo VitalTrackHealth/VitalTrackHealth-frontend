@@ -16,6 +16,7 @@ import {
   FoodInfoScreen,
   FullNutritionScreen,
   SearchFoodScreen,
+  SettingsScreen,
 } from "@/screens";
 import { createStyles, colors, padding, margin, fonts } from "@/styles";
 
@@ -119,7 +120,7 @@ const SettingsStackNavigator = () => {
     <SettingsStack.Navigator>
       <SettingsStack.Screen
         name="SettingsScreen"
-        component={NutritionProfileScreen}
+        component={SettingsScreen}
         options={{ headerShown: false }}
       />
     </SettingsStack.Navigator>

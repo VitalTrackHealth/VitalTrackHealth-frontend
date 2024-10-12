@@ -9,7 +9,7 @@ import ProviderHomeScreen from "./ProviderHomeScreen";
 import SearchFoodScreen from "./SearchFoodScreen";
 import UserSelectionScreen from "./UserSelectionScreen";
 import WelcomeScreen from "./WelcomeScreen";
-
+import SettingsScreen from "./Settings";
 export {
   FoodInfoScreen,
   FullNutritionScreen,
@@ -22,4 +22,5 @@ export {
   SearchFoodScreen,
   UserSelectionScreen,
   WelcomeScreen,
+  SettingsScreen,
 };
