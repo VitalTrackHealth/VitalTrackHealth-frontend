@@ -2,6 +2,16 @@ import React from "react";
 import { Pressable, Text } from "react-native";
 import { createStyles, fonts, colors } from "@/styles";
 
+const styles = createStyles({
+  text: {
+    fontSize: fonts.md,
+    color: colors.primary,
+  },
+  pressed: {
+    opacity: 0.5,
+  },
+});
+
 const ClickableText = ({ onPress, text, containerStyle, textStyle }) => {
   return (
     <Pressable
@@ -12,15 +22,5 @@ const ClickableText = ({ onPress, text, containerStyle, textStyle }) => {
     </Pressable>
   );
 };
-
-const styles = createStyles({
-  text: {
-    fontSize: fonts.md,
-    color: colors.primary,
-  },
-  pressed: {
-    opacity: 0.5,
-  },
-});
 
 export default ClickableText;

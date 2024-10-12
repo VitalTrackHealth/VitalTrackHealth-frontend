@@ -7,6 +7,11 @@ import TextInput from "./TextInput";
 import ClickableText from "./ClickableText";
 import Modal from "./Modal";
 import Snackbar from "./Snackbar";
+import Card from "./Card";
+import CalorieRing from "./CalorieRing";
+import PageCell from "./PageCell";
+import ProgressBar from "./ProgressBar";
+import FoodDiary from "./FoodDiary";
 
 export {
   BackButton,
@@ -14,8 +19,13 @@ export {
   Checkbox,
   ClickableText,
   TextHeader,
+  CalorieRing,
   Page,
+  PageCell,
+  ProgressBar,
   TextInput,
   Snackbar,
   Modal,
+  Card,
+  FoodDiary,
 };

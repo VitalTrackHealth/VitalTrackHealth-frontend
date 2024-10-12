@@ -8,6 +8,22 @@ import {
   borderRadius,
 } from "@/styles";
 
+const styles = createStyles({
+  inputContainer: {
+    backgroundColor: colors.white,
+    borderRadius: borderRadius.md,
+    padding: padding.md,
+    marginBottom: margin.md,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+  input: {
+    flex: 1,
+    fontSize: fonts.md,
+  },
+});
+
 const TextInput = ({
   placeholder,
   placeholderTextColor = colors.lightNeutral.medium,
@@ -38,21 +54,5 @@ const TextInput = ({
     </View>
   );
 };
-
-const styles = createStyles({
-  inputContainer: {
-    backgroundColor: colors.white,
-    borderRadius: borderRadius.md,
-    padding: padding.md,
-    marginBottom: margin.md,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-  },
-  input: {
-    flex: 1,
-    fontSize: fonts.md,
-  },
-});
 
 export default TextInput;

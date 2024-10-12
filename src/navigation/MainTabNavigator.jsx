@@ -160,11 +160,11 @@ const TabNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="ProfileStack"
+      name="NutritionProfileStack"
       component={NutritionProfileStackNavigator}
       options={{
         headerShown: false,
-        tabBarLabel: "Profile",
+        tabBarLabel: "Nutrition Profile",
         tabBarIcon: ({ color, size }) => (
           <AntDesign name="user" color={color} size={size} />
         ),
@@ -207,10 +207,10 @@ const DynamicDrawer = ({ navigation, state, isExpanded }) => {
         onPress={() => navigation.navigate("HomeStack")}
       />
       <DrawerItem
-        label="Goals"
+        label="Nutrition Profile"
         icon="user"
         isFocused={state.index === 1}
-        onPress={() => navigation.navigate("Goals")}
+        onPress={() => navigation.navigate("NutritionProfileStack")}
       />
       <DrawerItem
         label="Settings"
@@ -237,7 +237,10 @@ const DrawerNavigator = ({ keepDrawerOpen }) => {
       }}
     >
       <Drawer.Screen name="HomeStack" component={HomeStackNavigator} />
-      <Drawer.Screen name="Goals" component={NutritionProfileStackNavigator} />
+      <Drawer.Screen
+        name="NutritionProfileStack"
+        component={NutritionProfileStackNavigator}
+      />
       <Drawer.Screen name="SettingsStack" component={SettingsStackNavigator} />
     </Drawer.Navigator>
   );

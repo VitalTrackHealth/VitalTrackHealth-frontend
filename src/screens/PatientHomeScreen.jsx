@@ -1,138 +1,152 @@
-import React, { useState, useEffect } from "react";
+import { View, Text } from "react-native";
+
 import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Text,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { AntDesign } from "@expo/vector-icons";
+  Button,
+  Card,
+  TextHeader,
+  Page,
+  CalorieRing,
+  PageCell,
+  ProgressBar,
+  FoodDiary,
+} from "@/components";
+import { createStyles, fonts, colors, padding } from "@/styles";
 
-import { FoodDiary, PatientCard } from "@/components";
-import { colors } from "@/styles";
-import { useUser } from "@/context";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+const styles = createStyles({
+  cellHeader: {
+    color: colors.lightNeutral.darkest,
+    fontSize: fonts.xl,
+    textAlign: "left",
   },
-  separator: {
-    height: 1,
-    backgroundColor: "#ccc",
-    marginVertical: 20,
-  },
-  header: {
+  caloriesReportContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    position: "absolute",
-    justifyContent: "space-around",
-    top: 0,
-    width: "100%",
-    backgroundColor: colors.primary,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    zIndex: 10,
+    alignItems: "center",
   },
-  iconButton: {
-    marginTop: 30,
+  calorieTextContainer: {
+    alignItems: "center",
+    width: "30%",
   },
-  contentContainer: {
-    paddingTop: 10,
-    paddingHorizontal: 20,
-    paddingBottom: 100,
+  calorieNumber: {
+    fontSize: fonts.lg,
+    color: colors.primary,
+  },
+  calorieText: {
+    fontSize: fonts.md,
+  },
+  macrosContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: padding.lg,
+  },
+  macroItem: {
+    width: "30%",
+  },
+  macroText: {
+    fontSize: fonts.md,
+    color: colors.lightNeutral.dark,
+    marginBottom: padding.sm,
+  },
+  macroNumber: {
+    fontSize: fonts.md,
+    fontWeight: "bold",
+    color: colors.lightNeutral.darkest,
+    marginTop: padding.sm,
+  },
+  buttonContainer: {
+    marginBottom: padding.lg,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 
-const PatientHomeScreen = ({ route, navigation }) => {
-  // const { user, setUser } = useUser();
-  // const [selectedIcon, setSelectedIcon] = useState(null);
-  // const [mealData, setMealData] = useState({
-  //   breakfast: [],
-  //   lunch: [],
-  //   dinner: [],
-  //   snacks: [],
-  // });
+const PatientHomeScreen = () => {
+  const totalCalories = 2000;
+  const consumedCalories = 1429;
+  const remainingCalories = totalCalories - consumedCalories;
 
-  // const [calorieGoal, setCalorieGoal] = useState(
-  //   route.params?.calorieGoal || 2000
-  // );
-  // const [date, setDate] = useState(new Date());
+  const totalProtein = 180;
+  const consumedProtein = 120;
 
-  // const handleIconPress = (icon) => {
-  //   setSelectedIcon(icon);
-  //   if (icon === "goal") {
-  //     navigation.navigate("PatientGoals", { calorieGoal });
-  //   }
-  // };
+  const totalFat = 70;
+  const consumedFat = 40;
 
-  // const addFoodItem = (mealType, food) => {
-  //   setMealData((prevData) => ({
-  //     ...prevData,
-  //     [mealType]: [...(prevData[mealType] || []), food],
-  //   }));
-  // };
+  const totalCarbs = 150;
+  const consumedCarbs = 90;
 
-  // // useEffect(() => {
-  // //   console.log(user);
-  // //   if (route.params?.selectedFood) {
-  // //     const { mealType, food } = route.params.selectedFood;
-  // //     addFoodItem(mealType, food);
-  // //   }
-  // //   if (route.params?.calorieGoal) {
-  // //     setCalorieGoal(route.params.calorieGoal);
-  // //   }
-  // // }, [route.params?.selectedFood, route.params?.calorieGoal]);
-
-  // // const deleteFoodItem = (mealType, index) => {
-  // //   setMealData((prevData) => ({
-  // //     ...prevData,
-  // //     [mealType]: prevData[mealType].filter((_, i) => i !== index),
-  // //   }));
-  // // };
-
-  // const calculateTotalNutrients = () => {
-  //   let totalCalories = 0;
-  //   let totalProtein = 0;
-  //   let totalCarbs = 0;
-  //   let totalFats = 0;
-
-  //   Object.keys(mealData).forEach((mealType) => {
-  //     mealData[mealType].forEach((item) => {
-  //       totalCalories += item.calories || 0;
-  //       totalProtein += item.proteins || 0;
-  //       totalCarbs += item.carbs || 0;
-  //       totalFats += item.fats || 0;
-  //     });
-  //   });
-
-  //   return { totalCalories, totalProtein, totalCarbs, totalFats };
-  // };
-
-  // const handleDateChange = (event, selectedDate) => {
-  //   const currentDate = selectedDate || date;
-  //   setDate(currentDate);
-  // };
-
-  // const changeDateByDays = (days) => {
-  //   const newDate = new Date(date);
-  //   newDate.setDate(newDate.getDate() + days);
-  //   setDate(newDate);
-  // };
-
-  // const condition = route.params?.condition
-  //   ? route.params?.condition
-  //   : "Diabetes";
-  // const { totalCalories, totalProtein, totalCarbs, totalFats } =
-  //   calculateTotalNutrients();
-
-  return <View></View>;
+  return (
+    <Page>
+      <PageCell>
+        <TextHeader text="Overview" textStyle={styles.cellHeader} />
+        <Card>
+          <View style={styles.caloriesReportContainer}>
+            <View style={styles.calorieTextContainer}>
+              <Text style={styles.calorieNumber}>{remainingCalories}</Text>
+              <Text style={styles.calorieText}>Remaining</Text>
+            </View>
+            <CalorieRing
+              totalCalories={totalCalories}
+              consumedCalories={consumedCalories}
+            />
+            <View style={styles.calorieTextContainer}>
+              <Text style={styles.calorieNumber}>{totalCalories}</Text>
+              <Text style={styles.calorieText}>Target</Text>
+            </View>
+          </View>
+          <View style={styles.macrosContainer}>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroText}>Protein</Text>
+              <ProgressBar
+                progress={(consumedProtein / totalProtein) * 100}
+                fillerColor={colors.red.light}
+              />
+              <Text style={styles.macroNumber}>
+                {consumedProtein} / {totalProtein}g
+              </Text>
+            </View>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroText}>Fat</Text>
+              <ProgressBar
+                progress={(consumedFat / totalFat) * 100}
+                fillerColor={colors.yellow.light}
+              />
+              <Text style={styles.macroNumber}>
+                {consumedFat} / {totalFat}g
+              </Text>
+            </View>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroText}>Carbs</Text>
+              <ProgressBar
+                progress={(consumedCarbs / totalCarbs) * 100}
+                fillerColor={colors.blue.light}
+              />
+              <Text style={styles.macroNumber}>
+                {consumedCarbs} / {totalCarbs}g
+              </Text>
+            </View>
+          </View>
+        </Card>
+      </PageCell>
+      <PageCell>
+        <TextHeader text="Food" textStyle={styles.cellHeader} />
+        <Card>
+          <View style={styles.buttonContainer}>
+            <Button
+              text="Add Entry"
+              onPress={() => console.log("Add Entry pressed")}
+            />
+            <Button
+              text="Edit"
+              variant="secondary"
+              onPress={() => console.log("Edit pressed")}
+            />
+          </View>
+          <FoodDiary />
+        </Card>
+      </PageCell>
+    </Page>
+  );
 };
 
 export default PatientHomeScreen;

@@ -12,6 +12,57 @@ import {
 } from "@/styles";
 import { useSnackbar } from "@/context";
 
+const styles = createStyles({
+  container: {
+    position: "absolute",
+    bottom: margin.xl,
+    left: margin.lg,
+    right: margin.lg,
+    padding: padding.md,
+    borderRadius: borderRadius.md,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+  },
+  default: {
+    backgroundColor: colors.lightNeutral.dark,
+  },
+  success: {
+    backgroundColor: colors.green.medium,
+  },
+  error: {
+    backgroundColor: colors.red.medium,
+  },
+  warning: {
+    backgroundColor: colors.yellow.light,
+  },
+  message: {
+    flex: 1,
+    fontSize: fonts.md,
+    marginRight: margin.sm,
+  },
+  defaultText: {
+    color: colors.white,
+  },
+  successText: {
+    color: colors.white,
+  },
+  errorText: {
+    color: colors.white,
+  },
+  warningText: {
+    color: colors.black,
+  },
+  dismissButton: {
+    padding: padding.sm,
+  },
+});
+
 const Snackbar = () => {
   const { snackbar, hideSnackbar } = useSnackbar();
   const { visible, message, variant } = snackbar;
@@ -74,56 +125,5 @@ const Snackbar = () => {
     </Animated.View>
   );
 };
-
-const styles = createStyles({
-  container: {
-    position: "absolute",
-    bottom: margin.xl,
-    left: margin.lg,
-    right: margin.lg,
-    padding: padding.md,
-    borderRadius: borderRadius.md,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    elevation: 6,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-  },
-  default: {
-    backgroundColor: colors.lightNeutral.dark,
-  },
-  success: {
-    backgroundColor: colors.green.medium,
-  },
-  error: {
-    backgroundColor: colors.red.medium,
-  },
-  warning: {
-    backgroundColor: colors.yellow.light,
-  },
-  message: {
-    flex: 1,
-    fontSize: fonts.md,
-    marginRight: margin.sm,
-  },
-  defaultText: {
-    color: colors.white,
-  },
-  successText: {
-    color: colors.white,
-  },
-  errorText: {
-    color: colors.white,
-  },
-  warningText: {
-    color: colors.black,
-  },
-  dismissButton: {
-    padding: padding.sm,
-  },
-});
 
 export default Snackbar;

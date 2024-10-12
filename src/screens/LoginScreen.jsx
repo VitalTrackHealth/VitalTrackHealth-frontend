@@ -35,7 +35,6 @@ const LoginScreen = ({ navigation }) => {
   // TODO: Add email and password validation
 
   const handleBackButtonClick = () => {
-    cons;
     navigation.navigate("WelcomeScreen");
   };
 

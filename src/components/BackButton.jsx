@@ -4,6 +4,26 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { createStyles, colors, padding, borderRadius } from "@/styles";
 
+const styles = createStyles({
+  container: {
+    padding: padding.sm,
+    borderRadius: borderRadius.lg,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  primary: {
+    backgroundColor: colors.primary,
+  },
+  secondary: {
+    backgroundColor: "transparent",
+  },
+  pressed: {
+    opacity: 0.8,
+  },
+  disabled: {
+    backgroundColor: colors.lightNeutral.light,
+  },
+});
 const BackButton = ({
   onPress = () => {},
   style = {},
@@ -55,26 +75,5 @@ const BackButton = ({
     </Animated.View>
   );
 };
-
-const styles = createStyles({
-  container: {
-    padding: padding.sm,
-    borderRadius: borderRadius.lg,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  primary: {
-    backgroundColor: colors.primary,
-  },
-  secondary: {
-    backgroundColor: "transparent",
-  },
-  pressed: {
-    opacity: 0.8,
-  },
-  disabled: {
-    backgroundColor: colors.lightNeutral.light,
-  },
-});
 
 export default BackButton;

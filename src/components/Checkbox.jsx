@@ -4,6 +4,20 @@ import ExpoCheckbox from "expo-checkbox";
 
 import { createStyles, margin, fonts, colors } from "@/styles";
 
+const styles = createStyles({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  checkbox: {
+    marginHorizontal: margin.sm,
+  },
+  label: {
+    fontSize: fonts.md,
+    color: colors.lightNeutral.medium,
+  },
+});
+
 const Checkbox = ({
   label,
   checked,
@@ -36,19 +50,5 @@ const Checkbox = ({
     <View style={[styles.container, containerStyle]}>{checkboxWithLabel}</View>
   );
 };
-
-const styles = createStyles({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  checkbox: {
-    marginHorizontal: margin.sm,
-  },
-  label: {
-    fontSize: fonts.md,
-    color: colors.lightNeutral.medium,
-  },
-});
 
 export default Checkbox;
