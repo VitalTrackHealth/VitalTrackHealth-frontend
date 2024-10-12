@@ -12,6 +12,7 @@ import CalorieRing from "./CalorieRing";
 import PageCell from "./PageCell";
 import ProgressBar from "./ProgressBar";
 import FoodDiary from "./FoodDiary";
+import Slider from "./Slider";
 
 export {
   BackButton,
@@ -23,6 +24,7 @@ export {
   Page,
   PageCell,
   ProgressBar,
+  Slider,
   TextInput,
   Snackbar,
   Modal,

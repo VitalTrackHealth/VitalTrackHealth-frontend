@@ -1,339 +1,153 @@
-import { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Pressable,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Slider from "@react-native-community/slider";
-import { AntDesign } from "@expo/vector-icons";
+import { useState } from "react";
+import { StyleSheet, Text } from "react-native";
+import { Dropdown, MultiSelect } from "react-native-element-dropdown";
 
-import { colors } from "@/styles";
-
-const NutritionProfileScreen = ({ navigation, route }) => {
-  const [calorieGoal, setCalorieGoal] = useState(
-    route.params?.calorieGoal || 2000
-  );
-
-    const [fatGoal, setFatGoal] = useState(
-    route.params?.fatGoal || 50
-  );
-
-    const [proteinGoal, setProteinGoal] = useState(
-    route.params?.proteinGoal || 50
-  );
-
-    const [carbsGoal, setCarbsGoal] = useState(
-    route.params?.proteinGoal || 50
-  );
-
-
-
-  useEffect(() => {
-    if (route.params?.calorieGoal) {
-      setCalorieGoal(route.params.calorieGoal);
-    }
-  }, [route.params?.calorieGoal]);
-
-    useEffect(() => {
-    if (route.params?.fatGoal) {
-      setFatgoal(route.params.fatGoal);
-    }
-  }, [route.params?.fatGoal]);
-
-    useEffect(() => {
-    if (route.params?.carbsGoal) {
-      setCarbsgoal(route.params.carbsGoal);
-    }
-  }, [route.params?.carbsGoal]);
-
-  return (
-    <View style={{ backgroundColor: "#ffffff", flex:1 }}>
-      
-      <ScrollView>
-        <View style={styles.container}>
-          {/* Insert header here */}
-   
-
-
-          {/* Calorie  goal slider */}
-          <View style={styles.mealContainer}>
-            
-            <Text style={styles.calorieText}>{calorieGoal} Calories</Text>
-            <Slider
-              style={{ width: "100%", height: 40 }}
-              minimumValue={900}
-              maximumValue={3500}
-              step={50}
-              value={calorieGoal}
-              onValueChange={(value) => setCalorieGoal(value)}
-              minimumTrackTintColor={colors.primary}
-              maximumTrackTintColor="grey"
-            />
-            <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>900</Text>
-              <Text style={styles.markerText}>1200</Text>
-              <Text style={styles.markerText}>2000</Text>
-              <Text style={styles.markerText}>3000</Text>
-              <Text style={styles.markerText}>3500</Text>
-            </View>
-          </View>
-
-          {/* Protein goal slider */}
-          <View style={styles.mealContainer}>
-            
-            <Text style={styles.calorieText}>{proteinGoal} Grams of Protein</Text>
-            <Slider
-              style={{ width: "100%", height: 40 }}
-              minimumValue={80}
-              maximumValue={250}
-              step={5}
-              value={proteinGoal}
-              onValueChange={(value) => setProteinGoal(value)}
-              minimumTrackTintColor={colors.primary}
-              maximumTrackTintColor="grey"
-            />
-            <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>80</Text>
-              <Text style={styles.markerText}>110</Text>
-              <Text style={styles.markerText}>140</Text>
-              <Text style={styles.markerText}>170</Text>
-              <Text style={styles.markerText}>200</Text>
-              <Text style={styles.markerText}>250+</Text>
-            </View>
-          </View>
-
-
-          {/* Carbohydrates  goal slider */}
-          <View style={styles.mealContainer}>
-            
-            <Text style={styles.calorieText}>{carbsGoal} Grams of Carbs</Text>
-            <Slider
-              style={{ width: "100%", height: 40 }}
-              minimumValue={50}
-              maximumValue={500}
-              step={50}
-              value={carbsGoal}
-              onValueChange={(value) => setCarbsGoal(value)}
-              minimumTrackTintColor={colors.primary}
-              maximumTrackTintColor="grey"
-            />
-            <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>50</Text>
-              <Text style={styles.markerText}>150</Text>
-              <Text style={styles.markerText}>250</Text>
-              <Text style={styles.markerText}>350</Text>
-              <Text style={styles.markerText}>500+</Text>
-            </View>
-          </View>
-
-
-           {/* Fats  goal slider */}
-          <View style={styles.mealContainer}>
-          
-            <Text style={styles.calorieText}>{fatGoal} Grams of Fat</Text>
-            <Slider
-              style={{ width: "100%", height: 40 }}
-              minimumValue={0}
-              maximumValue={150}
-              step={10}
-              value={fatGoal}
-              onValueChange={(value) => setFatGoal(value)}
-              minimumTrackTintColor={colors.primary}
-              maximumTrackTintColor="grey"
-            />
-            <View style={styles.markerContainer}>
-              <Text style={styles.markerText}>0g</Text>
-              <Text style={styles.markerText}>40g</Text>
-              <Text style={styles.markerText}>70g</Text>
-              <Text style={styles.markerText}>100g</Text>
-              <Text style={styles.markerText}>150g</Text>
-            </View>
-          </View>
-          
-          
-
-
-          
-        </View>
-        
-      
-
-      {/* All circular buttons */}
-      <View style={styles.Conditions}>
- 
-        <View style={{ marginTop: 15, }}>
-          <Text> List Your Chronic condition </Text>
-        </View>
-        {/* First Row */}
-       
-        <View style={{ flexDirection: "row" }}>
-          {/* Diabetes */}
-          <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
-              <View style={styles.CircularButton}>
-                <Image source={require("@/assets/diabetes.png")} />
-              </View>
-              <Text> Diabetes </Text>
-            </View>
-          </Pressable>
-          {/* Obesity */}
-          <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
-              <View style={styles.CircularButton}>
-                <Image source={require("@/assets/obesity.png")} />
-              </View>
-              <Text> Obesity </Text>
-            </View>
-          </Pressable>
-
-          {/* Hypertension */}
-          <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
-              <View style={styles.CircularButton}>
-                <Image source={require("@/assets/hypertension.png")} />
-              </View>
-              <Text> Hypertension </Text>
-            </View>
-          </Pressable>
-        </View>
-        
-
-        {/* Second Row */}
-        <View style={{ flexDirection: "row", marginBottom: 20,  flexGrow: 1 }}>
-          {/* Osteoporosis */}
-          <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
-              <View style={styles.CircularButton}>
-                <Image source={require("@/assets/osteoporosi.png")} />
-              </View>
-              <Text> Diabetes </Text>
-            </View>
-          </Pressable>
-
-          {/* Cardiovascular Disease */}
-          <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
-              <View style={styles.CircularButton}>
-                <Image source={require("@/assets/cardio.png")} />
-              </View>
-              <Text> Cardio disease </Text>
-            </View>
-          </Pressable>
-
-          {/* Gastroesophageal Reflux Disease */}
-          <Pressable onPress={() => ""}>
-            <View style={{ flexDirection: "column", alignItems: "center",  flexGrow: 1 }}>
-              <View style={styles.CircularButton}>
-                <Image source={require("@/assets/stomach.png")} />
-              </View>
-              <Text>reflux disease </Text>
-            </View>
-          </Pressable>
-          
-        </View>
-        
-        
-      </View>
-      
-      </ScrollView>
-    </View>
-  );
-};
+import { colors, fonts, margin, borderRadius, padding } from "@/styles";
+import { Card, Page, Slider, PageCell, TextHeader } from "@/components";
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#007260",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: 100,
+  cellHeader: {
+    color: colors.lightNeutral.darkest,
+    fontSize: fonts.xl,
   },
-  button: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10,
-    marginLeft: 20,
-    width: 70,
+  card: {
+    marginBottom: margin.lg,
+  },
+  cardHeader: {
+    color: colors.lightNeutral.dark,
+    fontSize: fonts.lg,
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: margin.md,
+    textAlign: "left",
+  },
+  sliderHeader: {
+    fontSize: fonts.md,
+    marginBottom: margin.sm,
+  },
+  dropdownHeader: {
+    fontSize: fonts.md,
+    marginBottom: margin.sm,
+  },
+  dropdown: {
+    marginHorizontal: margin.md,
+    marginBottom: margin.lg,
     height: 50,
-  },
-  CircularButton: {
-    
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-    backgroundColor: "#FFDDDD",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 24,
-  },
-
-  Conditions: {
-    flexGrow: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-between",
-   // height: 100,
-   marginBottom: 35
-   
-  },
-
-  container: {
-    flexGrow: 1,
-    padding: 16,
-    backgroundColor: "#fff",
-    
-  },
-  mealContainer: {
-    marginBottom: 15,
-    flexGrow: 1,
-    padding: 16,
-    backgroundColor: "#f0f0f0",
-    borderRadius: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  calorieText: {
-    fontSize: 24,
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  markerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-  },
-  markerText: {
-    fontSize: 12,
-  },
-    header: {
-   
-    justifyContent: "space-between",
-    position: "absolute",
-    justifyContent: "space-around" ,
-    top: 0,
-    width: "100%",
-    backgroundColor: colors.primary,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    zIndex: 10,
+    backgroundColor: colors.lightNeutral.lightest,
+    borderRadius: borderRadius.md,
+    padding: padding.md,
   },
 });
+
+const NutritionProfileScreen = () => {
+  const [calorieGoal, setCalorieGoal] = useState(2000);
+  const [proteinGoal, setProteinGoal] = useState(50);
+  const [fatGoal, setFatGoal] = useState(50);
+  const [carbsGoal, setCarbsGoal] = useState(50);
+  const [height, setHeight] = useState(null);
+  const [weight, setWeight] = useState(null);
+  const [selectedConditions, setSelectedConditions] = useState([]);
+  const heightOptions = Array.from({ length: 101 }, (_, i) => ({
+    label: (i + 100).toString(), // Heights from 100 to 200 cm
+    value: (i + 100).toString(),
+  }));
+
+  const weightOptions = Array.from({ length: 151 }, (_, i) => ({
+    label: (i + 50).toString(), // Weights from 50 to 200 kg
+    value: (i + 50).toString(),
+  }));
+
+  const chronicConditionsOptions = [
+    { label: "Diabetes", value: "diabetes" },
+    { label: "Obesity", value: "obesity" },
+    { label: "Hypertension", value: "hypertension" },
+    { label: "Osteoporosis", value: "osteoporosis" },
+    { label: "Cardiovascular Disease", value: "cardiovascular" },
+    { label: "Gastroesophageal Reflux Disease", value: "reflux" },
+  ];
+
+  return (
+    <Page>
+      <TextHeader text="Nutrition Profile" textStyle={styles.cellHeader} />
+      <PageCell>
+        <Card headerText="Macro Targets" style={styles.card}>
+          <Text style={styles.sliderHeader}>{calorieGoal} Calories</Text>
+          <Slider
+            minimumValue={1000}
+            maximumValue={3500}
+            step={50}
+            value={calorieGoal}
+            onValueChange={(value) => setCalorieGoal(value)}
+            markers={[1000, 1500, 2000, 2500, 3000, 3500]}
+          />
+          <Text style={styles.sliderHeader}>{proteinGoal}g Protein</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={100}
+            step={5}
+            value={proteinGoal}
+            onValueChange={(value) => setProteinGoal(value)}
+            markers={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+          />
+          <Text style={styles.sliderHeader}>{fatGoal}g Fat</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={100}
+            step={5}
+            value={fatGoal}
+            onValueChange={(value) => setFatGoal(value)}
+            markers={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+          />
+          <Text style={styles.sliderHeader}>{carbsGoal}g Carbs</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={300}
+            step={10}
+            value={carbsGoal}
+            onValueChange={(value) => setCarbsGoal(value)}
+            markers={[0, 50, 100, 150, 200, 250, 300]}
+          />
+        </Card>
+      </PageCell>
+      <PageCell>
+        <Card headerText="Body Measurements" style={styles.card}>
+          <Text style={styles.dropdownHeader}>Height (cm)</Text>
+          <Dropdown
+            style={styles.dropdown}
+            data={heightOptions}
+            labelField="label"
+            valueField="value"
+            placeholder="Select height"
+            value={height}
+            onChange={(item) => setHeight(item.value)}
+          />
+
+          <Text style={styles.dropdownHeader}>Weight (kg)</Text>
+          <Dropdown
+            style={styles.dropdown}
+            data={weightOptions}
+            labelField="label"
+            valueField="value"
+            placeholder="Select weight"
+            value={weight}
+            onChange={(item) => setWeight(item.value)}
+          />
+          <Text style={styles.dropdownHeader}>Chronic Conditions</Text>
+          <MultiSelect
+            style={styles.dropdown}
+            data={chronicConditionsOptions}
+            search
+            labelField="label"
+            valueField="value"
+            placeholder="Select conditions"
+            searchPlaceholder="Search..."
+            value={selectedConditions}
+            onChange={(item) => setSelectedConditions(item)}
+          />
+        </Card>
+      </PageCell>
+    </Page>
+  );
+};
 
 export default NutritionProfileScreen;

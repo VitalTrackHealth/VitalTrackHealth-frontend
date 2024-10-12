@@ -1,6 +1,7 @@
 import { View } from "react-native";
 
-import { createStyles, padding, borderRadius, colors } from "@/styles";
+import { TextHeader } from "@/components";
+import { createStyles, padding, borderRadius, colors, margin } from "@/styles";
 
 const styles = createStyles({
   container: {
@@ -8,10 +9,27 @@ const styles = createStyles({
     borderRadius: borderRadius.md,
     backgroundColor: colors.white,
   },
+  cardHeader: {
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: margin.md,
+    textAlign: "left",
+    color: colors.lightNeutral.dark,
+  },
 });
 
-const Card = ({ children, style }) => {
-  return <View style={[styles.container, style]}>{children}</View>;
+const Card = ({ children, style, headerText, headerTextStyle }) => {
+  return (
+    <View style={[styles.container, style]}>
+      {headerText && (
+        <TextHeader
+          text={headerText}
+          textStyle={[styles.cardHeader, headerTextStyle]}
+        />
+      )}
+      {children}
+    </View>
+  );
 };
 
 export default Card;
