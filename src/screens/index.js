@@ -1,5 +1,4 @@
-import FoodInfoScreen from "./FoodInfoScreen";
-import FullNutritionScreen from "./FullNutritionScreen";
+import FoodDetailScreen from "./FoodDetailScreen";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
 import RegisterConditionQuestionScreen from "./RegisterConditionQuestionScreen";
@@ -9,10 +8,10 @@ import ProviderHomeScreen from "./ProviderHomeScreen";
 import SearchFoodScreen from "./SearchFoodScreen";
 import UserSelectionScreen from "./UserSelectionScreen";
 import WelcomeScreen from "./WelcomeScreen";
-import SettingsScreen from "./Settings";
+import SettingsScreen from "./SettingsScreen";
+
 export {
-  FoodInfoScreen,
-  FullNutritionScreen,
+  FoodDetailScreen,
   LoginScreen,
   PatientHomeScreen,
   NutritionProfileScreen,

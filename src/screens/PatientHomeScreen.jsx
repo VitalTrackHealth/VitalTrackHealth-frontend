@@ -61,7 +61,7 @@ const styles = createStyles({
   },
 });
 
-const PatientHomeScreen = () => {
+const PatientHomeScreen = ({ navigation }) => {
   const totalCalories = 2000;
   const consumedCalories = 1429;
   const remainingCalories = totalCalories - consumedCalories;
@@ -74,6 +74,18 @@ const PatientHomeScreen = () => {
 
   const totalCarbs = 150;
   const consumedCarbs = 90;
+
+  const handleAddEntry = () => {
+    navigation.navigate("SearchFoodScreen");
+  };
+
+  const handleEdit = () => {
+    console.log("Edit pressed");
+  };
+
+  const handleFoodItemPress = (item) => {
+    navigation.navigate("FoodDetailScreen", { foodItem: item });
+  };
 
   return (
     <Page>
@@ -132,17 +144,10 @@ const PatientHomeScreen = () => {
         <TextHeader text="Food" textStyle={styles.cellHeader} />
         <Card>
           <View style={styles.buttonContainer}>
-            <Button
-              text="Add Entry"
-              onPress={() => console.log("Add Entry pressed")}
-            />
-            <Button
-              text="Edit"
-              variant="secondary"
-              onPress={() => console.log("Edit pressed")}
-            />
+            <Button text="Add Entry" onPress={handleAddEntry} />
+            <Button text="Edit" variant="secondary" onPress={handleEdit} />
           </View>
-          <FoodDiary />
+          <FoodDiary onItemPress={handleFoodItemPress} />
         </Card>
       </PageCell>
     </Page>

@@ -13,8 +13,14 @@ import PageCell from "./PageCell";
 import ProgressBar from "./ProgressBar";
 import FoodDiary from "./FoodDiary";
 import Slider from "./Slider";
+import SearchBar from "./SearchBar";
+import FoodCard from "./FoodCard";
+import FoodList from "./FoodList";
+import FoodNutritionCard from "./FoodNutritionCard";
 
 export {
+  FoodCard,
+  SearchBar,
   BackButton,
   Button,
   Checkbox,
@@ -30,4 +36,6 @@ export {
   Modal,
   Card,
   FoodDiary,
+  FoodList,
+  FoodNutritionCard,
 };

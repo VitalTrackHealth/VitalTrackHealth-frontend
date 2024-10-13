@@ -1,4 +1,6 @@
 import { View, TextInput as RNTextInput } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
 import {
   createStyles,
   colors,
@@ -22,6 +24,9 @@ const styles = createStyles({
     flex: 1,
     fontSize: fonts.md,
   },
+  icon: {
+    marginRight: margin.sm,
+  },
 });
 
 const TextInput = ({
@@ -35,10 +40,21 @@ const TextInput = ({
   containerStyle,
   children,
   style,
+  icon,
+  iconSize = 20,
+  iconColor = colors.lightNeutral.dark,
   ...props
 }) => {
   return (
     <View style={[styles.inputContainer, containerStyle]}>
+      {icon && (
+        <Ionicons
+          name={icon}
+          size={iconSize}
+          color={iconColor}
+          style={styles.icon}
+        />
+      )}
       <RNTextInput
         placeholder={placeholder}
         value={value}

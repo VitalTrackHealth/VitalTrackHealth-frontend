@@ -88,6 +88,7 @@ const NutritionProfileScreen = () => {
             value={proteinGoal}
             onValueChange={(value) => setProteinGoal(value)}
             markers={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+            trackColor={colors.red.light}
           />
           <Text style={styles.sliderHeader}>{fatGoal}g Fat</Text>
           <Slider
@@ -97,6 +98,7 @@ const NutritionProfileScreen = () => {
             value={fatGoal}
             onValueChange={(value) => setFatGoal(value)}
             markers={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+            trackColor={colors.yellow.light}
           />
           <Text style={styles.sliderHeader}>{carbsGoal}g Carbs</Text>
           <Slider
@@ -106,6 +108,7 @@ const NutritionProfileScreen = () => {
             value={carbsGoal}
             onValueChange={(value) => setCarbsGoal(value)}
             markers={[0, 50, 100, 150, 200, 250, 300]}
+            trackColor={colors.blue.light}
           />
         </Card>
       </PageCell>

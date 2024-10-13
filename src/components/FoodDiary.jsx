@@ -1,12 +1,14 @@
 import { View, Text } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { createStyles, margin, fonts, colors, padding } from "@/styles";
-import { Card } from "@/components";
+import { FoodCard } from "@/components";
 
 const styles = createStyles({
   container: {
     flex: 1,
+  },
+  foodCard: {
+    backgroundColor: colors.lightNeutral.lightest,
   },
   entryContainer: {
     flexDirection: "row",
@@ -36,37 +38,9 @@ const styles = createStyles({
     flex: 1,
     backgroundColor: colors.lightNeutral.dark,
   },
-  card: {
-    flex: 1,
-    backgroundColor: colors.lightNeutral.lightest,
-    paddingVertical: padding.sm,
-    paddingHorizontal: padding.lg,
-  },
-  cardContent: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  icon: {
-    marginRight: margin.md,
-  },
-  foodInfo: {
-    flex: 1,
-  },
-  foodName: {
-    fontSize: fonts.lg,
-    fontWeight: "bold",
-    color: colors.lightNeutral.dark,
-  },
-  macrosContainer: {
-    flexDirection: "row",
-  },
-  macroText: {
-    fontSize: fonts.md,
-    color: colors.lightNeutral.medium,
-  },
 });
 
-const FoodDiary = () => {
+const FoodDiary = ({ onItemPress }) => {
   const foodEntries = [
     {
       time: "08:00",
@@ -131,27 +105,11 @@ const FoodDiary = () => {
               <View style={styles.timelineLine} />
             )}
           </View>
-          <Card style={styles.card}>
-            <View style={styles.cardContent}>
-              <MaterialCommunityIcons
-                name={entry.icon}
-                size={fonts.xl}
-                color={colors.primary}
-                style={styles.icon}
-              />
-              <View style={styles.foodInfo}>
-                <Text style={styles.foodName}>{entry.name}</Text>
-                <View style={styles.macrosContainer}>
-                  <Text style={styles.macroText}>
-                    {entry.macros.calories}kcal{"  "}
-                    {entry.macros.protein}P{"  "}
-                    {entry.macros.carbs}C{"  "}
-                    {entry.macros.fat}F | {entry.weight}g
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </Card>
+          <FoodCard
+            entry={entry}
+            cardStyle={styles.foodCard}
+            onPress={onItemPress}
+          />
         </View>
       ))}
     </View>

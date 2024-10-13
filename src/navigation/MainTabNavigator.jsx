@@ -1,20 +1,14 @@
-import { useState, useCallback } from "react";
 import { useWindowDimensions, View, Pressable, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  createDrawerNavigator,
-  useDrawerStatus,
-  useDrawerProgress,
-} from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AntDesign } from "@expo/vector-icons";
 
 import {
   PatientHomeScreen,
   ProviderHomeScreen,
   NutritionProfileScreen,
-  FoodInfoScreen,
-  FullNutritionScreen,
+  FoodDetailScreen,
   SearchFoodScreen,
   SettingsScreen,
 } from "@/screens";
@@ -80,24 +74,19 @@ const HomeStackNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="HomeScreen"
+        name="PatientHomeScreen"
         component={PatientHomeScreen}
         options={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="SearchFoodScreen"
         component={SearchFoodScreen}
-        options={{ headerShown: false }}
+        options={{ title: "Search Food" }}
       />
       <HomeStack.Screen
-        name="FoodInfoScreen"
-        component={FoodInfoScreen}
-        options={{ headerShown: false }}
-      />
-      <HomeStack.Screen
-        name="FullNutritionScreen"
-        component={FullNutritionScreen}
-        options={{ headerShown: false }}
+        name="FoodDetailScreen"
+        component={FoodDetailScreen}
+        options={{ title: "Food Details" }}
       />
     </HomeStack.Navigator>
   );
