@@ -52,10 +52,10 @@ export const getUser = async (email) => {
   return {
     success: true,
     results: {
-      username: "test@test.com",
+      username: email,
       first_name: "John",
       last_name: "Doe",
-      email: "test@test.com",
+      email: email,
       phone_number: "1234567890",
       conditions: ["Diabetes"],
       body_measurements: {

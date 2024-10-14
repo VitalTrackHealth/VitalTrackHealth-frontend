@@ -3,7 +3,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 
-import { SnackbarProvider } from "@/context";
+import { SnackbarProvider, UserTypeProvider } from "@/context";
 import { RootStackNavigator } from "@/navigation";
 import { Snackbar } from "@/components";
 
@@ -35,9 +35,11 @@ const linking = {
 const App = () => {
   return (
     <SnackbarProvider>
-      <NavigationContainer>
-        <RootStackNavigator />
-      </NavigationContainer>
+      <UserTypeProvider>
+        <NavigationContainer>
+          <RootStackNavigator />
+        </NavigationContainer>
+      </UserTypeProvider>
       <Snackbar />
     </SnackbarProvider>
   );

@@ -3,17 +3,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Button } from "@/components";
 import { createStyles, margin, fonts, colors } from "@/styles";
-
+import { useUserType } from "@/context";
 const WelcomeScreen = ({ navigation }) => {
+  const { setUserType } = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const handlePatientLoginClick = () => {
-    navigation.navigate("PatientStack", { screen: "Login" });
+    setUserType("patient");
+    navigation.navigate("PatientStack", {
+      screen: "LoginScreen",
+    });
   };
 
   const handleProviderLoginClick = () => {
-    navigation.navigate("ProviderStack", { screen: "Home" });
+    setUserType("provider");
+    navigation.navigate("ProviderStack");
   };
 
   return (

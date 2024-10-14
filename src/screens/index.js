@@ -6,7 +6,6 @@ import PatientHomeScreen from "./PatientHomeScreen";
 import NutritionProfileScreen from "./NutritionProfileScreen";
 import ProviderHomeScreen from "./ProviderHomeScreen";
 import SearchFoodScreen from "./SearchFoodScreen";
-import UserSelectionScreen from "./UserSelectionScreen";
 import WelcomeScreen from "./WelcomeScreen";
 import SettingsScreen from "./SettingsScreen";
 
@@ -19,7 +18,6 @@ export {
   RegisterScreen,
   RegisterQuestionScreen,
   SearchFoodScreen,
-  UserSelectionScreen,
   WelcomeScreen,
   SettingsScreen,
 };

@@ -1,11 +1,12 @@
 import RootStackNavigator from "./RootStackNavigator";
-import MainTabNavigator from "./MainTabNavigator";
 import ProviderStackNavigator from "./ProviderStackNavigator";
 import PatientStackNavigator from "./PatientStackNavigator";
-
+import PatientMainTabNavigator from "./PatientMainTabNavigator";
+import ProviderMainTabNavigator from "./ProviderMainTabNavigator";
 export {
   RootStackNavigator,
-  MainTabNavigator,
   ProviderStackNavigator,
   PatientStackNavigator,
+  PatientMainTabNavigator,
+  ProviderMainTabNavigator,
 };

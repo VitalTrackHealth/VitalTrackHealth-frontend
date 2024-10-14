@@ -27,7 +27,7 @@ import {
   borderRadius,
 } from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
-import { useSnackbar } from "@/context";
+import { useSnackbar, useUserType } from "@/context";
 
 const styles = createStyles({
   container: {
@@ -102,6 +102,7 @@ const styles = createStyles({
 });
 
 const RegisterScreen = ({ navigation }) => {
+  const userType = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -120,15 +121,22 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   const loginUserClick = () => {
-    navigation.navigate("LoginScreen");
+    navigation.navigate(
+      userType === "patient" ? "LoginScreen" : "ProviderLoginScreen"
+    );
   };
 
   const handleSignUpClick = async () => {
     // ! Remove this after testing
-    navigation.navigate("AuthStack", {
-      screen: "RegisterQuestionScreen",
-      params: { email: "test@test.com" },
-    });
+    if (userType === "patient") {
+      navigation.navigate("AuthStack", {
+        screen: "RegisterQuestionScreen",
+      });
+    } else {
+      navigation.navigate("ProviderMainTab", {
+        screen: "HomeStack",
+      });
+    }
 
     return;
 

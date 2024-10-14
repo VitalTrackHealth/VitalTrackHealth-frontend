@@ -18,7 +18,10 @@ import FoodCard from "./FoodCard";
 import FoodList from "./FoodList";
 import FoodNutritionCard from "./FoodNutritionCard";
 import Dropdown from "./Dropdown";
+import PatientCard from "./PatientCard";
+
 export {
+  PatientCard,
   FoodCard,
   SearchBar,
   BackButton,

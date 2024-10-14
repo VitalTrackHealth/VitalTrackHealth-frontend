@@ -24,8 +24,10 @@ import {
   fonts,
   borderRadius,
 } from "@/styles";
+import { useUserType } from "@/context";
 
 const LoginScreen = ({ navigation }) => {
+  const { userType } = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -39,7 +41,12 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const loginUserClick = () => {
-    navigation.navigate("MainStack", { screen: "HomeStack" });
+    navigation.navigate(
+      userType === "patient" ? "PatientMainTab" : "ProviderMainTab",
+      {
+        screen: "HomeStack",
+      }
+    );
   };
 
   const registerUserClick = () => {

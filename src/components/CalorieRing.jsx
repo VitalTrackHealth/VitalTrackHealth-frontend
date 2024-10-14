@@ -5,6 +5,9 @@ import { createStyles } from "@/styles";
 import { colors, fonts } from "@/styles";
 
 const styles = createStyles({
+  ringContainer: {
+    alignItems: "center",
+  },
   calorieTextContainer: {
     alignItems: "center",
     position: "absolute",
@@ -27,7 +30,7 @@ const CalorieRing = ({ totalCalories, consumedCalories }) => {
   const series = [consumedCalories, totalCalories - consumedCalories];
 
   return (
-    <View style={{ alignItems: "center" }}>
+    <View style={styles.ringContainer}>
       <PieChart
         widthAndHeight={widthAndHeight}
         series={series}

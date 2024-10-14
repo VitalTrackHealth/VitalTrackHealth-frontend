@@ -80,7 +80,7 @@ const RegisterQuestionsScreen = ({ navigation, route }) => {
 
   const handleContinueClick = async () => {
     navigation.navigate("MainStack", {
-      screen: "HomeStack",
+      screen: "PatientHomeStack",
     });
 
     // const result = await updateUser({
