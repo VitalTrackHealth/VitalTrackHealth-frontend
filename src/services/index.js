@@ -1,11 +1,12 @@
-import { handleRegister, handleLogin } from "./authentication";
-import { handleUserUpdate } from "./user";
-import { handleFoodSearch, handleFood_request_nutrients } from "./food";
+import { registerUser, loginUser } from "./authentication";
+import { updateUser, getUser } from "./user";
+import { searchFood, getFoodNutrients } from "./food";
 
 export {
-  handleRegister,
-  handleLogin,
-  handleUserUpdate,
-  handleFoodSearch,
-  handleFood_request_nutrients,
+  registerUser,
+  loginUser,
+  updateUser,
+  searchFood,
+  getFoodNutrients,
+  getUser,
 };

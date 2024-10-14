@@ -1,11 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { UserProvider } from "@/context";
-import {
-  LoginScreen,
-  RegisterScreen,
-  RegisterConditionQuestionScreen,
-} from "@/screens";
+import { LoginScreen, RegisterScreen, RegisterQuestionScreen } from "@/screens";
 import MainTabNavigator from "./MainTabNavigator";
 
 const PatientStack = createNativeStackNavigator();
@@ -25,8 +21,8 @@ const AuthStackNavigator = () => {
         options={{ headerShown: false }}
       />
       <AuthStack.Screen
-        name="RegisterConditionQuestionScreen"
-        component={RegisterConditionQuestionScreen}
+        name="RegisterQuestionScreen"
+        component={RegisterQuestionScreen}
         options={{ headerShown: false }}
       />
     </AuthStack.Navigator>

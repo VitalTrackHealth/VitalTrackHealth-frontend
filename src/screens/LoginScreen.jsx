@@ -38,11 +38,11 @@ const LoginScreen = ({ navigation }) => {
     navigation.navigate("WelcomeScreen");
   };
 
-  const handleLoginClick = () => {
+  const loginUserClick = () => {
     navigation.navigate("MainStack", { screen: "HomeStack" });
   };
 
-  const handleRegisterClick = () => {
+  const registerUserClick = () => {
     navigation.navigate("RegisterScreen");
   };
 
@@ -89,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
         containerStyle={styles.forgotPassword}
       />
       <Button
-        onPress={handleLoginClick}
+        onPress={loginUserClick}
         text="Login"
         disabled={!email || !password}
       />
@@ -114,7 +114,7 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>Don't have an account? </Text>
         <ClickableText
-          onPress={handleRegisterClick}
+          onPress={registerUserClick}
           text="Sign Up"
           textStyle={styles.registerLink}
         />

@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from "react-native";
 
 import { SearchBar, FoodList } from "@/components";
 import { colors, createStyles, padding } from "@/styles";
-import { handleFoodSearch } from "@/services";
+import { searchFood } from "@/services";
 
 const styles = createStyles({
   container: {
@@ -19,7 +19,7 @@ const SearchFoodScreen = () => {
   const [foodEntries, setFoodEntries] = useState([]);
 
   const handleSubmitEditing = () => {
-    handleFoodSearch(searchQuery).then((entries) => {
+    searchFood(searchQuery).then((entries) => {
       setFoodEntries(entries);
     });
   };

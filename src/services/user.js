@@ -1,6 +1,6 @@
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
-export const handleUserUpdate = async (userToUpdate) => {
+export const updateUser = async (userToUpdate) => {
   const {
     firstName: first_name,
     lastName: last_name,
@@ -46,4 +46,25 @@ export const handleUserUpdate = async (userToUpdate) => {
     console.error("error:", error);
     return { success: false, error: error.message };
   }
+};
+
+export const getUser = async (email) => {
+  return {
+    success: true,
+    results: {
+      username: "test@test.com",
+      first_name: "John",
+      last_name: "Doe",
+      email: "test@test.com",
+      phone_number: "1234567890",
+      conditions: ["Diabetes"],
+      body_measurements: {
+        height: 170,
+        weight: 70,
+      },
+      providers: ["123456"],
+      foods: [],
+      disabled: false,
+    },
+  };
 };

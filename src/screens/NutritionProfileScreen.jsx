@@ -1,11 +1,24 @@
 import { useState } from "react";
 import { StyleSheet, Text } from "react-native";
-import { Dropdown, MultiSelect } from "react-native-element-dropdown";
 
-import { colors, fonts, margin, borderRadius, padding } from "@/styles";
-import { Card, Page, Slider, PageCell, TextHeader } from "@/components";
+import {
+  colors,
+  fonts,
+  margin,
+  borderRadius,
+  padding,
+  createStyles,
+} from "@/styles";
+import {
+  Card,
+  Page,
+  Slider,
+  PageCell,
+  TextHeader,
+  Dropdown,
+} from "@/components";
 
-const styles = StyleSheet.create({
+const styles = createStyles({
   cellHeader: {
     color: colors.lightNeutral.darkest,
     fontSize: fonts.xl,
@@ -24,18 +37,6 @@ const styles = StyleSheet.create({
   sliderHeader: {
     fontSize: fonts.md,
     marginBottom: margin.sm,
-  },
-  dropdownHeader: {
-    fontSize: fonts.md,
-    marginBottom: margin.sm,
-  },
-  dropdown: {
-    marginHorizontal: margin.md,
-    marginBottom: margin.lg,
-    height: 50,
-    backgroundColor: colors.lightNeutral.lightest,
-    borderRadius: borderRadius.md,
-    padding: padding.md,
   },
 });
 
@@ -114,34 +115,25 @@ const NutritionProfileScreen = () => {
       </PageCell>
       <PageCell>
         <Card headerText="Body Measurements" style={styles.card}>
-          <Text style={styles.dropdownHeader}>Height (cm)</Text>
           <Dropdown
-            style={styles.dropdown}
+            headerText="Height (cm)"
             data={heightOptions}
-            labelField="label"
-            valueField="value"
             placeholder="Select height"
             value={height}
             onChange={(item) => setHeight(item.value)}
           />
 
-          <Text style={styles.dropdownHeader}>Weight (kg)</Text>
           <Dropdown
-            style={styles.dropdown}
+            headerText="Weight (kg)"
             data={weightOptions}
-            labelField="label"
-            valueField="value"
             placeholder="Select weight"
             value={weight}
             onChange={(item) => setWeight(item.value)}
           />
-          <Text style={styles.dropdownHeader}>Chronic Conditions</Text>
-          <MultiSelect
-            style={styles.dropdown}
+          <Dropdown
+            headerText="Chronic Conditions"
+            isMultiSelect={true}
             data={chronicConditionsOptions}
-            search
-            labelField="label"
-            valueField="value"
             placeholder="Select conditions"
             searchPlaceholder="Search..."
             value={selectedConditions}

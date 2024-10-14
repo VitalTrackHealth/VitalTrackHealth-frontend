@@ -1,6 +1,6 @@
 const API_BASE_URL = "http://127.0.0.1:8000";
 
-export async function handleFoodSearch(ingredient, brand = "") {
+export async function searchFood(ingredient, brand = "") {
   const dummyFood = [
     {
       time: "08:00",
@@ -87,7 +87,7 @@ export async function handleFoodSearch(ingredient, brand = "") {
   }
 }
 
-export async function handleFood_request_nutrients(ingr) {
+export async function getFoodNutrients(ingr) {
   try {
     const url = new URL("http://192.168.1.24:5000/api/food_search");
     const params = { ingr };

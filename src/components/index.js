@@ -17,7 +17,7 @@ import SearchBar from "./SearchBar";
 import FoodCard from "./FoodCard";
 import FoodList from "./FoodList";
 import FoodNutritionCard from "./FoodNutritionCard";
-
+import Dropdown from "./Dropdown";
 export {
   FoodCard,
   SearchBar,
@@ -38,4 +38,5 @@ export {
   FoodDiary,
   FoodList,
   FoodNutritionCard,
+  Dropdown,
 };

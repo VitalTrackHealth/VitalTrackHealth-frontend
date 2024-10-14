@@ -1,6 +1,6 @@
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
-export const handleRegister = async (userToRegister) => {
+export const registerUser = async (userToRegister) => {
   const {
     firstName: first_name,
     lastName: last_name,
@@ -41,7 +41,7 @@ export const handleRegister = async (userToRegister) => {
   }
 };
 
-export function handleLogin(email, password) {
+export function loginUser(email, password) {
   return fetch("http://192.168.1.24:5000/api/login", {
     method: "POST",
     headers: {
