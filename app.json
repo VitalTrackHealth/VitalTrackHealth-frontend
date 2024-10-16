@@ -8,5 +8,8 @@
   },
   "ios": {
     "bundleIdentifier": "com.anonymous.VitalTrack"
+  },
+  "web": {
+    "output": "single"
   }
 }
