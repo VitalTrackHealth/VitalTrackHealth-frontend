@@ -1,5 +1,4 @@
 import { FlatList, View, Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import FoodCard from "./FoodCard";
 import { createStyles, padding } from "@/styles";
@@ -14,15 +13,9 @@ const styles = createStyles({
 });
 
 const FoodList = ({ foodEntries, onItemPress }) => {
-  const navigation = useNavigation();
-
-  const tempOnItemPress = (item) => {
-    navigation.navigate("FoodDetailScreen", { foodItem: item });
-  };
-
   const renderItem = ({ item }) => (
-    <Pressable onPress={() => tempOnItemPress(item)}>
-      <FoodCard entry={item} onPress={tempOnItemPress} />
+    <Pressable onPress={() => onItemPress(item)}>
+      <FoodCard entry={item} onPress={onItemPress} />
     </Pressable>
   );
 

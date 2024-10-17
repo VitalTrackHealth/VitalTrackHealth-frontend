@@ -1,3 +1,5 @@
+import { useLocalSearchParams } from "expo-router";
+
 import {
   Page,
   PageCell,
@@ -18,15 +20,15 @@ const styles = createStyles({
   },
 });
 
-const FoodDetailScreen = ({ route }) => {
-  const { foodItem } = route.params;
+const FoodDetailScreen = () => {
+  const { foodItemName } = useLocalSearchParams();
 
   return (
     <Page>
       <PageCell>
-        <TextHeader text={foodItem.name} textStyle={styles.cellHeader} />
+        <TextHeader text={foodItemName} textStyle={styles.cellHeader} />
         <Card>
-          <FoodNutritionCard foodItem={foodItem} />
+          <FoodNutritionCard foodItem={foodItemName} />
         </Card>
       </PageCell>
     </Page>

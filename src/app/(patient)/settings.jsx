@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Text } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
 
 import {
   colors,

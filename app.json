@@ -10,6 +10,8 @@
     "bundleIdentifier": "com.anonymous.VitalTrack"
   },
   "web": {
+    "bundler": "metro",
     "output": "single"
-  }
+  },
+  "plugins": ["expo-router"]
 }

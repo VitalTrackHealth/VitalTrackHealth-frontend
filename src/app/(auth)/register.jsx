@@ -6,8 +6,8 @@ import {
   Image,
   useWindowDimensions,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 import {
   Button,
@@ -101,8 +101,8 @@ const styles = createStyles({
   },
 });
 
-const RegisterScreen = ({ navigation }) => {
-  const userType = useUserType();
+const RegisterScreen = () => {
+  const { userType } = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -121,23 +121,15 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   const loginUserClick = () => {
-    navigation.navigate(
-      userType === "patient" ? "LoginScreen" : "ProviderLoginScreen"
-    );
+    router.push("/login");
   };
 
   const handleSignUpClick = async () => {
+    console.log("userType", userType);
     // ! Remove this after testing
-    if (userType === "patient") {
-      navigation.navigate("AuthStack", {
-        screen: "RegisterQuestionScreen",
-      });
-    } else {
-      navigation.navigate("ProviderMainTab", {
-        screen: "HomeStack",
-      });
-    }
-
+    router.replace(
+      userType === "patient" ? "/register-questions" : "/(provider)/home"
+    );
     return;
 
     if (!emailComplexity(email)) {
@@ -244,7 +236,7 @@ const RegisterScreen = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {!isDesktop ? (
         <BackButton
           onPress={handleBackButtonClick}
@@ -281,7 +273,7 @@ const RegisterScreen = ({ navigation }) => {
           {RegisterForm}
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

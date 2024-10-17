@@ -1,4 +1,5 @@
 import { View, Text } from "react-native";
+import { router } from "expo-router";
 
 import {
   Button,
@@ -61,7 +62,7 @@ const styles = createStyles({
   },
 });
 
-const PatientHomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   const totalCalories = 2000;
   const consumedCalories = 1429;
   const remainingCalories = totalCalories - consumedCalories;
@@ -76,7 +77,7 @@ const PatientHomeScreen = ({ navigation }) => {
   const consumedCarbs = 90;
 
   const handleAddEntry = () => {
-    navigation.navigate("SearchFoodScreen");
+    router.push("/food/search-food");
   };
 
   const handleEdit = () => {
@@ -84,7 +85,10 @@ const PatientHomeScreen = ({ navigation }) => {
   };
 
   const handleFoodItemPress = (item) => {
-    navigation.navigate("FoodDetailScreen", { foodItem: item });
+    router.push({
+      pathname: "/food/food-details",
+      params: { foodItemName: item.name },
+    });
   };
 
   return (
@@ -154,4 +158,4 @@ const PatientHomeScreen = ({ navigation }) => {
   );
 };
 
-export default PatientHomeScreen;
+export default HomeScreen;

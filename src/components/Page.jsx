@@ -1,6 +1,5 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { createStyles, padding } from "@/styles";
 
@@ -14,9 +13,9 @@ const styles = createStyles({
 
 const Page = ({ children, containerStyle, contentStyle }) => {
   return (
-    <SafeAreaView style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle]}>
       <ScrollView style={[styles.content, contentStyle]}>{children}</ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

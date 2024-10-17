@@ -6,7 +6,7 @@ import {
   Pressable,
   useWindowDimensions,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
 import {
@@ -26,7 +26,7 @@ import {
 } from "@/styles";
 import { useUserType } from "@/context";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const { userType } = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
@@ -37,20 +37,17 @@ const LoginScreen = ({ navigation }) => {
   // TODO: Add email and password validation
 
   const handleBackButtonClick = () => {
-    navigation.navigate("WelcomeScreen");
+    router.back();
   };
 
   const loginUserClick = () => {
-    navigation.navigate(
-      userType === "patient" ? "PatientMainTab" : "ProviderMainTab",
-      {
-        screen: "HomeStack",
-      }
+    router.replace(
+      userType === "patient" ? "/(patient)/home" : "/(provider)/home"
     );
   };
 
   const registerUserClick = () => {
-    navigation.navigate("RegisterScreen");
+    router.navigate("/register");
   };
 
   const handleForgotPasswordClick = () => {
@@ -130,7 +127,7 @@ const LoginScreen = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {!isDesktop ? (
         <BackButton
           onPress={handleBackButtonClick}
@@ -167,7 +164,7 @@ const LoginScreen = ({ navigation }) => {
           {loginForm}
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

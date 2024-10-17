@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 import { Button, TextHeader, BackButton, Dropdown } from "@/components";
 import { colors, createStyles, margin, padding, borderRadius } from "@/styles";
@@ -51,10 +51,10 @@ const styles = createStyles({
   },
 });
 
-const RegisterQuestionsScreen = ({ navigation, route }) => {
+const RegisterQuestionsScreen = () => {
   // User context for state across register screens
-  const { setUser } = useUser();
-  const { email } = route.params;
+  // const { setUser } = useUser();
+  // const { email } = route.params;
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [selectedCondition, setSelectedCondition] = useState([]);
@@ -79,9 +79,7 @@ const RegisterQuestionsScreen = ({ navigation, route }) => {
   ];
 
   const handleContinueClick = async () => {
-    navigation.navigate("MainStack", {
-      screen: "PatientHomeStack",
-    });
+    router.push("/(patient)/home");
 
     // const result = await updateUser({
     //   email,
@@ -99,7 +97,7 @@ const RegisterQuestionsScreen = ({ navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.desktopLayout}>
         <TextHeader
           text="Hi! Welcome to VitalTrack Health."
@@ -133,7 +131,7 @@ const RegisterQuestionsScreen = ({ navigation, route }) => {
           <Button onPress={handleContinueClick} text="Continue" />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

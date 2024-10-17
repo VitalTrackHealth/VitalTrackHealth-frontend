@@ -1,28 +1,31 @@
 import { Text, Image, useWindowDimensions, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 import { Button } from "@/components";
 import { createStyles, margin, fonts, colors } from "@/styles";
 import { useUserType } from "@/context";
-const WelcomeScreen = ({ navigation }) => {
+
+const WelcomeScreen = () => {
   const { setUserType } = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const handlePatientLoginClick = () => {
     setUserType("patient");
-    navigation.navigate("PatientStack", {
-      screen: "LoginScreen",
+    router.navigate({
+      pathname: "/login",
     });
   };
 
   const handleProviderLoginClick = () => {
     setUserType("provider");
-    navigation.navigate("ProviderStack");
+    router.navigate({
+      pathname: "/login",
+    });
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {isDesktop ? (
         <View style={styles.desktopLayout}>
           <View style={styles.desktopLeftHalf}>
@@ -83,7 +86,7 @@ const WelcomeScreen = ({ navigation }) => {
           </View>
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

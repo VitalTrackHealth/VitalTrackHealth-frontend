@@ -20,7 +20,7 @@ const styles = createStyles({
   },
 });
 
-const ProviderHomeScreen = ({ navigation }) => {
+const ProviderHomeScreen = () => {
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
