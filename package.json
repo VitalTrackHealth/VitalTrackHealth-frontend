@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build": "npx expo export -p web"
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
@@ -52,6 +53,7 @@
     "@babel/core": "^7.24.0",
     "@eslint/compat": "^1.0.1",
     "@eslint/js": "^9.3.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.3.0"

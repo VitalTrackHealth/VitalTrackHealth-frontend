@@ -1,7 +1,7 @@
 import { View } from "react-native";
 
-import { colors, margin, createStyles } from "@/styles";
-import { TextInput } from "@/components";
+import { colors, createStyles } from "@/styles";
+import TextInput from "@/components/TextInput";
 
 const styles = createStyles({
   container: {},

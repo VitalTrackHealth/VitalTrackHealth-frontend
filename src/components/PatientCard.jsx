@@ -1,7 +1,8 @@
 import { View, Image, Text } from "react-native";
 import PieChart from "react-native-pie-chart";
 
-import { Card, ProgressBar } from "@/components";
+import Card from "@/components/Card";
+import ProgressBar from "@/components/ProgressBar";
 import {
   createStyles,
   colors,

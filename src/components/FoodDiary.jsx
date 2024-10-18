@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 
 import { createStyles, margin, fonts, colors, padding } from "@/styles";
-import { FoodCard } from "@/components";
+import FoodCard from "@/components/FoodCard";
 
 const styles = createStyles({
   container: {

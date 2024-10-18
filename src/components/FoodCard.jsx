@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Card } from "@/components";
+import Card from "@/components/Card";
 import { createStyles, fonts, colors, padding, margin } from "@/styles";
 
 const styles = createStyles({

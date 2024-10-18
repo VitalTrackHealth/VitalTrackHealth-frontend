@@ -11,7 +11,7 @@
   },
   "web": {
     "bundler": "metro",
-    "output": "server"
+    "output": "single"
   },
   "plugins": ["expo-router"]
 }

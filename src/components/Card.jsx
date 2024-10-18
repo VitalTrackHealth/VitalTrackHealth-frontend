@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-import { TextHeader } from "@/components";
+import TextHeader from "@/components/TextHeader";
 import { createStyles, padding, borderRadius, colors, margin } from "@/styles";
 
 const styles = createStyles({

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text } from "react-native";
 import { router } from "expo-router";
 
-import { Button, TextHeader, BackButton, Dropdown } from "@/components";
+import { Button, TextHeader, Dropdown } from "@/components";
 import { colors, createStyles, margin, padding, borderRadius } from "@/styles";
 import { useUser } from "@/context";
 import { updateUser } from "@/services";

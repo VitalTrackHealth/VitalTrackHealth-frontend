@@ -24,6 +24,7 @@ const styles = createStyles({
     backgroundColor: colors.lightNeutral.light,
   },
 });
+
 const BackButton = ({
   onPress = () => {},
   style = {},

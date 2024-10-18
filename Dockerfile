@@ -21,7 +21,7 @@ RUN npm install
 COPY . .
 
 # Generate web app static files
-RUN NODE_ENV="develop" npx expo export -p web
+RUN npm run build
 
 ### RUN STAGE ##############################################################
 
