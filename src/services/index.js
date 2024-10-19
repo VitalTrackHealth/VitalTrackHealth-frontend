@@ -1,10 +1,11 @@
-import { registerUser, loginUser } from "./authentication";
+import { loginUser, registerProvider, registerPatient } from "./authentication";
 import { updateUser, getUser } from "./user";
 import { searchFood, getFoodNutrients } from "./food";
 
 export {
-  registerUser,
   loginUser,
+  registerProvider,
+  registerPatient,
   updateUser,
   searchFood,
   getFoodNutrients,

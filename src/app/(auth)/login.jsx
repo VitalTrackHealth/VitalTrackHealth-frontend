@@ -31,20 +31,25 @@ const LoginScreen = () => {
   const userType = globalParams.userType || "patient";
   const { login } = useSession();
   const { showSnackbar } = useSnackbar();
+  const [buttonLoading, setButtonLoading] = useState(false);
+
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleBackButtonClick = () => {
-    router.back();
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/");
+    }
   };
 
   const loginUserClick = async () => {
-    setLoading(true);
+    setButtonLoading(true);
     // Sets session token if successful login
     const success = await login(email, password, userType);
 
@@ -57,11 +62,11 @@ const LoginScreen = () => {
     } else {
       showSnackbar("Invalid email or password", "error");
     }
-    setLoading(false);
+    setButtonLoading(false);
   };
 
   const registerUserClick = () => {
-    router.navigate("/register");
+    router.navigate({ pathname: "/register", params: { userType } });
   };
 
   const handleForgotPasswordClick = () => {
@@ -111,7 +116,7 @@ const LoginScreen = () => {
         onPress={loginUserClick}
         text="Login"
         disabled={!email || !password}
-        loading={loading}
+        loading={buttonLoading}
       />
       {/* <Text style={styles.orText}>Or Sign in with</Text>
       <View style={styles.socialContainer}>
@@ -144,13 +149,13 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      {!isDesktop ? (
+      <View style={styles.backButtonContainer}>
         <BackButton
           onPress={handleBackButtonClick}
           variant="secondary"
-          style={styles.mobileBackButton}
+          style={styles.backButton}
         />
-      ) : null}
+      </View>
       {isDesktop ? (
         <View style={styles.desktopLayout}>
           <Image
@@ -159,11 +164,6 @@ const LoginScreen = () => {
             resizeMode="contain"
           />
           <View style={styles.desktopFormContainer}>
-            <BackButton
-              onPress={handleBackButtonClick}
-              variant="secondary"
-              style={styles.desktopBackButton}
-            />
             <TextHeader
               text="Welcome Back! 👋"
               subText="Sign in to your Account"
@@ -188,6 +188,12 @@ const styles = createStyles({
   container: {
     flex: 1,
   },
+  backButtonContainer: {
+    position: "absolute",
+    top: padding.md,
+    left: padding.md,
+    zIndex: 1,
+  },
   desktopLayout: {
     flex: 1,
     alignItems: "center",
@@ -200,11 +206,6 @@ const styles = createStyles({
   },
   desktopInput: {
     backgroundColor: colors.lightNeutral.lightest,
-  },
-  desktopBackButton: {
-    position: "absolute",
-    top: padding.xl,
-    left: padding.md,
   },
   desktopFormContainer: {
     maxWidth: 600,
@@ -233,11 +234,6 @@ const styles = createStyles({
     textAlign: "center",
     marginVertical: margin.sm,
     fontSize: fonts.md,
-  },
-  mobileBackButton: {
-    position: "absolute",
-    top: padding.md,
-    left: padding.md,
   },
   socialContainer: {
     flexDirection: "row",

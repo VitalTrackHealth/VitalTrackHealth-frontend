@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import {
   Checkbox,
   ClickableText,
 } from "@/components";
-import { registerUser } from "@/services";
+import { registerProvider } from "@/services";
 import {
   colors,
   createStyles,
@@ -27,11 +27,16 @@ import {
   borderRadius,
 } from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
-import { useSnackbar } from "@/context";
+import { useSnackbar, useSession, useUser } from "@/context";
 
 const RegisterScreen = () => {
   const globalParams = useGlobalSearchParams();
   const userType = globalParams.userType || "patient";
+  const { login } = useSession();
+  const { setUser } = useUser();
+  const { showSnackbar } = useSnackbar();
+  const [buttonLoading, setButtonLoading] = useState(false);
+
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -43,49 +48,73 @@ const RegisterScreen = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
-  const { showSnackbar } = useSnackbar();
-
   const handleBackButtonClick = () => {
-    navigation.goBack();
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/");
+    }
   };
 
   const loginUserClick = () => {
-    router.push("/login");
+    router.navigate({ pathname: "/login", params: { userType } });
   };
 
   const handleSignUpClick = async () => {
-    // ! Remove this after testing
-    router.replace(
-      userType === "patient" ? "/register-questions" : "/(provider)/home"
-    );
-    return;
-
+    // Check if email and password are valid
     if (!emailComplexity(email)) {
       showSnackbar("Please enter a valid email address", "warning");
+      return;
     } else if (!passwordComplexity(password)) {
       showSnackbar(
-        "Password must be at least 8 characters long, have one special character, one uppercase and one lowercase letter",
+        "Password must: Be at least 8 characters long, have one special character, one uppercase and one lowercase letter",
         "warning"
       );
-    } else {
-      const result = await registerUser({
+      return;
+    }
+
+    setButtonLoading(true);
+    if (userType === "patient") {
+      setUser({
         firstName,
         lastName,
         phoneNumber,
+        username: email,
+        email,
+        password, // Needs to be dropped after next screen
+      });
+      router.navigate({
+        pathname: "/register-questions",
+        params: { userType },
+      });
+    } else if (userType === "provider") {
+      const result = await registerProvider({
+        firstName,
+        lastName,
+        phoneNumber,
+        username: email,
         email,
         password,
       });
-
       if (result.success) {
-        navigation.navigate("AuthStack", {
-          screen: "RegisterConditionQuestionScreen",
-          params: { email: result.results.data.email },
-        });
+        const success = await login(email, password, userType);
+        if (success) {
+          setUser({
+            firstName,
+            lastName,
+            phoneNumber,
+            username: email,
+            email,
+          });
+          router.replace("/(provider)/home");
+        } else {
+          showSnackbar("Registration successful, but login failed", "error");
+        }
       } else {
-        console.log("Registration failed:", result.error);
-        showSnackbar(result.error, "error");
+        showSnackbar("Registration failed", "error");
       }
     }
+    setButtonLoading(false);
   };
 
   const RegisterForm = (
@@ -149,8 +178,9 @@ const RegisterScreen = () => {
       />
       <Button
         onPress={handleSignUpClick}
-        text="Sign Up"
+        text={userType === "patient" ? "Continue" : "Sign Up"}
         disabled={!isTermsChecked}
+        loading={buttonLoading}
       />
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account? </Text>
@@ -165,13 +195,14 @@ const RegisterScreen = () => {
 
   return (
     <View style={styles.container}>
-      {!isDesktop ? (
+      <View style={styles.backButtonContainer}>
         <BackButton
           onPress={handleBackButtonClick}
           variant="secondary"
-          style={styles.mobileBackButton}
+          style={styles.backButton}
         />
-      ) : null}
+      </View>
+
       {isDesktop ? (
         <View style={styles.desktopLayout}>
           <Image
@@ -180,11 +211,6 @@ const RegisterScreen = () => {
             resizeMode="contain"
           />
           <View style={styles.desktopFormContainer}>
-            <BackButton
-              onPress={handleBackButtonClick}
-              variant="secondary"
-              style={styles.desktopBackButton}
-            />
             <TextHeader
               text="Create an Account ☀️"
               subText="Take control of your nutrition today!"
@@ -208,6 +234,12 @@ const styles = createStyles({
   container: {
     flex: 1,
   },
+  backButtonContainer: {
+    position: "absolute",
+    top: padding.md,
+    left: padding.md,
+    zIndex: 1,
+  },
   desktopLayout: {
     flex: 1,
     alignItems: "center",
@@ -221,16 +253,13 @@ const styles = createStyles({
   desktopInput: {
     backgroundColor: colors.lightNeutral.lightest,
   },
-  desktopBackButton: {
-    position: "absolute",
-    top: padding.xl,
-    left: padding.md,
-  },
   desktopFormContainer: {
     maxWidth: 600,
     width: "100%",
     backgroundColor: colors.white,
-    padding: padding.xl,
+    paddingHorizontal: padding.xl,
+    paddingTop: padding.lg,
+    paddingBottom: padding.xl,
     borderRadius: borderRadius.lg,
     shadowColor: colors.lightNeutral.dark,
     shadowOffset: { width: 0, height: 2 },
@@ -242,11 +271,6 @@ const styles = createStyles({
     flex: 1,
     padding: margin.lg,
     justifyContent: "center",
-  },
-  mobileBackButton: {
-    position: "absolute",
-    top: padding.md,
-    left: padding.md,
   },
   halfWidthInput: {
     width: "48%",

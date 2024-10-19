@@ -3,21 +3,7 @@ import React, { createContext, useState, useContext } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    providers: [],
-    bodyMeasurements: {
-      height: 0.0,
-      weight: 0.0,
-    },
-    conditions: [],
-    foods: [],
-    goals: {},
-  });
+  const [user, setUser] = useState({});
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

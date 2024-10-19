@@ -1,17 +1,17 @@
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
-export const registerUser = async (userToRegister) => {
+export const registerProvider = async (providerToRegister) => {
   const {
     firstName: first_name,
     lastName: last_name,
+    username,
     password,
     phoneNumber: phone_number,
     email,
-    providerCode: provider_code,
-  } = userToRegister;
+  } = providerToRegister;
 
   try {
-    const response = await fetch(`${API_URL}/user/register`, {
+    const response = await fetch(`${API_URL}/provider/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,10 +19,55 @@ export const registerUser = async (userToRegister) => {
       body: JSON.stringify({
         first_name,
         last_name,
+        username,
         password,
         phone_number,
         email,
-        provider_code,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
+    console.log("error:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const registerPatient = async (patientToRegister) => {
+  const {
+    firstName: first_name,
+    lastName: last_name,
+    username,
+    password,
+    phoneNumber: phone_number,
+    email,
+    conditions,
+    bodyMeasurements: body_measurements,
+  } = patientToRegister;
+
+  try {
+    const response = await fetch(`${API_URL}/patient/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        username,
+        password,
+        phone_number,
+        email,
+        conditions,
+        body_measurements,
       }),
     });
 
