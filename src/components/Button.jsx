@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Text, Pressable, Animated } from "react-native";
+import { Text, Pressable, Animated, ActivityIndicator } from "react-native";
 
 import { createStyles, colors, fonts, padding, borderRadius } from "@/styles";
 
@@ -11,6 +11,7 @@ const Button = ({
   variant = "default",
   danger,
   disabled,
+  loading = false,
 }) => {
   const getButtonStyle = () => {
     const baseStyle = [styles.container, styles[variant], style];
@@ -66,7 +67,13 @@ const Button = ({
         onPressOut={onPressOut}
         disabled={disabled}
       >
-        <Text style={buttonTextStyle}>{text}</Text>
+        {loading ? (
+          <ActivityIndicator
+            color={variant === "outlined" ? colors.primary : colors.white}
+          />
+        ) : (
+          <Text style={buttonTextStyle}>{text}</Text>
+        )}
       </Pressable>
     </Animated.View>
   );
@@ -115,6 +122,9 @@ const styles = createStyles({
     color: colors.lightNeutral.medium,
   },
   pressed: {
+    opacity: 0.8,
+  },
+  loading: {
     opacity: 0.8,
   },
 });

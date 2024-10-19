@@ -73,7 +73,7 @@ const Snackbar = () => {
     timeoutRef.current = setTimeout(() => {
       Animated.timing(opacity, {
         toValue: 0,
-        duration: 100,
+        duration: 50,
         useNativeDriver: true,
       }).start(() => {
         hideSnackbar();
@@ -85,7 +85,7 @@ const Snackbar = () => {
     if (visible) {
       Animated.timing(opacity, {
         toValue: 1,
-        duration: 100,
+        duration: 50,
         useNativeDriver: true,
       }).start();
       startDismissTimer();

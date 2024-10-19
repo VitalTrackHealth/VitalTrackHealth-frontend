@@ -24,25 +24,27 @@ import {
   fonts,
   borderRadius,
 } from "@/styles";
-import { useSession } from "@/context";
+import { useSession, useSnackbar } from "@/context";
 
 const LoginScreen = () => {
   const globalParams = useGlobalSearchParams();
   const userType = globalParams.userType || "patient";
   const { login } = useSession();
-
+  const { showSnackbar } = useSnackbar();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleBackButtonClick = () => {
     router.back();
   };
 
   const loginUserClick = async () => {
+    setLoading(true);
     // Sets session token if successful login
     const success = await login(email, password, userType);
 
@@ -53,9 +55,9 @@ const LoginScreen = () => {
         router.replace("/(provider)/home");
       }
     } else {
-      // TODO: Add error handling modal
-      console.error("Login failed:", success);
+      showSnackbar("Invalid email or password", "error");
     }
+    setLoading(false);
   };
 
   const registerUserClick = () => {
@@ -109,6 +111,7 @@ const LoginScreen = () => {
         onPress={loginUserClick}
         text="Login"
         disabled={!email || !password}
+        loading={loading}
       />
       {/* <Text style={styles.orText}>Or Sign in with</Text>
       <View style={styles.socialContainer}>

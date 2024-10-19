@@ -54,7 +54,6 @@ const RegisterScreen = () => {
   };
 
   const handleSignUpClick = async () => {
-    console.log("userType", userType);
     // ! Remove this after testing
     router.replace(
       userType === "patient" ? "/register-questions" : "/(provider)/home"
