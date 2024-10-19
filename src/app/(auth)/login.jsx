@@ -6,7 +6,7 @@ import {
   Pressable,
   useWindowDimensions,
 } from "react-native";
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
 import {
@@ -24,26 +24,38 @@ import {
   fonts,
   borderRadius,
 } from "@/styles";
-import { useUserType } from "@/context";
+import { useSession } from "@/context";
 
 const LoginScreen = () => {
-  const { userType } = useUserType();
+  const globalParams = useGlobalSearchParams();
+  const userType = globalParams.userType || "patient";
+  const { login } = useSession();
+
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // TODO: Add email and password validation
 
   const handleBackButtonClick = () => {
     router.back();
   };
 
-  const loginUserClick = () => {
-    router.replace(
-      userType === "patient" ? "/(patient)/home" : "/(provider)/home"
-    );
+  const loginUserClick = async () => {
+    // Sets session token if successful login
+    const success = await login(email, password, userType);
+
+    if (success) {
+      if (userType === "patient") {
+        router.replace("/(patient)/home");
+      } else if (userType === "provider") {
+        router.replace("/(provider)/home");
+      }
+    } else {
+      // TODO: Add error handling modal
+      console.error("Login failed:", success);
+    }
   };
 
   const registerUserClick = () => {
@@ -78,6 +90,7 @@ const LoginScreen = () => {
         onChangeText={setPassword}
         secureTextEntry={!isPasswordShown}
         containerStyle={isDesktop ? styles.desktopInput : null}
+        onSubmitEditing={loginUserClick}
       >
         <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
           <Ionicons
@@ -97,7 +110,7 @@ const LoginScreen = () => {
         text="Login"
         disabled={!email || !password}
       />
-      <Text style={styles.orText}>Or Sign in with</Text>
+      {/* <Text style={styles.orText}>Or Sign in with</Text>
       <View style={styles.socialContainer}>
         <Pressable onPress={handleGoogleLoginClick} style={styles.socialButton}>
           <Image
@@ -114,7 +127,7 @@ const LoginScreen = () => {
             style={styles.socialIcon}
           />
         </Pressable>
-      </View>
+      </View> */}
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>Don't have an account? </Text>
         <ClickableText
@@ -241,6 +254,7 @@ const styles = createStyles({
   registerContainer: {
     flexDirection: "row",
     justifyContent: "center",
+    marginTop: margin.lg,
   },
   registerText: {
     color: colors.lightNeutral.med,

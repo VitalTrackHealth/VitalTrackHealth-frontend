@@ -10,25 +10,6 @@ import {
   borderRadius,
 } from "@/styles";
 
-const styles = createStyles({
-  inputContainer: {
-    backgroundColor: colors.white,
-    borderRadius: borderRadius.md,
-    padding: padding.md,
-    marginBottom: margin.md,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-  },
-  input: {
-    flex: 1,
-    fontSize: fonts.md,
-  },
-  icon: {
-    marginRight: margin.sm,
-  },
-});
-
 const TextInput = ({
   placeholder,
   placeholderTextColor = colors.lightNeutral.medium,
@@ -43,6 +24,7 @@ const TextInput = ({
   icon,
   iconSize = 20,
   iconColor = colors.lightNeutral.dark,
+  onSubmitEditing,
   ...props
 }) => {
   return (
@@ -64,11 +46,31 @@ const TextInput = ({
         autoCorrect={autoCorrect}
         placeholderTextColor={placeholderTextColor}
         style={[styles.input, style]}
+        onSubmitEditing={onSubmitEditing}
         {...props}
       />
       {children}
     </View>
   );
 };
+
+const styles = createStyles({
+  inputContainer: {
+    backgroundColor: colors.white,
+    borderRadius: borderRadius.md,
+    padding: padding.md,
+    marginBottom: margin.md,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+  input: {
+    flex: 1,
+    fontSize: fonts.md,
+  },
+  icon: {
+    marginRight: margin.sm,
+  },
+});
 
 export default TextInput;

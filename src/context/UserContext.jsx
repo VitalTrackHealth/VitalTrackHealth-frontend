@@ -4,14 +4,19 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
+    username: "",
     firstName: "",
     lastName: "",
     email: "",
-    conditions: [],
+    phoneNumber: "",
+    providers: [],
     bodyMeasurements: {
       height: 0.0,
       weight: 0.0,
     },
+    conditions: [],
+    foods: [],
+    goals: {},
   });
 
   return (

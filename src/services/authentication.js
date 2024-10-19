@@ -41,25 +41,28 @@ export const registerUser = async (userToRegister) => {
   }
 };
 
-export function loginUser(email, password) {
-  return fetch("http://192.168.1.24:5000/api/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userName: email,
-      password: password,
-      phoneNumber: "1234567890",
-      email: email,
-    }),
-  })
-    .then((response) => response.text()) // Use text() instead of json()
-    .then((data) => {
-      console.log(data);
-      return data; // Return the string data
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+export const loginUser = async (email, password) => {
+  const formData = new FormData();
+  formData.append("username", email);
+  formData.append("password", password);
+
+  try {
+    const response = await fetch(`${API_URL}/token`, {
+      method: "POST",
+      body: formData,
     });
-}
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
+    console.log("error:", error);
+    return { success: false, error: error.message };
+  }
+};

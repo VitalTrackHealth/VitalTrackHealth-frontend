@@ -17,49 +17,11 @@ import {
   TextInput,
   Button,
 } from "@/components";
-
-const styles = createStyles({
-  cellHeader: {
-    color: colors.lightNeutral.darkest,
-    fontSize: fonts.xl,
-  },
-  card: {
-    marginBottom: margin.lg,
-  },
-  cardHeader: {
-    color: colors.lightNeutral.dark,
-    fontSize: fonts.lg,
-    marginTop: 0,
-    paddingTop: 0,
-    marginBottom: margin.md,
-    textAlign: "left",
-  },
-  inputHeader: {
-    fontSize: fonts.md,
-    marginBottom: margin.sm,
-  },
-  input: {
-    marginHorizontal: margin.md,
-    marginBottom: margin.lg,
-    height: 50,
-    backgroundColor: colors.lightNeutral.lightest,
-    borderRadius: borderRadius.md,
-    padding: padding.md,
-  },
-  dropdown: {
-    marginHorizontal: margin.md,
-    marginBottom: margin.lg,
-    height: 50,
-    backgroundColor: colors.lightNeutral.lightest,
-    borderRadius: borderRadius.md,
-    padding: padding.md,
-  },
-  buttonContainer: {
-    marginTop: margin.lg,
-  },
-});
+import { useSession } from "@/context";
 
 const SettingsScreen = () => {
+  const { logout } = useSession();
+
   const [firstName, setFirstName] = useState("Daniel");
   const [lastName, setLastName] = useState("Williams");
   const [email, setEmail] = useState("daniel@example.com");
@@ -75,8 +37,8 @@ const SettingsScreen = () => {
     { label: "Gastroesophageal Reflux Disease", value: "reflux" },
   ];
 
-  const handleSaveChanges = () => {
-    console.log("Save changes");
+  const handleLogOut = () => {
+    logout();
   };
 
   return (
@@ -130,13 +92,55 @@ const SettingsScreen = () => {
       </PageCell>
       <PageCell>
         <Button
-          text="Save Changes"
-          onPress={handleSaveChanges}
-          style={styles.buttonContainer}
+          text="Log Out"
+          onPress={handleLogOut}
+          style={styles.logoutButton}
+          danger
         />
       </PageCell>
     </Page>
   );
 };
+
+const styles = createStyles({
+  cellHeader: {
+    color: colors.lightNeutral.darkest,
+    fontSize: fonts.xl,
+  },
+  card: {
+    marginBottom: margin.lg,
+  },
+  cardHeader: {
+    color: colors.lightNeutral.dark,
+    fontSize: fonts.lg,
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: margin.md,
+    textAlign: "left",
+  },
+  inputHeader: {
+    fontSize: fonts.md,
+    marginBottom: margin.sm,
+  },
+  input: {
+    marginHorizontal: margin.md,
+    marginBottom: margin.lg,
+    height: 50,
+    backgroundColor: colors.lightNeutral.lightest,
+    borderRadius: borderRadius.md,
+    padding: padding.md,
+  },
+  dropdown: {
+    marginHorizontal: margin.md,
+    marginBottom: margin.lg,
+    height: 50,
+    backgroundColor: colors.lightNeutral.lightest,
+    borderRadius: borderRadius.md,
+    padding: padding.md,
+  },
+  logoutButton: {
+    marginTop: margin.lg,
+  },
+});
 
 export default SettingsScreen;

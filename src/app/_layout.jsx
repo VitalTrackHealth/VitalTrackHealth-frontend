@@ -1,16 +1,16 @@
-import { Stack } from "expo-router";
+import { Stack, Slot } from "expo-router";
 
-import { SnackbarProvider, UserTypeProvider } from "@/context";
+import { SnackbarProvider, SessionProvider } from "@/context";
 import { Snackbar } from "@/components";
 
 const RootLayout = () => {
   return (
-    <SnackbarProvider>
-      <UserTypeProvider>
+    <SessionProvider>
+      <SnackbarProvider>
         <Stack screenOptions={{ headerShown: false }} />
-      </UserTypeProvider>
-      <Snackbar />
-    </SnackbarProvider>
+        <Snackbar />
+      </SnackbarProvider>
+    </SessionProvider>
   );
 };
 

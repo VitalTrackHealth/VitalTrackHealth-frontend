@@ -149,7 +149,7 @@ const HomeScreen = () => {
         <Card>
           <View style={styles.buttonContainer}>
             <Button text="Add Entry" onPress={handleAddEntry} />
-            <Button text="Edit" variant="secondary" onPress={handleEdit} />
+            <Button text="Edit" variant="outlined" onPress={handleEdit} />
           </View>
           <FoodDiary onItemPress={handleFoodItemPress} />
         </Card>

@@ -3,24 +3,22 @@ import { router } from "expo-router";
 
 import { Button } from "@/components";
 import { createStyles, margin, fonts, colors } from "@/styles";
-import { useUserType } from "@/context";
 
 const WelcomeScreen = () => {
-  const { setUserType } = useUserType();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const handlePatientLoginClick = () => {
-    setUserType("patient");
     router.navigate({
       pathname: "/login",
+      params: { userType: "patient" },
     });
   };
 
   const handleProviderLoginClick = () => {
-    setUserType("provider");
     router.navigate({
       pathname: "/login",
+      params: { userType: "provider" },
     });
   };
 
@@ -44,13 +42,12 @@ const WelcomeScreen = () => {
                 text="Patient"
                 onPress={handlePatientLoginClick}
                 style={styles.button}
-                variant="primary"
               />
               <Button
                 text="Provider"
                 onPress={handleProviderLoginClick}
                 style={styles.button}
-                variant="secondary"
+                variant="outlined"
               />
             </View>
           </View>
@@ -74,13 +71,12 @@ const WelcomeScreen = () => {
                 text="Patient"
                 onPress={handlePatientLoginClick}
                 style={styles.button}
-                variant="primary"
               />
               <Button
                 text="Provider"
                 onPress={handleProviderLoginClick}
                 style={styles.button}
-                variant="secondary"
+                variant="outlined"
               />
             </View>
           </View>

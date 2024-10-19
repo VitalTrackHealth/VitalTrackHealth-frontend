@@ -7,7 +7,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 
 import {
   Button,
@@ -27,82 +27,11 @@ import {
   borderRadius,
 } from "@/styles";
 import { emailComplexity, passwordComplexity } from "@/utils";
-import { useSnackbar, useUserType } from "@/context";
-
-const styles = createStyles({
-  container: {
-    flex: 1,
-  },
-  desktopLayout: {
-    flex: 1,
-    alignItems: "center",
-    padding: margin.lg,
-  },
-  desktopLogo: {
-    width: "30%",
-    height: 100,
-    marginBottom: margin.xl,
-  },
-  desktopInput: {
-    backgroundColor: colors.lightNeutral.lightest,
-  },
-  desktopBackButton: {
-    position: "absolute",
-    top: padding.xl,
-    left: padding.md,
-  },
-  desktopFormContainer: {
-    maxWidth: 600,
-    width: "100%",
-    backgroundColor: colors.white,
-    padding: padding.xl,
-    borderRadius: borderRadius.lg,
-    shadowColor: colors.lightNeutral.dark,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  mobileLayout: {
-    flex: 1,
-    padding: margin.lg,
-    justifyContent: "center",
-  },
-  mobileBackButton: {
-    position: "absolute",
-    top: padding.md,
-    left: padding.md,
-  },
-  halfWidthInput: {
-    width: "48%",
-  },
-  nameContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-  },
-  checkboxContainer: {
-    justifyContent: "center",
-    marginBottom: margin.sm,
-  },
-  loginContainer: {
-    marginTop: margin.lg,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  loginText: {
-    color: colors.lightNeutral.med,
-    fontSize: fonts.md,
-  },
-  loginLink: {
-    color: colors.primary,
-    fontWeight: "bold",
-    fontSize: fonts.md,
-  },
-});
+import { useSnackbar } from "@/context";
 
 const RegisterScreen = () => {
-  const { userType } = useUserType();
+  const globalParams = useGlobalSearchParams();
+  const userType = globalParams.userType || "patient";
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -276,5 +205,76 @@ const RegisterScreen = () => {
     </View>
   );
 };
+const styles = createStyles({
+  container: {
+    flex: 1,
+  },
+  desktopLayout: {
+    flex: 1,
+    alignItems: "center",
+    padding: margin.lg,
+  },
+  desktopLogo: {
+    width: "30%",
+    height: 100,
+    marginBottom: margin.xl,
+  },
+  desktopInput: {
+    backgroundColor: colors.lightNeutral.lightest,
+  },
+  desktopBackButton: {
+    position: "absolute",
+    top: padding.xl,
+    left: padding.md,
+  },
+  desktopFormContainer: {
+    maxWidth: 600,
+    width: "100%",
+    backgroundColor: colors.white,
+    padding: padding.xl,
+    borderRadius: borderRadius.lg,
+    shadowColor: colors.lightNeutral.dark,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  mobileLayout: {
+    flex: 1,
+    padding: margin.lg,
+    justifyContent: "center",
+  },
+  mobileBackButton: {
+    position: "absolute",
+    top: padding.md,
+    left: padding.md,
+  },
+  halfWidthInput: {
+    width: "48%",
+  },
+  nameContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  checkboxContainer: {
+    justifyContent: "center",
+    marginBottom: margin.sm,
+  },
+  loginContainer: {
+    marginTop: margin.lg,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  loginText: {
+    color: colors.lightNeutral.med,
+    fontSize: fonts.md,
+  },
+  loginLink: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: fonts.md,
+  },
+});
 
 export default RegisterScreen;

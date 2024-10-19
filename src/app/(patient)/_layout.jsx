@@ -1,48 +1,11 @@
 import { useWindowDimensions } from "react-native";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 
 import { AntDesign } from "@expo/vector-icons";
 
+import { useSession } from "@/context";
 import { createStyles, colors, padding } from "@/styles";
-
-const styles = createStyles({
-  drawerContent: {
-    flex: 1,
-    paddingTop: padding.lg,
-  },
-  drawerItem: {
-    justifyContent: "center",
-  },
-  drawerItemFocused: {
-    tintColor: colors.primary,
-    backgroundColor: colors.green.lightest,
-  },
-  tabBar: {
-    position: "absolute",
-    bottom: 25,
-    left: 20,
-    right: 20,
-    elevation: 10,
-    backgroundColor: colors.white,
-    borderRadius: 20,
-    borderTopWidth: 0,
-    height: 60,
-    shadowColor: colors.black,
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowRadius: 25,
-  },
-  mobiletabItem: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 60, // Must be the same as the tabBar height
-  },
-});
 
 const TabLayout = () => (
   <Tabs
@@ -138,9 +101,15 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
 );
 
 const PatientLayout = () => {
+  const { session } = useSession();
+
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
   const keepDrawerOpen = width >= 1280;
+
+  if (!session) {
+    return <Redirect href="/" />;
+  }
 
   if (isDesktop) {
     return <DrawerLayout keepDrawerOpen={keepDrawerOpen} />;
@@ -148,5 +117,43 @@ const PatientLayout = () => {
 
   return <TabLayout />;
 };
+
+const styles = createStyles({
+  drawerContent: {
+    flex: 1,
+    paddingTop: padding.lg,
+  },
+  drawerItem: {
+    justifyContent: "center",
+  },
+  drawerItemFocused: {
+    tintColor: colors.primary,
+    backgroundColor: colors.green.lightest,
+  },
+  tabBar: {
+    position: "absolute",
+    bottom: 25,
+    left: 20,
+    right: 20,
+    elevation: 10,
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    borderTopWidth: 0,
+    height: 60,
+    shadowColor: colors.black,
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowRadius: 25,
+  },
+  mobiletabItem: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 60, // Must be the same as the tabBar height
+  },
+});
 
 export default PatientLayout;
