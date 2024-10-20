@@ -7,6 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useSession, useUser } from "@/context";
 import { createStyles, colors, padding } from "@/styles";
 import { getPatient } from "@/services";
+
 const TabLayout = () => (
   <Tabs
     screenOptions={{

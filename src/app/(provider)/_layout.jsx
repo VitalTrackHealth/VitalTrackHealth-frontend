@@ -5,7 +5,8 @@ import { Drawer } from "expo-router/drawer";
 import { AntDesign } from "@expo/vector-icons";
 
 import { createStyles, colors, padding } from "@/styles";
-import { useSession } from "@/context";
+import { useSession, useUser } from "@/context";
+import { getProvider } from "@/services";
 
 const TabLayout = () => (
   <Tabs
@@ -29,7 +30,7 @@ const TabLayout = () => (
       }}
     />
     <Tabs.Screen
-      name="home"
+      name="(home)"
       options={{
         headerShown: false,
         tabBarLabel: "Home",
@@ -52,7 +53,7 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
     }}
   >
     <Drawer.Screen
-      name="home"
+      name="(home)"
       options={{
         drawerLabel: "Home",
         drawerIcon: ({ color, size }) => (
@@ -80,13 +81,29 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
 
 const ProviderLayout = () => {
   const { session } = useSession();
-
+  const { user, setUser } = useUser();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
   const keepDrawerOpen = width >= 1280;
 
   if (!session) {
     return <Redirect href="/" />;
+  }
+
+  if (Object.keys(user).length === 0) {
+    getProvider(session).then((res) => {
+      if (res.success) {
+        setUser({
+          id: res.results.data.id,
+          firstName: res.results.data.first_name,
+          lastName: res.results.data.last_name,
+          username: res.results.data.username,
+          email: res.results.data.email,
+          phoneNumber: res.results.data.phone_number,
+          providerCode: res.results.data.provider_code,
+        });
+      }
+    });
   }
 
   if (isDesktop) {

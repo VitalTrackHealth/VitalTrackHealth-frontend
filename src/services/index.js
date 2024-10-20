@@ -4,8 +4,14 @@ import {
   registerPatient,
   checkProviderCode,
 } from "./authentication";
-import { updateUser, getPatient } from "./user";
+import {
+  updateUser,
+  getPatient,
+  getProvider,
+  getProviderPatients,
+} from "./user";
 import { searchFood, getFoodNutrients } from "./food";
+import { fetchPatientFoodEntries } from "./user";
 
 export {
   loginUser,
@@ -15,5 +21,8 @@ export {
   searchFood,
   getFoodNutrients,
   getPatient,
+  getProvider,
+  getProviderPatients,
   checkProviderCode,
+  fetchPatientFoodEntries,
 };

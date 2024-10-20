@@ -22,21 +22,11 @@ import { useSession, useUser } from "@/context";
 const SettingsScreen = () => {
   const { logout } = useSession();
   const { user, setUser } = useUser();
-
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
   const [email, setEmail] = useState(user.email || "");
   const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
   const [password, setPassword] = useState("");
-
-  const conditionOptions = [
-    { label: "Diabetes", value: "diabetes" },
-    { label: "Obesity", value: "obesity" },
-    { label: "Hypertension", value: "hypertension" },
-    { label: "Osteoporosis", value: "osteoporosis" },
-    { label: "Cardiovascular Disease", value: "cardiovascular" },
-    { label: "Gastroesophageal Reflux Disease", value: "reflux" },
-  ];
 
   const handleLogOut = () => {
     logout();
@@ -54,6 +44,7 @@ const SettingsScreen = () => {
             onChangeText={setFirstName}
             placeholder="Enter your first name"
             style={styles.input}
+            disabled
           />
           <Text style={styles.inputHeader}>Last Name</Text>
           <TextInput
@@ -61,6 +52,7 @@ const SettingsScreen = () => {
             onChangeText={setLastName}
             placeholder="Enter your last name"
             style={styles.input}
+            disabled
           />
           <Text style={styles.inputHeader}>Email</Text>
           <TextInput
@@ -69,6 +61,7 @@ const SettingsScreen = () => {
             placeholder="Enter your email"
             keyboardType="email-address"
             style={styles.input}
+            disabled
           />
           <Text style={styles.inputHeader}>Phone Number</Text>
           <TextInput
@@ -77,6 +70,7 @@ const SettingsScreen = () => {
             placeholder="Enter your phone number"
             keyboardType="phone-pad"
             style={styles.input}
+            disabled
           />
         </Card>
       </PageCell>
@@ -89,6 +83,7 @@ const SettingsScreen = () => {
             placeholder="Enter new password"
             secureTextEntry
             style={styles.input}
+            disabled
           />
         </Card>
       </PageCell>
@@ -122,6 +117,7 @@ const styles = createStyles({
   },
   inputHeader: {
     fontSize: fonts.md,
+    marginLeft: margin.md,
     marginBottom: margin.sm,
   },
   input: {

@@ -4,7 +4,7 @@ const HomeLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="home" options={{ headerShown: false }} />
-      <Stack.Screen name="food" options={{ headerShown: false }} />
+      <Stack.Screen name="patient-details" />
     </Stack>
   );
 };
