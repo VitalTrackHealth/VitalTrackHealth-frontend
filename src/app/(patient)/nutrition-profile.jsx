@@ -11,15 +11,24 @@ import {
   Dropdown,
   TextInput,
 } from "@/components";
+import { useUser } from "@/context";
 
 const NutritionProfileScreen = () => {
-  const [calorieGoal, setCalorieGoal] = useState(2000);
-  const [proteinGoal, setProteinGoal] = useState(50);
-  const [fatGoal, setFatGoal] = useState(50);
-  const [carbsGoal, setCarbsGoal] = useState(50);
-  const [height, setHeight] = useState(null);
-  const [weight, setWeight] = useState(null);
-  const [selectedConditions, setSelectedConditions] = useState([]);
+  const { user } = useUser();
+
+  const [calorieGoal, setCalorieGoal] = useState(
+    user.nutritionGoals?.calorie || 1
+  );
+  const [proteinGoal, setProteinGoal] = useState(
+    user.nutritionGoals?.protein || 1
+  );
+  const [fatGoal, setFatGoal] = useState(user.nutritionGoals?.fat || 1);
+  const [carbsGoal, setCarbsGoal] = useState(user.nutritionGoals?.carbs || 1);
+  const [height, setHeight] = useState(user.bodyMeasurements?.height || 1);
+  const [weight, setWeight] = useState(user.bodyMeasurements?.weight || 1);
+  const [selectedConditions, setSelectedConditions] = useState(
+    user.conditions || []
+  );
 
   const chronicConditionsOptions = [
     { label: "Diabetes", value: "diabetes" },
@@ -46,19 +55,22 @@ const NutritionProfileScreen = () => {
           />
           <Text style={styles.sliderHeader}>{proteinGoal}g Protein</Text>
           <Slider
-            minimumValue={0}
-            maximumValue={100}
-            step={5}
+            minimumValue={1}
+            maximumValue={200}
+            step={1}
             value={proteinGoal}
             onValueChange={(value) => setProteinGoal(value)}
-            markers={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+            markers={[
+              0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140,
+              150, 160, 170, 180, 190, 200,
+            ]}
             trackColor={colors.red.light}
           />
           <Text style={styles.sliderHeader}>{fatGoal}g Fat</Text>
           <Slider
-            minimumValue={0}
+            minimumValue={1}
             maximumValue={100}
-            step={5}
+            step={1}
             value={fatGoal}
             onValueChange={(value) => setFatGoal(value)}
             markers={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
@@ -66,12 +78,12 @@ const NutritionProfileScreen = () => {
           />
           <Text style={styles.sliderHeader}>{carbsGoal}g Carbs</Text>
           <Slider
-            minimumValue={0}
-            maximumValue={300}
-            step={10}
+            minimumValue={1}
+            maximumValue={400}
+            step={1}
             value={carbsGoal}
             onValueChange={(value) => setCarbsGoal(value)}
-            markers={[0, 50, 100, 150, 200, 250, 300]}
+            markers={[0, 50, 100, 150, 200, 250, 300, 350, 400]}
             trackColor={colors.blue.light}
           />
         </Card>

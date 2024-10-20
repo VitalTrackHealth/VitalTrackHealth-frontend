@@ -12,68 +12,20 @@ import {
   FoodDiary,
 } from "@/components";
 import { createStyles, fonts, colors, padding } from "@/styles";
-
-const styles = createStyles({
-  cellHeader: {
-    color: colors.lightNeutral.darkest,
-    fontSize: fonts.xl,
-    textAlign: "left",
-  },
-  caloriesReportContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  calorieTextContainer: {
-    alignItems: "center",
-    width: "30%",
-  },
-  calorieNumber: {
-    fontSize: fonts.lg,
-    color: colors.primary,
-  },
-  calorieText: {
-    fontSize: fonts.md,
-  },
-  macrosContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: padding.lg,
-  },
-  macroItem: {
-    width: "30%",
-  },
-  macroText: {
-    fontSize: fonts.md,
-    color: colors.lightNeutral.dark,
-    marginBottom: padding.sm,
-  },
-  macroNumber: {
-    fontSize: fonts.md,
-    fontWeight: "bold",
-    color: colors.lightNeutral.darkest,
-    marginTop: padding.sm,
-  },
-  buttonContainer: {
-    marginBottom: padding.lg,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-});
-
+import { useUser } from "@/context";
 const HomeScreen = () => {
-  const totalCalories = 2000;
+  const { user } = useUser();
+  const totalCalories = user.nutritionGoals?.calorie || 2000;
   const consumedCalories = 1429;
   const remainingCalories = totalCalories - consumedCalories;
 
-  const totalProtein = 180;
+  const totalProtein = user.nutritionGoals?.protein || 180;
   const consumedProtein = 120;
 
-  const totalFat = 70;
+  const totalFat = user.nutritionGoals?.fat || 70;
   const consumedFat = 40;
 
-  const totalCarbs = 150;
+  const totalCarbs = user.nutritionGoals?.carbs || 150;
   const consumedCarbs = 90;
 
   const handleAddEntry = () => {
@@ -157,5 +109,54 @@ const HomeScreen = () => {
     </Page>
   );
 };
+
+const styles = createStyles({
+  cellHeader: {
+    color: colors.lightNeutral.darkest,
+    fontSize: fonts.xl,
+    textAlign: "left",
+  },
+  caloriesReportContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  calorieTextContainer: {
+    alignItems: "center",
+    width: "30%",
+  },
+  calorieNumber: {
+    fontSize: fonts.lg,
+    color: colors.primary,
+  },
+  calorieText: {
+    fontSize: fonts.md,
+  },
+  macrosContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: padding.lg,
+  },
+  macroItem: {
+    width: "30%",
+  },
+  macroText: {
+    fontSize: fonts.md,
+    color: colors.lightNeutral.dark,
+    marginBottom: padding.sm,
+  },
+  macroNumber: {
+    fontSize: fonts.md,
+    fontWeight: "bold",
+    color: colors.lightNeutral.darkest,
+    marginTop: padding.sm,
+  },
+  buttonContainer: {
+    marginBottom: padding.lg,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});
 
 export default HomeScreen;

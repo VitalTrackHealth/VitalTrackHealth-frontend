@@ -125,6 +125,7 @@ const PatientLayout = () => {
           conditions: res.results.data.conditions,
           bodyMeasurements: res.results.data.body_measurements,
           providerCode: res.results.data.provider_code,
+          nutritionGoals: res.results.data.nutrition_goals,
         });
       }
     });
