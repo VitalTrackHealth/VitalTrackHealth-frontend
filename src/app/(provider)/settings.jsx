@@ -17,16 +17,17 @@ import {
   TextInput,
   Button,
 } from "@/components";
-import { useSession } from "@/context";
+import { useSession, useUser } from "@/context";
 
 const SettingsScreen = () => {
   const { logout } = useSession();
+  const { user, setUser } = useUser();
 
-  const [firstName, setFirstName] = useState("Daniel");
-  const [lastName, setLastName] = useState("Williams");
-  const [email, setEmail] = useState("daniel@example.com");
-  const [phoneNumber, setPhoneNumber] = useState("1234567890");
-  const [password, setPassword] = useState("password");
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
+  const [password, setPassword] = useState("");
 
   const conditionOptions = [
     { label: "Diabetes", value: "diabetes" },
@@ -39,6 +40,7 @@ const SettingsScreen = () => {
 
   const handleLogOut = () => {
     logout();
+    setUser({});
   };
 
   return (

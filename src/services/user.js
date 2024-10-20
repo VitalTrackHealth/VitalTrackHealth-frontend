@@ -48,23 +48,27 @@ export const updateUser = async (userToUpdate) => {
   }
 };
 
-export const getUser = async (email) => {
-  return {
-    success: true,
-    results: {
-      username: email,
-      first_name: "John",
-      last_name: "Doe",
-      email: email,
-      phone_number: "1234567890",
-      conditions: ["Diabetes"],
-      body_measurements: {
-        height: 170,
-        weight: 70,
+export const getPatient = async (token) => {
+  try {
+    const response = await fetch(`${API_URL}/patient/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      providers: ["123456"],
-      foods: [],
-      disabled: false,
-    },
-  };
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
+    console.error("error:", error);
+    return { success: false, error: error.message };
+  }
 };

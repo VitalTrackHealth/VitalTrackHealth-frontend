@@ -18,7 +18,7 @@ import {
   fonts,
 } from "@/styles";
 import { useUser, useSession, useSnackbar } from "@/context";
-import { registerPatient } from "@/services";
+import { registerPatient, checkProviderCode } from "@/services";
 
 const RegisterQuestionsScreen = () => {
   const globalParams = useGlobalSearchParams();
@@ -28,21 +28,10 @@ const RegisterQuestionsScreen = () => {
   const { showSnackbar } = useSnackbar();
   const [buttonLoading, setButtonLoading] = useState(false);
 
-  const [height, setHeight] = useState(null);
-  const [weight, setWeight] = useState(null);
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
   const [selectedConditions, setSelectedConditions] = useState([]);
   const [providerCode, setProviderCode] = useState("");
-
-  const heightOptions = Array.from({ length: 101 }, (_, i) => ({
-    label: (i + 100).toString(), // Heights from 100 to 200 cm
-    value: (i + 100).toString(),
-  }));
-
-  const weightOptions = Array.from({ length: 151 }, (_, i) => ({
-    label: (i + 50).toString(), // Weights from 50 to 200 kg
-    value: (i + 50).toString(),
-  }));
-
   const conditionOptions = [
     { label: "Diabetes", value: "diabetes" },
     { label: "Obesity", value: "obesity" },
@@ -50,14 +39,33 @@ const RegisterQuestionsScreen = () => {
     { label: "Osteoporosis", value: "osteoporosis" },
     { label: "Cardiovascular Disease", value: "cardiovascular" },
     { label: "Gastroesophageal Reflux Disease", value: "reflux" },
+    { label: "Other", value: "other" },
   ];
 
   const handleBackButtonClick = () => {
-    router.goBack();
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/");
+    }
   };
 
   const handleRegisterClick = async () => {
+    if (!height || !weight) {
+      showSnackbar("Please enter a valid height and weight", "warning");
+      return;
+    }
+
     setButtonLoading(true);
+
+    if (providerCode) {
+      const result = await checkProviderCode(providerCode);
+      if (!result.success) {
+        showSnackbar("Provider code is invalid", "error");
+        setButtonLoading(false);
+        return;
+      }
+    }
 
     const result = await registerPatient({
       firstName: user.firstName,
@@ -68,25 +76,20 @@ const RegisterQuestionsScreen = () => {
       password: user.password,
       conditions: selectedConditions,
       bodyMeasurements: { height, weight },
+      providerCode,
     });
-    router.push("/(patient)/home");
 
     if (result.success) {
       const success = await login(user.email, user.password, userType);
       if (success) {
-        setUser({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          phoneNumber: user.phoneNumber,
-          username: user.username,
-          email: user.email,
-          providerCode: providerCode,
-        });
+        setUser({});
         router.replace("/(patient)/home");
       } else {
+        setUser({});
         showSnackbar("Registration successful, but login failed", "error");
       }
     } else {
+      setUser({});
       showSnackbar("Registration failed", "error");
     }
     setButtonLoading(false);

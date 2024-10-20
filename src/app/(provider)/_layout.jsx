@@ -78,7 +78,7 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
   </Drawer>
 );
 
-const PatientLayout = () => {
+const ProviderLayout = () => {
   const { session } = useSession();
 
   const { width } = useWindowDimensions();
@@ -134,4 +134,4 @@ const styles = createStyles({
   },
 });
 
-export default PatientLayout;
+export default ProviderLayout;

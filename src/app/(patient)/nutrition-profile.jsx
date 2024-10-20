@@ -1,14 +1,7 @@
 import { useState } from "react";
-import { StyleSheet, Text } from "react-native";
+import { View, Text } from "react-native";
 
-import {
-  colors,
-  fonts,
-  margin,
-  borderRadius,
-  padding,
-  createStyles,
-} from "@/styles";
+import { colors, fonts, margin, createStyles } from "@/styles";
 import {
   Card,
   Page,
@@ -16,29 +9,8 @@ import {
   PageCell,
   TextHeader,
   Dropdown,
+  TextInput,
 } from "@/components";
-
-const styles = createStyles({
-  cellHeader: {
-    color: colors.lightNeutral.darkest,
-    fontSize: fonts.xl,
-  },
-  card: {
-    marginBottom: margin.lg,
-  },
-  cardHeader: {
-    color: colors.lightNeutral.dark,
-    fontSize: fonts.lg,
-    marginTop: 0,
-    paddingTop: 0,
-    marginBottom: margin.md,
-    textAlign: "left",
-  },
-  sliderHeader: {
-    fontSize: fonts.md,
-    marginBottom: margin.sm,
-  },
-});
 
 const NutritionProfileScreen = () => {
   const [calorieGoal, setCalorieGoal] = useState(2000);
@@ -48,15 +20,6 @@ const NutritionProfileScreen = () => {
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [selectedConditions, setSelectedConditions] = useState([]);
-  const heightOptions = Array.from({ length: 101 }, (_, i) => ({
-    label: (i + 100).toString(), // Heights from 100 to 200 cm
-    value: (i + 100).toString(),
-  }));
-
-  const weightOptions = Array.from({ length: 151 }, (_, i) => ({
-    label: (i + 50).toString(), // Weights from 50 to 200 kg
-    value: (i + 50).toString(),
-  }));
 
   const chronicConditionsOptions = [
     { label: "Diabetes", value: "diabetes" },
@@ -115,21 +78,28 @@ const NutritionProfileScreen = () => {
       </PageCell>
       <PageCell>
         <Card headerText="Body Measurements" style={styles.card}>
-          <Dropdown
-            headerText="Height (cm)"
-            data={heightOptions}
-            placeholder="Select height"
-            value={height}
-            onChange={(item) => setHeight(item.value)}
-          />
-
-          <Dropdown
-            headerText="Weight (kg)"
-            data={weightOptions}
-            placeholder="Select weight"
-            value={weight}
-            onChange={(item) => setWeight(item.value)}
-          />
+          <View style={styles.bodyMeasurementsContainer}>
+            <View style={styles.bodyMeasurementsItem}>
+              <Text style={styles.bodyMeasurementsText}>Height</Text>
+              <TextInput
+                placeholder="Height (cm)"
+                value={height}
+                onChangeText={setHeight}
+                keyboardType="numeric"
+                containerStyle={[styles.desktopInput]}
+              />
+            </View>
+            <View style={styles.bodyMeasurementsItem}>
+              <Text style={styles.bodyMeasurementsText}>Weight</Text>
+              <TextInput
+                placeholder="Weight (kg)"
+                value={weight}
+                onChangeText={setWeight}
+                keyboardType="numeric"
+                containerStyle={[styles.halfWidthInput, styles.desktopInput]}
+              />
+            </View>
+          </View>
           <Dropdown
             headerText="Chronic Conditions"
             isMultiSelect={true}
@@ -144,5 +114,42 @@ const NutritionProfileScreen = () => {
     </Page>
   );
 };
+
+const styles = createStyles({
+  cellHeader: {
+    color: colors.lightNeutral.darkest,
+    fontSize: fonts.xl,
+  },
+  card: {
+    marginBottom: margin.lg,
+  },
+  cardHeader: {
+    color: colors.lightNeutral.dark,
+    fontSize: fonts.lg,
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: margin.md,
+    textAlign: "left",
+  },
+  sliderHeader: {
+    fontSize: fonts.md,
+    marginBottom: margin.sm,
+  },
+  desktopInput: {
+    backgroundColor: colors.lightNeutral.lightest,
+  },
+  bodyMeasurementsItem: {
+    width: "48%",
+  },
+  bodyMeasurementsText: {
+    fontSize: fonts.md,
+    marginBottom: margin.sm,
+  },
+  bodyMeasurementsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+});
 
 export default NutritionProfileScreen;

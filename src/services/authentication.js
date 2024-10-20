@@ -51,24 +51,31 @@ export const registerPatient = async (patientToRegister) => {
     email,
     conditions,
     bodyMeasurements: body_measurements,
+    providerCode: provider_code,
   } = patientToRegister;
 
   try {
+    const body = {
+      first_name,
+      last_name,
+      username,
+      password,
+      phone_number,
+      email,
+      conditions,
+      body_measurements,
+    };
+
+    if (provider_code) {
+      body.provider_code = provider_code;
+    }
+
     const response = await fetch(`${API_URL}/patient/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        first_name,
-        last_name,
-        username,
-        password,
-        phone_number,
-        email,
-        conditions,
-        body_measurements,
-      }),
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -108,6 +115,26 @@ export const loginUser = async (email, password) => {
     return { success: true, results };
   } catch (error) {
     console.log("error:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const checkProviderCode = async (providerCode) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/provider/check-provider-code?provider_code=${providerCode}`
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
     return { success: false, error: error.message };
   }
 };

@@ -4,9 +4,9 @@ import { Drawer } from "expo-router/drawer";
 
 import { AntDesign } from "@expo/vector-icons";
 
-import { useSession } from "@/context";
+import { useSession, useUser } from "@/context";
 import { createStyles, colors, padding } from "@/styles";
-
+import { getPatient } from "@/services";
 const TabLayout = () => (
   <Tabs
     screenOptions={{
@@ -102,6 +102,7 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
 
 const PatientLayout = () => {
   const { session } = useSession();
+  const { user, setUser } = useUser();
 
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
@@ -109,6 +110,24 @@ const PatientLayout = () => {
 
   if (!session) {
     return <Redirect href="/" />;
+  }
+
+  if (Object.keys(user).length === 0) {
+    getPatient(session).then((res) => {
+      if (res.success) {
+        setUser({
+          id: res.results.data.id,
+          firstName: res.results.data.first_name,
+          lastName: res.results.data.last_name,
+          username: res.results.data.username,
+          email: res.results.data.email,
+          phoneNumber: res.results.data.phone_number,
+          conditions: res.results.data.conditions,
+          bodyMeasurements: res.results.data.body_measurements,
+          providerCode: res.results.data.provider_code,
+        });
+      }
+    });
   }
 
   if (isDesktop) {

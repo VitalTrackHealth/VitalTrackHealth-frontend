@@ -33,18 +33,18 @@ const RegisterScreen = () => {
   const globalParams = useGlobalSearchParams();
   const userType = globalParams.userType || "patient";
   const { login } = useSession();
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const { showSnackbar } = useSnackbar();
   const [buttonLoading, setButtonLoading] = useState(false);
 
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [password, setPassword] = useState(user.password || "");
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 

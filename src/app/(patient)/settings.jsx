@@ -17,16 +17,16 @@ import {
   TextInput,
   Button,
 } from "@/components";
-import { useSession } from "@/context";
+import { useSession, useUser } from "@/context";
 
 const SettingsScreen = () => {
   const { logout } = useSession();
-
-  const [firstName, setFirstName] = useState("Daniel");
-  const [lastName, setLastName] = useState("Williams");
-  const [email, setEmail] = useState("daniel@example.com");
-  const [phoneNumber, setPhoneNumber] = useState("1234567890");
-  const [password, setPassword] = useState("password");
+  const { user, setUser } = useUser();
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
+  const [password, setPassword] = useState("");
 
   const conditionOptions = [
     { label: "Diabetes", value: "diabetes" },
@@ -39,6 +39,7 @@ const SettingsScreen = () => {
 
   const handleLogOut = () => {
     logout();
+    setUser({});
   };
 
   return (
@@ -52,6 +53,8 @@ const SettingsScreen = () => {
             onChangeText={setFirstName}
             placeholder="Enter your first name"
             style={styles.input}
+            containerStyle={styles.inputContainer}
+            disabled
           />
           <Text style={styles.inputHeader}>Last Name</Text>
           <TextInput
@@ -59,6 +62,8 @@ const SettingsScreen = () => {
             onChangeText={setLastName}
             placeholder="Enter your last name"
             style={styles.input}
+            containerStyle={styles.inputContainer}
+            disabled
           />
           <Text style={styles.inputHeader}>Email</Text>
           <TextInput
@@ -67,6 +72,8 @@ const SettingsScreen = () => {
             placeholder="Enter your email"
             keyboardType="email-address"
             style={styles.input}
+            containerStyle={styles.inputContainer}
+            disabled
           />
           <Text style={styles.inputHeader}>Phone Number</Text>
           <TextInput
@@ -75,6 +82,8 @@ const SettingsScreen = () => {
             placeholder="Enter your phone number"
             keyboardType="phone-pad"
             style={styles.input}
+            containerStyle={styles.inputContainer}
+            disabled
           />
         </Card>
       </PageCell>
@@ -84,9 +93,11 @@ const SettingsScreen = () => {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            placeholder="Enter new password"
+            placeholder="Enter new password (disabled)"
             secureTextEntry
             style={styles.input}
+            disabled
+            containerStyle={styles.inputContainer}
           />
         </Card>
       </PageCell>
@@ -120,6 +131,7 @@ const styles = createStyles({
   },
   inputHeader: {
     fontSize: fonts.md,
+    marginLeft: margin.md,
     marginBottom: margin.sm,
   },
   input: {
@@ -128,7 +140,11 @@ const styles = createStyles({
     height: 50,
     backgroundColor: colors.lightNeutral.lightest,
     borderRadius: borderRadius.md,
-    padding: padding.md,
+    paddingHorizontal: padding.md,
+  },
+  inputContainer: {
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
   dropdown: {
     marginHorizontal: margin.md,

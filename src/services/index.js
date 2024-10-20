@@ -1,5 +1,10 @@
-import { loginUser, registerProvider, registerPatient } from "./authentication";
-import { updateUser, getUser } from "./user";
+import {
+  loginUser,
+  registerProvider,
+  registerPatient,
+  checkProviderCode,
+} from "./authentication";
+import { updateUser, getPatient } from "./user";
 import { searchFood, getFoodNutrients } from "./food";
 
 export {
@@ -9,5 +14,6 @@ export {
   updateUser,
   searchFood,
   getFoodNutrients,
-  getUser,
+  getPatient,
+  checkProviderCode,
 };
