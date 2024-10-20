@@ -27,15 +27,7 @@ const SettingsScreen = () => {
   const [email, setEmail] = useState(user.email || "");
   const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
   const [password, setPassword] = useState("");
-
-  const conditionOptions = [
-    { label: "Diabetes", value: "diabetes" },
-    { label: "Obesity", value: "obesity" },
-    { label: "Hypertension", value: "hypertension" },
-    { label: "Osteoporosis", value: "osteoporosis" },
-    { label: "Cardiovascular Disease", value: "cardiovascular" },
-    { label: "Gastroesophageal Reflux Disease", value: "reflux" },
-  ];
+  const [providerCode, setProviderCode] = useState(user.providers || "");
 
   const handleLogOut = () => {
     logout();
@@ -84,6 +76,19 @@ const SettingsScreen = () => {
             style={styles.input}
             containerStyle={styles.inputContainer}
             disabled
+          />
+        </Card>
+      </PageCell>
+      <PageCell>
+        <Card headerText="Provider" style={styles.card}>
+          <Text style={styles.inputHeader}>Provider Code</Text>
+          <TextInput
+            value={providerCode}
+            onChangeText={setProviderCode}
+            placeholder="Provider Code"
+            style={styles.input}
+            disabled
+            containerStyle={styles.inputContainer}
           />
         </Card>
       </PageCell>
