@@ -28,18 +28,28 @@ const styles = createStyles({
 
 const SearchFoodScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [foodEntries, setFoodEntries] = useState([]);
+  const [foodItems, setFoodItems] = useState([]);
 
-  const handleSubmitEditing = () => {
-    searchFood(searchQuery).then((entries) => {
-      setFoodEntries(entries);
-    });
+  const handleSubmitEditing = async () => {
+    const response = await searchFood(searchQuery);
+    console.log(response);
+    if (response.success) {
+      setFoodItems(response.results.data.all);
+    }
   };
 
   const handleFoodItemPress = (item) => {
     router.push({
       pathname: "/food/food-details",
-      params: { foodItemName: item.name },
+      params: {
+        foodName: item.label,
+        foodId: item.food_id,
+        calories: item.nutrients.CALORIES,
+        protein: item.nutrients.PROTEIN,
+        carbohydrates: item.nutrients.CARBOHYDRATE,
+        fat: item.nutrients.FAT,
+        servingSize: item.serving,
+      },
     });
   };
 
@@ -61,7 +71,7 @@ const SearchFoodScreen = () => {
           />
         </View>
       </View>
-      <FoodList foodEntries={foodEntries} onItemPress={handleFoodItemPress} />
+      <FoodList foodItems={foodItems} onItemPress={handleFoodItemPress} />
     </View>
   );
 };

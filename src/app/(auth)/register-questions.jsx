@@ -59,15 +59,15 @@ const RegisterQuestionsScreen = () => {
     setButtonLoading(true);
 
     if (providerCode) {
-      const result = await checkProviderCode(providerCode);
-      if (!result.success) {
+      const response = await checkProviderCode(providerCode);
+      if (!response.success) {
         showSnackbar("Provider code is invalid", "error");
         setButtonLoading(false);
         return;
       }
     }
 
-    const result = await registerPatient({
+    const response = await registerPatient({
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
@@ -79,7 +79,7 @@ const RegisterQuestionsScreen = () => {
       providerCode,
     });
 
-    if (result.success) {
+    if (response.success) {
       const success = await login(user.email, user.password, userType);
       if (success) {
         setUser({});
@@ -89,7 +89,6 @@ const RegisterQuestionsScreen = () => {
         showSnackbar("Registration successful, but login failed", "error");
       }
     } else {
-      setUser({});
       showSnackbar("Registration failed", "error");
     }
     setButtonLoading(false);

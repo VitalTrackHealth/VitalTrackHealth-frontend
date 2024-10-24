@@ -88,7 +88,7 @@ const RegisterScreen = () => {
         params: { userType },
       });
     } else if (userType === "provider") {
-      const result = await registerProvider({
+      const response = await registerProvider({
         firstName,
         lastName,
         phoneNumber,
@@ -96,7 +96,7 @@ const RegisterScreen = () => {
         email,
         password,
       });
-      if (result.success) {
+      if (response.success) {
         const success = await login(email, password, userType);
         if (success) {
           setUser({
@@ -164,7 +164,7 @@ const RegisterScreen = () => {
       >
         <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
           <Ionicons
-            name={isPasswordShown ? "eye-off" : "eye"}
+            name={isPasswordShown ? "eye" : "eye-off"}
             size={24}
             color={colors.lightNeutral.dark}
           />

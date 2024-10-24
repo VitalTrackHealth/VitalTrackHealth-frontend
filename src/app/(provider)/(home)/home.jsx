@@ -14,9 +14,9 @@ const ProviderHomeScreen = () => {
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
-    getProviderPatients(session).then((res) => {
-      if (res.success) {
-        res.results.data.forEach((patient) => {
+    getProviderPatients(session).then((response) => {
+      if (response.success) {
+        response.results.data.forEach((patient) => {
           setPatients((patients) => [...patients, patient]);
         });
       }

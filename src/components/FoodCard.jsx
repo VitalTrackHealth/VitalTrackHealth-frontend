@@ -4,6 +4,40 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Card from "@/components/Card";
 import { createStyles, fonts, colors, padding, margin } from "@/styles";
 
+const FoodCard = ({ foodItem, cardStyle, onPress }) => {
+  return (
+    <Card style={[styles.card, cardStyle]}>
+      <View style={styles.cardContent}>
+        <MaterialCommunityIcons
+          name={"food-variant"}
+          size={fonts.xl}
+          color={colors.primary}
+          style={styles.icon}
+        />
+        <View style={styles.foodInfo}>
+          <Text style={styles.foodName}>{foodItem.label}</Text>
+          <View style={styles.macrosContainer}>
+            <Text style={styles.macroText}>
+              {Math.round(foodItem.nutrients.CALORIES)}kcal{"  "}
+              {Math.round(foodItem.nutrients.PROTEIN)}P{"  "}
+              {Math.round(foodItem.nutrients.CARBOHYDRATE)}C{"  "}
+              {Math.round(foodItem.nutrients.FAT)}F |{"  "}
+              {Math.round(foodItem.serving)}g
+            </Text>
+          </View>
+        </View>
+        <Pressable onPress={() => onPress(foodItem)}>
+          <MaterialCommunityIcons
+            name="chevron-right"
+            size={fonts.lg}
+            color={colors.lightNeutral.dark}
+          />
+        </Pressable>
+      </View>
+    </Card>
+  );
+};
+
 const styles = createStyles({
   card: {
     flex: 1,
@@ -33,38 +67,5 @@ const styles = createStyles({
     color: colors.lightNeutral.medium,
   },
 });
-
-const FoodCard = ({ entry, cardStyle, onPress }) => {
-  return (
-    <Card style={[styles.card, cardStyle]}>
-      <View style={styles.cardContent}>
-        <MaterialCommunityIcons
-          name={entry.icon}
-          size={fonts.xl}
-          color={colors.primary}
-          style={styles.icon}
-        />
-        <View style={styles.foodInfo}>
-          <Text style={styles.foodName}>{entry.name}</Text>
-          <View style={styles.macrosContainer}>
-            <Text style={styles.macroText}>
-              {entry.macros.calories}kcal{"  "}
-              {entry.macros.protein}P{"  "}
-              {entry.macros.carbs}C{"  "}
-              {entry.macros.fat}F | {entry.weight}g
-            </Text>
-          </View>
-        </View>
-        <Pressable onPress={() => onPress(entry)}>
-          <MaterialCommunityIcons
-            name="chevron-right"
-            size={fonts.lg}
-            color={colors.lightNeutral.dark}
-          />
-        </Pressable>
-      </View>
-    </Card>
-  );
-};
 
 export default FoodCard;

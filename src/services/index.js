@@ -9,9 +9,10 @@ import {
   getPatient,
   getProvider,
   getProviderPatients,
+  fetchFoodItems,
+  addFoodItem,
 } from "./user";
 import { searchFood, getFoodNutrients } from "./food";
-import { fetchPatientFoodEntries } from "./user";
 
 export {
   loginUser,
@@ -24,5 +25,6 @@ export {
   getProvider,
   getProviderPatients,
   checkProviderCode,
-  fetchPatientFoodEntries,
+  fetchFoodItems,
+  addFoodItem,
 };

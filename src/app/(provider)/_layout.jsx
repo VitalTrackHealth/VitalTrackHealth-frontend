@@ -91,16 +91,16 @@ const ProviderLayout = () => {
   }
 
   if (Object.keys(user).length === 0) {
-    getProvider(session).then((res) => {
-      if (res.success) {
+    getProvider(session).then((response) => {
+      if (response.success) {
         setUser({
-          id: res.results.data.id,
-          firstName: res.results.data.first_name,
-          lastName: res.results.data.last_name,
-          username: res.results.data.username,
-          email: res.results.data.email,
-          phoneNumber: res.results.data.phone_number,
-          providerCode: res.results.data.provider_code,
+          id: response.results.data.id,
+          firstName: response.results.data.first_name,
+          lastName: response.results.data.last_name,
+          username: response.results.data.username,
+          email: response.results.data.email,
+          phoneNumber: response.results.data.phone_number,
+          providerCode: response.results.data.provider_code,
         });
       }
     });

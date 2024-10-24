@@ -16,9 +16,9 @@ export function SessionProvider({ children }) {
   const [[_, userType], setUserType] = useStorageState("userType");
 
   const login = async (email, password, userType_local) => {
-    const result = await loginUser(email, password);
-    if (result.success) {
-      setSession(result.results.access_token);
+    const response = await loginUser(email, password);
+    if (response.success) {
+      setSession(response.results.access_token);
       setUserType(userType_local);
       return true;
     } else {

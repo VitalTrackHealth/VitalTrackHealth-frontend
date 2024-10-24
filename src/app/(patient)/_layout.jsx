@@ -114,19 +114,19 @@ const PatientLayout = () => {
   }
 
   if (Object.keys(user).length === 0) {
-    getPatient(session).then((res) => {
-      if (res.success) {
+    getPatient(session).then((response) => {
+      if (response.success) {
         setUser({
-          id: res.results.data.id,
-          firstName: res.results.data.first_name,
-          lastName: res.results.data.last_name,
-          username: res.results.data.username,
-          email: res.results.data.email,
-          phoneNumber: res.results.data.phone_number,
-          conditions: res.results.data.conditions,
-          bodyMeasurements: res.results.data.body_measurements,
-          providerCode: res.results.data.provider_code,
-          nutritionGoals: res.results.data.nutrition_goals,
+          id: response.results.data.id,
+          firstName: response.results.data.first_name,
+          lastName: response.results.data.last_name,
+          username: response.results.data.username,
+          email: response.results.data.email,
+          phoneNumber: response.results.data.phone_number,
+          conditions: response.results.data.conditions,
+          bodyMeasurements: response.results.data.body_measurements,
+          providerCode: response.results.data.provider_code,
+          nutritionGoals: response.results.data.nutrition_goals,
         });
       }
     });
