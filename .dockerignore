@@ -16,4 +16,4 @@
 **/.vscode
 
 # !Re-enable
-# .env
+.env
