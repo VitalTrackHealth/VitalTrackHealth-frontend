@@ -2,6 +2,9 @@
 
 FROM node:18 AS builder
 
+# !Remove
+ENV EXPO_PUBLIC_API_URL=http://157.230.231.51:8000
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install --yes \
