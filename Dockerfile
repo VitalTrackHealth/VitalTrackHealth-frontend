@@ -20,6 +20,9 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+# !Remove
+COPY .env .env
+
 # Generate web app static files
 RUN npm run build
 

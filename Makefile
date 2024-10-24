@@ -1,5 +1,5 @@
 up:
-	docker run -d -p 80:80 --name app app:dev
+	docker run --env-file .env -d -p 80:80 --name app app:dev
 
 down:
 	docker stop app
