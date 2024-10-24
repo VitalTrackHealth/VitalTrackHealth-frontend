@@ -9,23 +9,53 @@ import {
   PatientsFoodEntries,
 } from "@/components";
 import { createStyles, padding, colors, fonts } from "@/styles";
-import { fetchPatientFoodEntries } from "@/services";
+import { fetchFoodItemsProvider } from "@/services";
+import { useSession } from "@/context";
+
+const formatTime = (epochTime) => {
+  const date = new Date(epochTime * 1000);
+
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  const options = { month: "numeric" };
+  const month = date.toLocaleString("en-US", options);
+
+  const day = date.getDate();
+
+  const year = String(date.getFullYear()).slice(-2);
+
+  return `${hours}:${minutes} ${ampm} - ${month}/${day}/${year}`;
+};
 
 const PatientDetailScreen = () => {
   const { patientEmail } = useLocalSearchParams();
-  const [foodEntries, setFoodEntries] = useState([]);
+  const { session } = useSession();
+  const [foodItems, setFoodItems] = useState([]);
 
   useEffect(() => {
-    const loadFoodEntries = async () => {
-      try {
-        const entries = await fetchPatientFoodEntries(patientEmail);
-        setFoodEntries(entries);
-      } catch (error) {
-        console.error("Error fetching food entries:", error);
+    fetchFoodItemsProvider(session, patientEmail).then((response) => {
+      if (response.success) {
+        const formattedFoodItems = [];
+        for (const item of response.results.data) {
+          const newItem = {
+            label: item.food_name,
+            foodId: item.food_id,
+            serving: item.details.serving_size,
+            nutrients: {
+              CALORIES: item.details.calories,
+              PROTEIN: item.details.protein,
+              CARBOHYDRATE: item.details.carbohydrates,
+              FAT: item.details.fat,
+            },
+            time: formatTime(item.added_at),
+          };
+          formattedFoodItems.push(newItem);
+        }
+        setFoodItems(formattedFoodItems);
       }
-    };
-
-    loadFoodEntries();
+    });
   }, [patientEmail]);
 
   return (
@@ -33,7 +63,7 @@ const PatientDetailScreen = () => {
       <PageCell>
         <TextHeader text={patientEmail} textStyle={styles.cellHeader} />
         <Card>
-          <PatientsFoodEntries foodEntries={foodEntries} />
+          <PatientsFoodEntries foodItems={foodItems} />
         </Card>
       </PageCell>
     </Page>

@@ -26,12 +26,12 @@ const ProviderHomeScreen = () => {
   const macros = {
     totalCalories: 2000,
     consumedCalories: 1500,
-    totalProtein: 100,
-    consumedProtein: 80,
-    totalFat: 100,
-    consumedFat: 80,
-    totalCarbs: 100,
-    consumedCarbs: 80,
+    totalProtein: 180,
+    consumedProtein: 120,
+    totalFat: 70,
+    consumedFat: 50,
+    totalCarbs: 150,
+    consumedCarbs: 100,
   };
 
   const handlePatientPress = (patient) => {

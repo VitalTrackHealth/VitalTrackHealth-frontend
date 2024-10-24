@@ -10,6 +10,7 @@ import {
   getProvider,
   getProviderPatients,
   fetchFoodItems,
+  fetchFoodItemsProvider,
   addFoodItem,
 } from "./user";
 import { searchFood, getFoodNutrients } from "./food";
@@ -26,5 +27,6 @@ export {
   getProviderPatients,
   checkProviderCode,
   fetchFoodItems,
+  fetchFoodItemsProvider,
   addFoodItem,
 };

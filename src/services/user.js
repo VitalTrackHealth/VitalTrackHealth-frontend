@@ -185,3 +185,30 @@ export const fetchFoodItems = async (token) => {
     return { success: false, error: error.message };
   }
 };
+
+export const fetchFoodItemsProvider = async (token, patientEmail) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/provider/food-log/${patientEmail}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
+    console.error("error:", error);
+    return { success: false, error: error.message };
+  }
+};

@@ -2,14 +2,7 @@ import { View, Image, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Card from "@/components/Card";
-import {
-  createStyles,
-  colors,
-  fonts,
-  padding,
-  margin,
-  borderRadius,
-} from "@/styles";
+import { createStyles, colors, fonts, margin, borderRadius } from "@/styles";
 
 const PatientCard = ({ patient, macros, cardStyle }) => {
   const {
@@ -22,7 +15,6 @@ const PatientCard = ({ patient, macros, cardStyle }) => {
     totalCarbs,
     consumedCarbs,
   } = macros;
-  const remainingCalories = totalCalories - consumedCalories;
 
   return (
     <Card style={[styles.card, cardStyle]}>

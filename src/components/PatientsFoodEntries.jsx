@@ -2,7 +2,7 @@ import { View, Text, FlatList } from "react-native";
 
 import { createStyles, colors, fonts, padding, margin } from "@/styles";
 
-const PatientFoodEntries = ({ foodEntries }) => {
+const PatientFoodEntries = ({ foodItems }) => {
   const renderTableHeader = () => (
     <View style={styles.tableRow}>
       <Text style={[styles.headerCell, styles.dateCell]}>Date</Text>
@@ -16,12 +16,20 @@ const PatientFoodEntries = ({ foodEntries }) => {
 
   const renderFoodEntry = ({ item }) => (
     <View style={styles.tableRow}>
-      <Text style={[styles.cell, styles.dateCell]}>{item.date}</Text>
-      <Text style={[styles.cell, styles.foodItemCell]}>{item.foodItem}</Text>
-      <Text style={[styles.cell, styles.numericCell]}>{item.calories}</Text>
-      <Text style={[styles.cell, styles.numericCell]}>{item.protein}</Text>
-      <Text style={[styles.cell, styles.numericCell]}>{item.fat}</Text>
-      <Text style={[styles.cell, styles.numericCell]}>{item.carbs}</Text>
+      <Text style={[styles.cell, styles.dateCell]}>{item.time}</Text>
+      <Text style={[styles.cell, styles.foodItemCell]}>{item.label}</Text>
+      <Text style={[styles.cell, styles.numericCell]}>
+        {Math.round(item.nutrients.CALORIES)}
+      </Text>
+      <Text style={[styles.cell, styles.numericCell]}>
+        {Math.round(item.nutrients.PROTEIN)}
+      </Text>
+      <Text style={[styles.cell, styles.numericCell]}>
+        {Math.round(item.nutrients.FAT)}
+      </Text>
+      <Text style={[styles.cell, styles.numericCell]}>
+        {Math.round(item.nutrients.CARBOHYDRATE)}
+      </Text>
     </View>
   );
 
@@ -30,7 +38,7 @@ const PatientFoodEntries = ({ foodEntries }) => {
       <Text style={styles.title}>Food Entries</Text>
       {renderTableHeader()}
       <FlatList
-        data={foodEntries}
+        data={foodItems}
         renderItem={renderFoodEntry}
         keyExtractor={(item, index) => `${item.id}-${index}`}
       />
