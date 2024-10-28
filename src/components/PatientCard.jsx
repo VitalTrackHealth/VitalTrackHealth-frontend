@@ -20,10 +20,10 @@ const PatientCard = ({ patient, macros, cardStyle }) => {
     <Card style={[styles.card, cardStyle]}>
       <View style={styles.cardContent}>
         <View style={styles.patientInfoContainer}>
-          <Image
+          {/* <Image
             source={`https://ui-avatars.com/api/?name=${patient.first_name}+${patient.last_name}&background=random`}
             style={styles.avatar}
-          />
+          /> */}
           <View style={styles.patientDetails}>
             <Text style={styles.patientName}>
               {patient.first_name} {patient.last_name}
@@ -38,7 +38,13 @@ const PatientCard = ({ patient, macros, cardStyle }) => {
             </View>
             <View style={styles.summaryItem}>
               <Text style={styles.summaryLabel}>Conditions:</Text>
-              <Text style={styles.summaryValue}>{patient.conditions}</Text>
+              <View style={styles.conditionsContainer}>
+                {patient.conditions.map((condition, index) => (
+                  <Text key={index} style={styles.summaryValue}>
+                    {condition.trim()}
+                  </Text>
+                ))}
+              </View>
             </View>
             <View style={styles.summaryItem}>
               <Text style={styles.summaryLabel}>Height:</Text>
@@ -56,30 +62,22 @@ const PatientCard = ({ patient, macros, cardStyle }) => {
         </View>
         <View style={styles.verticalLine} />
         <View style={styles.weeklySummary}>
-          <Text style={styles.summaryTitle}>Weekly Summary</Text>
+          <Text style={styles.summaryTitle}>Macro Goals</Text>
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Calories:</Text>
-            <Text style={styles.summaryValue}>
-              {consumedCalories} / {totalCalories}
-            </Text>
+            <Text style={styles.summaryValue}>{totalCalories}</Text>
           </View>
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Protein:</Text>
-            <Text style={styles.summaryValue}>
-              {consumedProtein}g / {totalProtein}g
-            </Text>
+            <Text style={styles.summaryValue}>{totalProtein}g</Text>
           </View>
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Fat:</Text>
-            <Text style={styles.summaryValue}>
-              {consumedFat}g / {totalFat}g
-            </Text>
+            <Text style={styles.summaryValue}>{totalFat}g</Text>
           </View>
           <View style={styles.summaryItem}>
             <Text style={styles.summaryLabel}>Carbs:</Text>
-            <Text style={styles.summaryValue}>
-              {consumedCarbs}g / {totalCarbs}g
-            </Text>
+            <Text style={styles.summaryValue}>{totalCarbs}g</Text>
           </View>
         </View>
         <View style={styles.arrowContainer}>
