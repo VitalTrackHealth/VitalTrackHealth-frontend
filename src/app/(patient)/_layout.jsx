@@ -102,7 +102,7 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
 );
 
 const PatientLayout = () => {
-  const { session } = useSession();
+  const { session, logout, userType } = useSession();
   const { user, setUser } = useUser();
 
   const { width } = useWindowDimensions();
@@ -111,6 +111,10 @@ const PatientLayout = () => {
 
   if (!session) {
     return <Redirect href="/" />;
+  }
+
+  if (userType && userType === "provider") {
+    return <Redirect href="/(provider)/home" />;
   }
 
   if (Object.keys(user).length === 0) {
@@ -127,7 +131,11 @@ const PatientLayout = () => {
           bodyMeasurements: response.results.data.body_measurements,
           providerCode: response.results.data.provider_code,
           nutritionGoals: response.results.data.nutrition_goals,
+          providers: response.results.data.providers,
         });
+      } else {
+        logout();
+        return <Redirect href="/login" params={{ userType: "patient" }} />;
       }
     });
   }

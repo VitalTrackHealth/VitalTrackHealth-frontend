@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Card from "@/components/Card";
 import { createStyles, fonts, colors, padding, margin } from "@/styles";
 
-const FoodCard = ({ foodItem, cardStyle, onPress }) => {
+const FoodCard = ({ foodItem, cardStyle, onPress, onDelete }) => {
   return (
     <Card style={[styles.card, cardStyle]}>
       <View style={styles.cardContent}>
@@ -26,6 +26,17 @@ const FoodCard = ({ foodItem, cardStyle, onPress }) => {
             </Text>
           </View>
         </View>
+        {onDelete && (
+          <View style={styles.deleteIconContainer}>
+            <Pressable onPress={() => onDelete(foodItem.foodObjectId)}>
+              <MaterialCommunityIcons
+                name="delete"
+                size={fonts.lg}
+                color={colors.lightNeutral.dark}
+              />
+            </Pressable>
+          </View>
+        )}
         <Pressable onPress={() => onPress(foodItem)}>
           <MaterialCommunityIcons
             name="chevron-right"
@@ -65,6 +76,9 @@ const styles = createStyles({
   macroText: {
     fontSize: fonts.md,
     color: colors.lightNeutral.medium,
+  },
+  deleteIconContainer: {
+    marginRight: margin.md,
   },
 });
 

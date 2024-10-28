@@ -12,6 +12,8 @@ import {
   fetchFoodItems,
   fetchFoodItemsProvider,
   addFoodItem,
+  deleteFoodItem,
+  addProvider,
 } from "./user";
 import { searchFood, getFoodNutrients } from "./food";
 
@@ -29,4 +31,6 @@ export {
   fetchFoodItems,
   fetchFoodItemsProvider,
   addFoodItem,
+  deleteFoodItem,
+  addProvider,
 };

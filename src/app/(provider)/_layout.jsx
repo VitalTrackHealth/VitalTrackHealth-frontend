@@ -80,7 +80,7 @@ const DrawerLayout = ({ keepDrawerOpen }) => (
 );
 
 const ProviderLayout = () => {
-  const { session } = useSession();
+  const { session, logout, userType } = useSession();
   const { user, setUser } = useUser();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
@@ -88,6 +88,10 @@ const ProviderLayout = () => {
 
   if (!session) {
     return <Redirect href="/" />;
+  }
+
+  if (userType && userType === "patient") {
+    return <Redirect href="/(patient)/home" />;
   }
 
   if (Object.keys(user).length === 0) {
@@ -102,6 +106,9 @@ const ProviderLayout = () => {
           phoneNumber: response.results.data.phone_number,
           providerCode: response.results.data.provider_code,
         });
+      } else {
+        logout();
+        return <Redirect href="/login" params={{ userType: "provider" }} />;
       }
     });
   }

@@ -3,13 +3,21 @@ import { View, Text } from "react-native";
 import { createStyles, margin, fonts, colors } from "@/styles";
 import FoodCard from "@/components/FoodCard";
 
-const FoodDiary = ({ foodItems, onItemPress }) => {
+const FoodDiary = ({ foodItems, onItemPress, onDelete }) => {
+  const formattedTime = (time) => {
+    return time.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
   return (
     <View style={styles.container}>
       {foodItems.map((item, index) => (
         <View key={index} style={styles.entryContainer}>
           <View style={styles.timeContainer}>
-            <Text style={styles.timeText}>{item.time}</Text>
+            <Text style={styles.timeText}>{formattedTime(item.time)}</Text>
           </View>
           <View style={styles.timelineContainer}>
             <View style={styles.timelineDot} />
@@ -21,6 +29,7 @@ const FoodDiary = ({ foodItems, onItemPress }) => {
             foodItem={item}
             cardStyle={styles.foodCard}
             onPress={onItemPress}
+            onDelete={onDelete}
           />
         </View>
       ))}

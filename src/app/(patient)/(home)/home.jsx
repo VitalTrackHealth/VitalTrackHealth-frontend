@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { View, Text } from "react-native";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 
 import {
   Button,
@@ -15,11 +15,10 @@ import {
 } from "@/components";
 import { createStyles, fonts, colors, padding } from "@/styles";
 import { useUser, useSession } from "@/context";
-import { fetchFoodItems } from "@/services";
+import { fetchFoodItems, deleteFoodItem } from "@/services";
 
 const HomeScreen = () => {
   const { user } = useUser();
-  console.log(user);
   const { session } = useSession();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [foodItems, setFoodItems] = useState([]);
@@ -37,59 +36,63 @@ const HomeScreen = () => {
     carbs: user.nutritionGoals?.carbs || 150,
   });
 
-  useEffect(() => {
-    const timeOptions = {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    };
+  useFocusEffect(
+    useCallback(() => {
+      const timeOptions = {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      };
 
-    fetchFoodItems(session).then((response) => {
-      if (response.success) {
-        const formattedFoodItems = [];
-        let totalCalories = 0;
-        let totalProtein = 0;
-        let totalFat = 0;
-        let totalCarbs = 0;
+      fetchFoodItems(session).then((response) => {
+        if (response.success) {
+          const formattedFoodItems = [];
+          let totalCalories = 0;
+          let totalProtein = 0;
+          let totalFat = 0;
+          let totalCarbs = 0;
 
-        for (const item of response.results.data) {
-          const newItem = {
-            label: item.food_name,
-            foodId: item.food_id,
-            serving: item.details.serving_size,
-            nutrients: {
-              CALORIES: item.details.calories,
-              PROTEIN: item.details.protein,
-              CARBOHYDRATE: item.details.carbohydrates,
-              FAT: item.details.fat,
-            },
-            time: new Date(item.added_at * 1000).toLocaleTimeString(
-              "en-US",
-              timeOptions
-            ),
-          };
-          formattedFoodItems.push(newItem);
+          for (const item of response.results.data) {
+            const itemDate = new Date(item.added_at * 1000);
 
-          totalCalories += Math.round(newItem.nutrients.CALORIES);
-          totalProtein += Math.round(newItem.nutrients.PROTEIN);
-          totalFat += Math.round(newItem.nutrients.FAT);
-          totalCarbs += Math.round(newItem.nutrients.CARBOHYDRATE);
+            const newItem = {
+              label: item.food_name,
+              foodId: item.food_id,
+              foodObjectId: item._id,
+              serving: item.details.serving_size,
+              nutrients: {
+                CALORIES: item.details.calories,
+                PROTEIN: item.details.protein,
+                CARBOHYDRATE: item.details.carbohydrates,
+                FAT: item.details.fat,
+              },
+              time: itemDate,
+            };
+
+            if (itemDate.toDateString() === selectedDate.toDateString()) {
+              formattedFoodItems.push(newItem);
+            }
+
+            totalCalories += Math.round(newItem.nutrients.CALORIES);
+            totalProtein += Math.round(newItem.nutrients.PROTEIN);
+            totalFat += Math.round(newItem.nutrients.FAT);
+            totalCarbs += Math.round(newItem.nutrients.CARBOHYDRATE);
+          }
+          setFoodItems(formattedFoodItems);
+          setConsumedMacros({
+            calories: totalCalories,
+            protein: totalProtein,
+            fat: totalFat,
+            carbs: totalCarbs,
+          });
         }
-        setFoodItems(formattedFoodItems);
-        setConsumedMacros({
-          calories: totalCalories,
-          protein: totalProtein,
-          fat: totalFat,
-          carbs: totalCarbs,
-        });
-      }
-    });
-  }, [selectedDate]);
+      });
+    }, [selectedDate, foodItems.length]) // Not sure why length is needed here rather than just the array
+  );
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    // Here you would typically fetch data for the selected date
-    console.log("Selected date:", date);
+    // TODO: Fetch food items for the new date
   };
 
   const handleAddEntry = () => {
@@ -112,6 +115,16 @@ const HomeScreen = () => {
         fat: item.nutrients.FAT,
         servingSize: item.serving,
       },
+    });
+  };
+
+  const handleFoodItemDelete = (foodObjectId) => {
+    deleteFoodItem(foodObjectId, session).then((response) => {
+      if (response.success) {
+        setFoodItems(
+          foodItems.filter((item) => item.foodObjectId !== foodObjectId)
+        );
+      }
     });
   };
 
@@ -178,13 +191,14 @@ const HomeScreen = () => {
         <Card>
           <View style={styles.buttonContainer}>
             <Button text="Add Entry" onPress={handleAddEntry} />
-            <Button text="Edit" variant="outlined" onPress={handleEdit} />
+            {/* <Button text="Edit" variant="outlined" onPress={handleEdit} /> */}
           </View>
           {foodItems.length > 0 && (
             <View style={styles.foodDiaryContainer}>
               <FoodDiary
                 foodItems={foodItems}
                 onItemPress={handleFoodItemPress}
+                onDelete={handleFoodItemDelete}
               />
             </View>
           )}

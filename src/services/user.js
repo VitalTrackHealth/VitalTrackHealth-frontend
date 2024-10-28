@@ -1,6 +1,6 @@
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
-export const updateUser = async (userToUpdate) => {
+export const updateUser = async (userToUpdate, token) => {
   const {
     firstName: first_name,
     lastName: last_name,
@@ -10,6 +10,7 @@ export const updateUser = async (userToUpdate) => {
     conditions,
     bodyMeasurements: body_measurements,
     providerCode: provider_code,
+    nutritionGoals: nutrition_goals,
   } = userToUpdate;
 
   // Don't include fields we aren't updating
@@ -22,12 +23,16 @@ export const updateUser = async (userToUpdate) => {
     ...(conditions !== undefined && { conditions }),
     ...(body_measurements !== undefined && { body_measurements }),
     ...(provider_code !== undefined && { provider_code }),
+    ...(nutrition_goals !== undefined && { nutrition_goals }),
   };
 
+  console.log("body:", body);
+
   try {
-    const response = await fetch(`${API_URL}/user/update`, {
+    const response = await fetch(`${API_URL}/patient/update`, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
@@ -162,6 +167,40 @@ export async function addFoodItem(foodItem, token) {
   }
 }
 
+export async function deleteFoodItem(foodObjectId, token) {
+  try {
+    const params = {
+      foods: [
+        {
+          food_object_id: foodObjectId,
+        },
+      ],
+    };
+
+    const response = await fetch(`${API_URL}/patient/delete-food`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
+    console.error("error:", error);
+    return { success: false, error: error.message };
+  }
+}
+
 export const fetchFoodItems = async (token) => {
   try {
     const response = await fetch(`${API_URL}/patient/food-log`, {
@@ -197,6 +236,34 @@ export const fetchFoodItemsProvider = async (token, patientEmail) => {
         },
       }
     );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}. Message: ${errorText}`
+      );
+    }
+
+    const results = await response.json();
+    return { success: true, results };
+  } catch (error) {
+    console.error("error:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const addProvider = async (providerCode, token) => {
+  const params = { provider_code: providerCode };
+
+  try {
+    const response = await fetch(`${API_URL}/patient/add-provider`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    });
 
     if (!response.ok) {
       const errorText = await response.text();

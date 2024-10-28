@@ -21,7 +21,7 @@ import Dropdown from "./Dropdown";
 import PatientCard from "./PatientCard";
 import PatientsFoodEntries from "./PatientsFoodEntries";
 import DateScroller from "./DateScroller";
-
+import ProviderCard from "./ProviderCard";
 export {
   PatientCard,
   PatientsFoodEntries,
@@ -46,4 +46,5 @@ export {
   FoodNutritionCard,
   Dropdown,
   DateScroller,
+  ProviderCard,
 };

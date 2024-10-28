@@ -20,12 +20,44 @@ const DateScroller = ({ onDateChange }) => {
 
   const formatDate = (date) => {
     const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    if (date.toDateString() === today.toDateString()) return "Today";
-    if (date.toDateString() === tomorrow.toDateString()) return "Tomorrow";
-    return date.toLocaleDateString("en-US", { weekday: "long" });
+    // Reset hours to compare dates properly
+    today.setHours(0, 0, 0, 0);
+    yesterday.setHours(0, 0, 0, 0);
+    tomorrow.setHours(0, 0, 0, 0);
+    const compareDate = new Date(date);
+    compareDate.setHours(0, 0, 0, 0);
+
+    if (compareDate.getTime() === today.getTime()) return "Today";
+    if (compareDate.getTime() === tomorrow.getTime()) return "Tomorrow";
+    if (compareDate.getTime() === yesterday.getTime()) return "Yesterday";
+
+    // Format as "Oct 25th" for other dates
+    const suffix = getDaySuffix(date.getDate());
+    return date
+      .toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      })
+      .replace(/\d+/, date.getDate() + suffix);
+  };
+
+  const getDaySuffix = (day) => {
+    if (day > 3 && day < 21) return "th";
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
   };
 
   return (

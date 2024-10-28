@@ -105,6 +105,7 @@ const RegisterScreen = () => {
             phoneNumber,
             username: email,
             email,
+            providerCode: response.results.data.provider_code,
           });
           router.replace("/(provider)/home");
         } else {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 import {
   colors,
@@ -16,12 +16,17 @@ import {
   TextHeader,
   TextInput,
   Button,
+  ProviderCard,
 } from "@/components";
-import { useSession, useUser } from "@/context";
+import { useSession, useUser, useSnackbar } from "@/context";
+import { addProvider, checkProviderCode } from "@/services";
 
 const SettingsScreen = () => {
-  const { logout } = useSession();
+  const { logout, session } = useSession();
   const { user, setUser } = useUser();
+  const { showSnackbar } = useSnackbar();
+
+  const [buttonLoading, setButtonLoading] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
   const [email, setEmail] = useState(user.email || "");
@@ -32,6 +37,26 @@ const SettingsScreen = () => {
   const handleLogOut = () => {
     logout();
     setUser({});
+  };
+
+  const handleAddProvider = async () => {
+    setButtonLoading(true);
+    const res = await checkProviderCode(providerCode);
+    if (res.success) {
+      const addProviderRes = await addProvider(providerCode, session);
+      if (addProviderRes.success) {
+        setUser({
+          ...user,
+          providers: [...user.providers, addProviderRes.results.data],
+        });
+        showSnackbar("Provider added successfully", "success");
+      } else {
+        showSnackbar("Failed to add provider", "error");
+      }
+    } else {
+      showSnackbar("Provider code is invalid", "error");
+    }
+    setButtonLoading(false);
   };
 
   return (
@@ -81,15 +106,34 @@ const SettingsScreen = () => {
       </PageCell>
       <PageCell>
         <Card headerText="Provider" style={styles.card}>
-          <Text style={styles.inputHeader}>Provider Code</Text>
-          <TextInput
-            value={providerCode}
-            onChangeText={setProviderCode}
-            placeholder="Provider Code"
-            style={styles.input}
-            disabled
-            containerStyle={styles.inputContainer}
-          />
+          {user.providers && user.providers.length > 0 && (
+            <>
+              {user.providers.map((provider) => (
+                <ProviderCard key={provider.username} provider={provider} />
+              ))}
+            </>
+          )}
+          {!user.providers ||
+            (user.providers.length === 0 && (
+              <>
+                <Text style={styles.inputHeader}>Provider Code</Text>
+                <TextInput
+                  value={providerCode}
+                  onChangeText={setProviderCode}
+                  placeholder="Provider Code"
+                  style={styles.input}
+                  containerStyle={styles.inputContainer}
+                />
+                <Button
+                  text="Add Provider"
+                  onPress={handleAddProvider}
+                  loading={buttonLoading}
+                />
+              </>
+            ))}
+          <Text style={styles.inputHeader}>
+            To remove provider, contact support.
+          </Text>
         </Card>
       </PageCell>
       <PageCell>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 
 import { colors, fonts, margin, createStyles } from "@/styles";
@@ -10,25 +10,23 @@ import {
   TextHeader,
   Dropdown,
   TextInput,
+  Button,
 } from "@/components";
-import { useUser } from "@/context";
+import { useUser, useSession, useSnackbar } from "@/context";
+import { updateUser } from "@/services";
 
 const NutritionProfileScreen = () => {
   const { user } = useUser();
+  const { session } = useSession();
+  const { showSnackbar } = useSnackbar();
 
-  const [calorieGoal, setCalorieGoal] = useState(
-    user.nutritionGoals?.calorie || 1
-  );
-  const [proteinGoal, setProteinGoal] = useState(
-    user.nutritionGoals?.protein || 1
-  );
-  const [fatGoal, setFatGoal] = useState(user.nutritionGoals?.fat || 1);
-  const [carbsGoal, setCarbsGoal] = useState(user.nutritionGoals?.carbs || 1);
-  const [height, setHeight] = useState(user.bodyMeasurements?.height || 1);
-  const [weight, setWeight] = useState(user.bodyMeasurements?.weight || 1);
-  const [selectedConditions, setSelectedConditions] = useState(
-    user.conditions || []
-  );
+  const [calorieGoal, setCalorieGoal] = useState(1);
+  const [proteinGoal, setProteinGoal] = useState(1);
+  const [fatGoal, setFatGoal] = useState(1);
+  const [carbsGoal, setCarbsGoal] = useState(1);
+  const [height, setHeight] = useState(1);
+  const [weight, setWeight] = useState(1);
+  const [selectedConditions, setSelectedConditions] = useState([]);
 
   const chronicConditionsOptions = [
     { label: "Diabetes", value: "diabetes" },
@@ -38,6 +36,46 @@ const NutritionProfileScreen = () => {
     { label: "Cardiovascular Disease", value: "cardiovascular" },
     { label: "Gastroesophageal Reflux Disease", value: "reflux" },
   ];
+
+  useEffect(() => {
+    if (user.nutritionGoals) {
+      setCalorieGoal(user.nutritionGoals.calorie);
+      setProteinGoal(user.nutritionGoals.protein);
+      setFatGoal(user.nutritionGoals.fat);
+      setCarbsGoal(user.nutritionGoals.carbs);
+    }
+    if (user.bodyMeasurements) {
+      setHeight(user.bodyMeasurements.height);
+      setWeight(user.bodyMeasurements.weight);
+    }
+    if (user.conditions) {
+      setSelectedConditions(user.conditions);
+    }
+  }, [user]);
+
+  const handleSave = async () => {
+    const response = await updateUser(
+      {
+        nutritionGoals: {
+          calorie: calorieGoal,
+          protein: proteinGoal,
+          fat: fatGoal,
+          carbs: carbsGoal,
+        },
+        bodyMeasurements: {
+          height: height,
+          weight: weight,
+        },
+        conditions: selectedConditions,
+      },
+      session
+    );
+    if (response.success) {
+      showSnackbar("Nutrition profile updated successfully", "success");
+    } else {
+      showSnackbar("Failed to update nutrition profile", "error");
+    }
+  };
 
   return (
     <Page>
@@ -123,6 +161,7 @@ const NutritionProfileScreen = () => {
           />
         </Card>
       </PageCell>
+      <Button text="Save" onPress={handleSave} />
     </Page>
   );
 };
