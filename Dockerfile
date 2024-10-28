@@ -3,7 +3,7 @@
 FROM node:18 AS builder
 
 # !Remove
-ENV EXPO_PUBLIC_API_URL=https://api.dev.vitaltrackh.com
+ENV EXPO_PUBLIC_API_URL=https://api.vitaltrackh.com
 
 WORKDIR /app
 
